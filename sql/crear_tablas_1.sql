@@ -13,7 +13,7 @@ CREATE TABLE docentes (
 dni INT NOT NULL PRIMARY KEY,
 nombre VARCHAR(50) NOT NULL,
 apellido VARCHAR(50) NOT NULL,
-fecha_naiemiento DATE,
+fecha_nacimiento DATE,
 usuario VARCHAR(20) NOT NULL,
 contraseña VARCHAR(20) NOT NULL
 );
@@ -42,4 +42,4 @@ CREATE TABLE inscripciones_materias (
 id INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
 codigo_materia INT NOT NULL,
 dni_alumno INT NOT NULL
-);
+); 

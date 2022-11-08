@@ -1,12 +1,12 @@
 import { getConnection, sql } from "../database/connection.js";
 import querys from "../database/querys.js";
 
-//Consulta la tabla de Clientes
-export const getCustomers = async (req, res) => {
+//Consulta la tabla de Alumnos
+export const getAlumnos = async (req, res) => {
     try {
         const pool = await getConnection();
         const result = await pool.request()
-        .query(querys.getAllCustomers)
+        .query(querys.getAllAlumnos)
         res.json(result.recordsets)
     } catch (error) {
         res.status(500);
@@ -14,8 +14,8 @@ export const getCustomers = async (req, res) => {
     }
 }
 
-//Crea nuevo cliente
-export const createNewCustomer = async (req, res) => {
+//Crea nuevo Alumno
+export const createNewAlumno = async (req, res) => {
 
     const { dni, name, surname} = req.body
 

@@ -1,29 +1,29 @@
 export default{
 
     //Alumnos
-    getAllProducts : 'SELECT * FROM products',
-    addNewProduct : 'INSERT INTO products (code, brand, description, price, quantity, unit) VALUES (@code, @brand, @description, @price, @quantity, @unit)',
-    getProductByCode : 'SELECT * FROM products WHERE code = @code',
-    deleteProductByCode : 'DELETE FROM products WHERE code = @code',
-    getTotalProducts : 'SELECT COUNT (*) FROM products',
-    updateProductsByCode : 'UPDATE products SET brand = @brand, description = @description, price = @price, quantity = @quantity, unit = @unit WHERE code = @code',
-    updateQuantityProductsByCode : 'UPDATE products SET quantity = @quantity WHERE code = @code',
+    getAllAlumnos : 'SELECT * FROM alumnos',
+    addNewAlumno : 'INSERT INTO alumnos (nombre, apellido, fecha_nacimiento, fecha_ingreso, usuario, contraseña) VALUES (@nombre, @apellido, @fecha_nacimiento, @fecha_ingreso, @usuario, @contraseña)',
+    getAlumnoByDni : 'SELECT * FROM alumnos WHERE dni = @dni',
+    deleteAlumnoByDni : 'DELETE FROM alumnos WHERE dni = @dni',
+    getTotalAlumnos : 'SELECT COUNT (*) FROM alumnos',
+    updateAlumnosByDni : 'UPDATE alumnos SET nombre = @nombre, apellido = @apellido, fecha_nacimiento = @fecha_nacimiento, fecha_ingreso = @fecha_ingreso, usuario = @usuario, contraseña = @contraseña WHERE dni = @dni',
 
     //Docentes
-    getAllCustomers : 'SELECT * FROM customers',
-    addNewCustomer : 'INSERT INTO customers (dni, name, surname) VALUES (@dni, @name, @surname)',
-    getCustomerByDni : 'SELECT * FROM customers WHERE dni = @dni',
-    deleteCustomerByDni : 'DELETE FROM customers WHERE dni = @dni',
-    updateCustomerByDni : 'UPDATE customers SET name = @name, surname = @surname WHERE dni = @dni',
+    getAllDocentes : 'SELECT * FROM docentes',
+    addNewDocente : 'INSERT INTO docentes (nombre, apellido, fecha_nacimiento, usuario, contraseña) VALUES (@nombre, @apellido, @fecha_nacimiento, @fecha_ingreso, @usuario, @contraseña)',
+    getDocenteByDni : 'SELECT * FROM docentes WHERE dni = @dni',
+    deleteDocenteByDni : 'DELETE FROM docentes WHERE dni = @dni',
+    getTotalDocentes : 'SELECT COUNT (*) FROM docentes',
+    updateDocentesByDni : 'UPDATE docentes SET nombre = @nombre, apellido = @apellido, fecha_nacimiento = @fecha_nacimiento, usuario = @usuario, contraseña = @contraseña WHERE dni = @dni',
 
     //Calificaciones
-    getAllSuppliers : 'SELECT * FROM suppliers',
-    addNewSupplier : 'INSERT INTO suppliers (supplier, address, city, phone) VALUES (@supplier, @address, @city, @phone)',
-    getSupplierById : 'SELECT * FROM suppliers WHERE id = @id',
-    deleteSupplierById : 'DELETE FROM suppliers WHERE id = @id',
-    updateSupplierById : 'UPDATE suppliers SET supplier = @supplier, address = @address, city = @city, phone = @phone WHERE id = @id',
+    getAllCalificaciones : 'SELECT * FROM calificaciones',
+    addNewCalificacion : 'INSERT INTO calificaciones (codigo_materia, dni_alumno, nota_1, fecha_1, nota_2, fecha_2, nota_3, fecha_3) VALUES (@supplier, @address, @city, @phone)',
+    getCalificacionById : 'SELECT * FROM calificaciones WHERE codigo_materia = @codigo_materia and dni_alumno = @dni_alumno',
+    deleteCalificacionById : 'DELETE FROM calificaciones WHERE id = @id',
+    updateCalificacionById : 'UPDATE calificaciones SET supplier = @supplier, address = @address, city = @city, phone = @phone WHERE id = @id',
     
-    //materias
+    //Materias
     getSales : 'SELECT * FROM sales ORDER BY id_sale DESC',
     getProductsByIdSaleOfTheSale : 'SELECT * FROM sales WHERE id_sale = @id_sale',
     getProductByCodeOfTheSale : 'SELECT * FROM sales WHERE id_sale = @id_sale and code = @code',

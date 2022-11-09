@@ -2,11 +2,11 @@ import { getConnection, sql } from "../database/connection.js";
 import querys from "../database/querys.js";
 
 //Consulta la tabla de Alumnos
-export const getAlumnos = async (req, res) => {
+export const getStudents = async (req, res) => {
     try {
         const pool = await getConnection();
         const result = await pool.request()
-        .query(querys.getAllAlumnos)
+        .query(querys.getStudents)
         res.json(result.recordsets)
     } catch (error) {
         res.status(500);
@@ -14,8 +14,29 @@ export const getAlumnos = async (req, res) => {
     }
 }
 
+//Consulta un Alumno por dni
+export const getStudentsByDni = async (req, res) => {
+    const { dni } = req.params;
+
+    if (dni == null) {
+        return res.status(400).json({ msg: "Complete todos los campos." })
+    }
+    try {
+        const pool = await getConnection();
+        const result = await pool
+            .request()
+            .input("dni", dni)
+            .query(querys.getAlumnoByDni);
+
+        res.send(result.recordsets[0]);
+    } catch (error) {
+        res.status(500);
+        res.status(error.message);
+    }
+}
+
 //Crea nuevo Alumno
-export const createNewAlumno = async (req, res) => {
+export const addNewStudents = async (req, res) => {
 
     const { dni, name, surname} = req.body
 
@@ -30,7 +51,7 @@ export const createNewAlumno = async (req, res) => {
             .input("dni", sql.Int, dni)
             .input("name", sql.VarChar, name)
             .input("surname", sql.VarChar, surname)
-            .query(querys.addNewCustomer);
+            .query(querys.addNewAlumno);
         res.json({ dni, name, surname });
     } catch (error) {
         res.status(500);
@@ -38,29 +59,10 @@ export const createNewAlumno = async (req, res) => {
     }
 }
 
-//Consulta un cliente por dni
-export const getCustomerByDni = async (req, res) => {
-    const { dni } = req.params;
 
-    if (dni == null) {
-        return res.status(400).json({ msg: "Complete todos los campos." })
-    }
-    try {
-        const pool = await getConnection();
-        const result = await pool
-            .request()
-            .input("dni", dni)
-            .query(querys.getCustomerByDni);
-
-        res.send(result.recordsets[0]);
-    } catch (error) {
-        res.status(500);
-        res.status(error.message);
-    }
-}
 
 //Elimina un cliente por dni
-export const deleteCustomerByDni = async (req, res) => {
+export const deleteStudentsByDni = async (req, res) => {
     const { dni } = req.params;
 
 
@@ -85,7 +87,7 @@ export const deleteCustomerByDni = async (req, res) => {
 
 
 //Actualiza un cliente
-export const updateCustomerByDni = async (req, res) => {
+export const updateStudentsByDni = async (req, res) => {
 
     const { name, surname } = req.body;
     const { dni } = req.params;

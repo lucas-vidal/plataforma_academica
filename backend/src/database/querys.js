@@ -1,27 +1,27 @@
 export default{
 
     //Alumnos
-    getAllAlumnos : 'SELECT * FROM alumnos',
-    addNewAlumno : 'INSERT INTO alumnos (nombre, apellido, fecha_nacimiento, fecha_ingreso, usuario, contraseña) VALUES (@nombre, @apellido, @fecha_nacimiento, @fecha_ingreso, @usuario, @contraseña)',
-    getAlumnoByDni : 'SELECT * FROM alumnos WHERE dni = @dni',
-    deleteAlumnoByDni : 'DELETE FROM alumnos WHERE dni = @dni',
-    getTotalAlumnos : 'SELECT COUNT (*) FROM alumnos',
-    updateAlumnosByDni : 'UPDATE alumnos SET nombre = @nombre, apellido = @apellido, fecha_nacimiento = @fecha_nacimiento, fecha_ingreso = @fecha_ingreso, usuario = @usuario, contraseña = @contraseña WHERE dni = @dni',
+    getStudents : 'SELECT * FROM students',
+    getStudentsByDni : 'INSERT INTO students (name, surname, date_of_brith, date_of_admission, user, password) VALUES (@name, @surname, @date_of_brith, @date_of_admission, @user, @password)',
+    addNewStudents : 'SELECT * FROM students WHERE dni = @dni',
+    deleteStudentsByDni : 'DELETE FROM students WHERE dni = @dni',
+    getTotalStudents : 'SELECT COUNT (*) FROM students',
+    updateStudentsByDni : 'UPDATE students SET name = @name, surname = @surname, date_of_brith = @date_of_brith, date_of_admission = @date_of_admission, user = @user, password = @password WHERE dni = @dni',
 
     //Docentes
-    getAllDocentes : 'SELECT * FROM docentes',
-    addNewDocente : 'INSERT INTO docentes (nombre, apellido, fecha_nacimiento, usuario, contraseña) VALUES (@nombre, @apellido, @fecha_nacimiento, @fecha_ingreso, @usuario, @contraseña)',
-    getDocenteByDni : 'SELECT * FROM docentes WHERE dni = @dni',
-    deleteDocenteByDni : 'DELETE FROM docentes WHERE dni = @dni',
-    getTotalDocentes : 'SELECT COUNT (*) FROM docentes',
-    updateDocentesByDni : 'UPDATE docentes SET nombre = @nombre, apellido = @apellido, fecha_nacimiento = @fecha_nacimiento, usuario = @usuario, contraseña = @contraseña WHERE dni = @dni',
+    getAllTeachers : 'SELECT * FROM teachers',
+    addNewTeacher : 'INSERT INTO teachers (name, surname, date_of_brith, user, password) VALUES (@name, @surname, @date_of_brith, @date_of_admission, @user, @password)',
+    getTeacherByDni : 'SELECT * FROM teachers WHERE dni = @dni',
+    deleteTeacherByDni : 'DELETE FROM teachers WHERE dni = @dni',
+    getTotalTeachers : 'SELECT COUNT (*) FROM teachers',
+    updateTeachersByDni : 'UPDATE teachers SET name = @name, surname = @surname, date_of_brith = @date_of_brith, user = @user, password = @password WHERE dni = @dni',
 
     //Calificaciones
-    getAllCalificaciones : 'SELECT * FROM calificaciones',
-    addNewCalificacion : 'INSERT INTO calificaciones (codigo_materia, dni_alumno, nota_1, fecha_1, nota_2, fecha_2, nota_3, fecha_3) VALUES (@supplier, @address, @city, @phone)',
-    getCalificacionById : 'SELECT * FROM calificaciones WHERE codigo_materia = @codigo_materia and dni_alumno = @dni_alumno',
-    deleteCalificacionById : 'DELETE FROM calificaciones WHERE id = @id',
-    updateCalificacionById : 'UPDATE calificaciones SET supplier = @supplier, address = @address, city = @city, phone = @phone WHERE id = @id',
+    getAllQualification : 'SELECT * FROM qualification',
+    addNewQualification : 'INSERT INTO qualification (code_course, dni_student, qual_1, date_1, qual_2, date_2, qual_3, date_3) VALUES (@code_course, @dni_student, @qual_1, @date_1, @qual_2, @date_2, @qual_3, @date_3)',
+    getQualificationById : 'SELECT * FROM qualification WHERE code_course = @code_course and dni_student = @dni_student',
+    deleteQualificationById : 'DELETE FROM qualification WHERE code_course = @code_course and dni_student = @dni_student',
+    updateQualificationById : 'UPDATE qualification SET code_course = @code_course, dni_student = @dni_student, city = @city, phone = @phone WHERE id = @id',
     
     //Materias
     getSales : 'SELECT * FROM sales ORDER BY id_sale DESC',

@@ -1,23 +1,19 @@
 
 import {Router} from 'express'
-import { createNewProducts, getProducts, getProductByCode, deleteProductByCode, getTotalProducts, updateProductsByCode, updateQuantityProductsByCode
-        } from '../controllers/products.controller.js'
+import { getCourses, getCourseByCode, addNewCourse, deleteCourseByCode, updateCourseByCode
+        } from '../controllers/courses.controller'
 
-const router = Router()
-//Consulta productos
-router.get('/products', getProducts)
-//Consulta una linea de productos
-router.get('/products/:code', getProductByCode)
-//Contar total de productos
-router.post('/products/count', getTotalProducts)
-//Insertar un producto
-router.post('/products', createNewProducts)
-//Borrar productos
-router.delete('/products/:code', deleteProductByCode)
-//Actualizar productos
-router.put('/products/:code', updateProductsByCode)
-//Actualizar productos
-router.put('/products/quantity/:code', updateQuantityProductsByCode)
+        const router = Router()
+        //Consulta cursos
+        router.get('/courses', getCourses)
+        //Consulta un curso
+        router.get('/courses/:code', getCourseByCode)
+        //Insertar un nuevo curso
+        router.post('/courses', addNewCourse)
+        //Borrar curso
+        router.delete('/courses/:code', deleteCourseByCode)
+        //Actualizar curso
+        router.put('/courses/:code', updateCourseByCode)
 
-export default router
+        export default router
 

@@ -15,7 +15,7 @@ export const getStudents = async (req, res) => {
 }
 
 //Consulta un Alumno por dni
-export const getStudentsByDni = async (req, res) => {
+export const getStudentByDni = async (req, res) => {
     const { dni } = req.params;
 
     if (dni == null) {
@@ -26,7 +26,7 @@ export const getStudentsByDni = async (req, res) => {
         const result = await pool
             .request()
             .input("dni", dni)
-            .query(querys.getAlumnoByDni);
+            .query(querys.getStudentByDni);
 
         res.send(result.recordsets[0]);
     } catch (error) {
@@ -35,10 +35,27 @@ export const getStudentsByDni = async (req, res) => {
     }
 }
 
-//Crea nuevo Alumno
-export const addNewStudents = async (req, res) => {
+//Contar cantidad alumnos
+export const getTotalStudents = async (req, res) => {
+    const { dni } = req.params;
+    try {
+    const pool = await getConnection();
+    const result = await pool
+        .request()
+        .input("dni", dni)
+        .query(querys.getTotalStudents);
+    res.json(result.recordsets);
 
-    const { dni, name, surname} = req.body
+    } catch (error) {
+        res.status(500);
+        res.status(error.message);
+    }
+}
+
+//Crea nuevo Alumno
+export const addNewStudent = async (req, res) => {
+
+    const { dni, name, surname, date_of_brith, date_of_admission, username, password } = req.body
 
     if (dni == null || name == null || surname == null) {
         return res.status(400).json({ msg: "Complete todos los campos." })
@@ -51,8 +68,12 @@ export const addNewStudents = async (req, res) => {
             .input("dni", sql.Int, dni)
             .input("name", sql.VarChar, name)
             .input("surname", sql.VarChar, surname)
-            .query(querys.addNewAlumno);
-        res.json({ dni, name, surname });
+            .input("date_of_brith", sql.Date, date_of_brith)
+            .input("date_of_admission", sql.Date, date_of_admission)
+            .input("username", sql.VarChar, username)
+            .input("password", sql.VarChar, password)
+            .query(querys.addNewStudent);
+        res.json({ dni, name, surname, date_of_brith, date_of_admission, username, password });
     } catch (error) {
         res.status(500);
         res.status(error.message);
@@ -60,9 +81,8 @@ export const addNewStudents = async (req, res) => {
 }
 
 
-
 //Elimina un cliente por dni
-export const deleteStudentsByDni = async (req, res) => {
+export const deleteStudentByDni = async (req, res) => {
     const { dni } = req.params;
 
 
@@ -75,7 +95,7 @@ export const deleteStudentsByDni = async (req, res) => {
         const result = await pool
             .request()
             .input("dni", dni)
-            .query(querys.deleteCustomerByDni);
+            .query(querys.deleteStudentByDni);
 
         res.sendStatus(204);
     } catch (error) {
@@ -85,11 +105,10 @@ export const deleteStudentsByDni = async (req, res) => {
 }
 
 
-
 //Actualiza un cliente
-export const updateStudentsByDni = async (req, res) => {
+export const updateStudentByDni = async (req, res) => {
 
-    const { name, surname } = req.body;
+    const { name, surname, date_of_brith, date_of_admission, username, password } = req.body;
     const { dni } = req.params;
 
     if (name == null || surname == null ) {
@@ -103,9 +122,13 @@ export const updateStudentsByDni = async (req, res) => {
             .request()
             .input("name", sql.VarChar, name)
             .input("surname", sql.VarChar, surname)
+            .input("date_of_brith", sql.Date, date_of_brith)
+            .input("date_of_admission", sql.Date, date_of_admission)
+            .input("username", sql.VarChar, username)
+            .input("password", sql.VarChar, password)
             .input("dni", sql.Int, dni)
-            .query(querys.updateCustomerByDni);
-        res.json({ dni, name, surname });
+            .query(querys.updateStudentByDni);
+        res.json({ name, surname, date_of_brith, date_of_admission, username, password });
     try {
 
 

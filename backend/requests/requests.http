@@ -1,6 +1,6 @@
 
 //PRDUCTOS
-@api_prod = http://localhost:3000/products
+@api_prod = http://localhost:3000/students
 
 ### REQUEST PRODUCT
 GET {{api_prod}}
@@ -10,12 +10,13 @@ POST {{api_prod}}
 Content-Type: application/json
 
      {
-          "code": 989898,
-          "brand": "La Morenita",
-          "description": "Cafe de 1kg",
-          "price": 2554,
-          "quantity": 22,
-          "unit": "Pack"
+          "dni": 34967132,
+          "name": "Lucas",
+          "surname": "Vidal",
+          "date_of_brith": "1990-02-20",
+          "date_of_admission": "2022-11-10",
+          "username": "admin",
+          "password": "1234"
      }
 
 

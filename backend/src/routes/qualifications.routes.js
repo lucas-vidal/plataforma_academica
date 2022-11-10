@@ -1,21 +1,21 @@
 
 import {Router} from 'express'
-import { getQualifications, getQualificationsByCourse, getQualificationsByDniAndCourse, addNewQualification, deleteQualificationsByDniAndCourse, updateQualificationsByDniAndCourse
+import { getQualifications, getQualificationByCourse, getQualificationByDniAndCourse, addNewQualification, deleteQualificationByDniAndCourse, updateQualificationByDniAndCourse
 } from '../controllers/qualifications.controller'
 
         const router = Router()
         //Consulta calificaciones
         router.get('/qualifications', getQualifications)
         //Consulta calificaciones de una materia 
-        router.get('/qualifications/:code_course', getQualificationsByCourse)
+        router.get('/qualifications/:code', getQualificationByCourse)
         //Consulta una calificacion 
-        router.get('/qualifications/:code_course/:dni', getQualificationsByDniAndCourse)
+        router.get('/qualifications/:code/:dni', getQualificationByDniAndCourse)
         //Insertar un nueva calificacion
         router.post('/qualifications', addNewQualification)
         //Borrar calificacion
-        router.delete('/qualifications/:code_course/:dni', deleteQualificationsByDniAndCourse)
+        router.delete('/qualifications/:code/:dni', deleteQualificationByDniAndCourse)
         //Actualizar calificacion 
-        router.put('/qualifications/:code_course/:dni', updateQualificationsByDniAndCourse)
+        router.put('/qualifications/:code/:dni', updateQualificationByDniAndCourse)
 
         export default router
         

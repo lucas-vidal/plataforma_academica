@@ -1,7 +1,7 @@
 
 import {Router} from 'express'
 import { getQualifications, getQualificationByCourse, getQualificationByDniAndCourse, addNewQualification, deleteQualificationByDniAndCourse, updateQualificationByDniAndCourse
-} from '../controllers/qualifications.controller'
+} from '../controllers/qualifications.controller.js'
 
         const router = Router()
         //Consulta calificaciones

@@ -1,11 +1,11 @@
 import { getConnection, sql } from "../database/connection.js";
 import querys from "../database/querys.js";
 
-//Consulta la tabla de ID Ventas
-export const getIdSales = async (req, res) => {
+//Consulta la tabla de Docentes
+export const getTeachers = async (req, res) => {
     try {
         const pool = await getConnection();
-        const result = await pool.request().query(querys.getIdSales)
+        const result = await pool.request().query(querys.getTeachers)
         res.json(result.recordsets)
     } catch (error) {
         res.status(500);
@@ -13,11 +13,11 @@ export const getIdSales = async (req, res) => {
     }
 }
 
-//Consulta una compra por el ID
-export const getIdSalesById = async (req, res) => {
-    const { id_sale } = req.params;
+//Consulta un docente por dni
+export const getTeacherByDni = async (req, res) => {
+    const { dni } = req.params;
 
-    if (id_sale == null) {
+    if (dni == null) {
         return res.status(400).json({ msg: "Complete todos los campos." })
     }
     try {
@@ -25,8 +25,8 @@ export const getIdSalesById = async (req, res) => {
 
         const result = await pool
             .request()
-            .input("id_sale", id_sale)
-            .query(querys.getIdSalesById);
+            .input("dni", sql.Int, dni)
+            .query(querys.getTeacherByDni);
 
         res.send(result.recordsets[0]);
     } catch (error) {
@@ -35,35 +35,42 @@ export const getIdSalesById = async (req, res) => {
     }
 }
 
-//Consulta un producto por el codigo
-export const getIdLastSale = async (req, res) => {
+//Contar cantidad alumnos
+export const countTotalTeachers = async (req, res) => {
+    const { dni } = req.params;
     try {
-        const pool = await getConnection();
+    const pool = await getConnection();
+    const result = await pool
+        .request()
+        .input("dni", sql.Int, dni)
+        .query(querys.countTotalTeachers);
+    res.json(result.recordsets);
 
-        const result = await pool
-            .request()
-            .query(querys.getIdLastSale);
-        res.send(result.recordsets);
     } catch (error) {
         res.status(500);
         res.status(error.message);
     }
 }
 
-//Crea una nueva venta
-export const addNewSale = async (req, res) => {
 
-    const { dni_customer } = req.body
+//Crea un nuevo docente
+export const addNewTeacher = async (req, res) => {
+
+    const { dni, name, surname, date_of_brith, username, password } = req.body
 
     try {
         const pool = await getConnection();
 
         await pool
-            .request()
-            .input("dni_customer", sql.Int, dni_customer)
-            .query(querys.addNewSale);
-        res.json({ dni_customer});
-
+        .request()
+        .input("dni", sql.Int, dni)
+        .input("name", sql.VarChar, name)
+        .input("surname", sql.VarChar, surname)
+        .input("date_of_brith", sql.Date, date_of_brith)
+        .input("username", sql.VarChar, username)
+        .input("password", sql.VarChar, password)
+        .query(querys.addNewStudent);
+    res.json({ dni, name, surname, date_of_brith, username, password });
     } catch (error) {
         res.status(500);
         res.status(error.message);
@@ -72,10 +79,10 @@ export const addNewSale = async (req, res) => {
 
 
 //Elimina una venta por ID
-export const deleteIdSaleById = async (req, res) => {
-    const { id_sale } = req.params;
+export const deleteTeacherByDni = async (req, res) => {
+    const { dni } = req.params;
 
-    if (id_sale == null) {
+    if (dni == null) {
         return res.status(400).json({ msg: "Complete todos los campos." })
     }
 
@@ -84,8 +91,8 @@ export const deleteIdSaleById = async (req, res) => {
 
         const result = await pool
             .request()
-            .input("id_sale", id_sale)
-            .query(querys.deleteIdSaleById);
+            .input("dni", sql.Int, dni)
+            .query(querys.deleteTeacherByDni);
 
         res.sendStatus(204);
     } catch (error) {
@@ -95,23 +102,26 @@ export const deleteIdSaleById = async (req, res) => {
 }
 
 //Actualiza un producto en la lista de venta
-export const updateIdSalebyId = async (req, res) => {
+export const updateTeacherByDni = async (req, res) => {
 
-    const { dni_customer } = req.body;
-    const { id_sale } = req.params;
+    const { name, surname, date_of_brith, username, password } = req.body;
+    const { dni } = req.params;
 
-    // if ( dni_customer == null ) {
-    //     return res.status(400).json({ msg: "Complete todos los campos." })
-    // }
-       
+    if (name == null || surname == null || date_of_brith == null || username == null || password == null ) {
+        return res.status(400).json({ msg: "Complete todos los campos." })
+    }
     try {
  const pool = await getConnection();
         await pool
-            .request()
-            .input("dni_customer", sql.Int, dni_customer)
-            .input("id_sale", sql.Int, id_sale)
-            .query(querys.updateIdSalebyId);
-        res.json({ id_sale, dni_customer });
+        .request()
+        .input("name", sql.VarChar, name)
+        .input("surname", sql.VarChar, surname)
+        .input("date_of_brith", sql.Date, date_of_brith)
+        .input("username", sql.VarChar, username)
+        .input("password", sql.VarChar, password)
+        .input("dni", sql.Int, dni)
+        .query(querys.updateTeacherByDni);
+        res.json({ dni, name, surname, date_of_brith, username, password });
     } catch (error) {
 
         res.status(500);

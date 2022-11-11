@@ -3,7 +3,7 @@ export default{
     //Alumnos
     getStudents : 'SELECT * FROM students ORDER BY name DESC',
     getStudentByDni : 'SELECT * FROM students WHERE dni = @dni',
-    getTotalStudents : 'SELECT COUNT (*) FROM students',
+    countTotalStudents : 'SELECT COUNT (*) FROM students',
     addNewStudent : 'INSERT INTO students (dni, name, surname, date_of_brith, date_of_admission, username, password) VALUES (@dni, @name, @surname, @date_of_brith, @date_of_admission, @username, @password)',
     deleteStudentByDni : 'DELETE FROM students WHERE dni = @dni',
     updateStudentByDni : 'UPDATE students SET name = @name, surname = @surname, date_of_brith = @date_of_brith, date_of_admission = @date_of_admission, username = @username, password = @password WHERE dni = @dni',
@@ -11,10 +11,10 @@ export default{
     //Docentes
     getTeachers : 'SELECT * FROM teachers ORDER BY name DESC',
     getTeacherByDni : 'SELECT * FROM teachers WHERE dni = @dni',
-    getTotalTeachers : 'SELECT COUNT (*) FROM teachers',
+    countTotalTeachers : 'SELECT COUNT (*) FROM teachers',
     addNewTeacher : 'INSERT INTO teachers (name, surname, date_of_brith, user, password) VALUES (@name, @surname, @date_of_brith, @date_of_admission, @user, @password)',
     deleteTeacherByDni : 'DELETE FROM teachers WHERE dni = @dni',
-    updateTeachersByDni : 'UPDATE teachers SET name = @name, surname = @surname, date_of_brith = @date_of_brith, user = @user, password = @password WHERE dni = @dni',
+    updateTeacherByDni : 'UPDATE teachers SET name = @name, surname = @surname, date_of_brith = @date_of_brith, user = @user, password = @password WHERE dni = @dni',
 
     //Calificaciones
     getQualifications : 'SELECT * FROM qualifications',

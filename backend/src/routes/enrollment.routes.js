@@ -1,7 +1,7 @@
 
 import {Router} from 'express'
 import { getEnrollments, getEnrollmentByDni, getEnrollmentByCode , addNewEnrollment, deleteEnrollmentByDni, updateEnrollmentByDni
-        } from '../controllers/enrollment.controller'
+        } from '../controllers/enrollment.controller.js'
 
         const router = Router()
         //Consulta inscripciones

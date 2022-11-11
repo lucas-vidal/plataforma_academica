@@ -1,7 +1,7 @@
 
 import {Router} from 'express'
 import { getCourses, getCourseByCode, addNewCourse, deleteCourseByCode, updateCourseByCode
-        } from '../controllers/courses.controller'
+        } from '../controllers/courses.controller.js'
 
         const router = Router()
         //Consulta cursos

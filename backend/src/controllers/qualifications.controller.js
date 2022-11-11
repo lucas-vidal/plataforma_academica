@@ -1,8 +1,8 @@
 import { getConnection, sql } from "../database/connection.js";
 import querys from "../database/querys.js";
 
-//Consulta la tabla de Ventas
-export const getSales = async (req, res) => {
+//Consulta la tabla de calificaciones
+export const getQualifications = async (req, res) => {
     try {
         const pool = await getConnection();
         const result = await pool.request().query(querys.getSales)
@@ -13,12 +13,55 @@ export const getSales = async (req, res) => {
     }
 }
 
+//Consulta de calificaciones de un curso
+export const getQualificationByCourse = async (req, res) => {
+    const { code } = req.params;
 
+    if (code == null) {
+        return res.status(400).json({ msg: "Complete todos los campos." })
+    }
+    try {
+        const pool = await getConnection();
 
-//Inserta un producto a la venta
-export const insertAProductToSale = async (req, res) => {
+        const result = await pool
+            .request()
+            .input("code", sql.Int, code)
+            .query(querys.getQualificationByCourse);
 
-    const { code, price, quantity } = req.body
+        res.send(result.recordsets[0]);
+    } catch (error) {
+        res.status(500);
+        res.status(error.message);
+    }
+}
+
+//Consulta una calificacion por curso y dni
+export const getQualificationByDniAndCourse = async (req, res) => {
+    const { code, dni } = req.params;
+
+    if (code == null || dni == null ) {
+        return res.status(400).json({ msg: "Complete todos los campos." })
+    }
+    try {
+        const pool = await getConnection();
+
+        const result = await pool
+            .request()
+            .input("code", sql.Int, code)
+            .input("dni", sql.Int, dni)
+            .query(querys.getQualificationByDniAndCourse);
+
+        res.send(result.recordsets[0][0]);
+    } catch (error) {
+        res.status(500);
+        res.status(error.message);
+    }
+}
+
+//Inserta un calificacion
+export const addNewQualification = async (req, res) => {
+
+    const { code, dni, qual_1, date_1, qual_2, date_2, qual_3, date_3 } = req.body
 
     if (code == null || price == null || quantity == null ) {
 
@@ -30,10 +73,15 @@ export const insertAProductToSale = async (req, res) => {
         await pool
             .request()
             .input("code", sql.Int, code)
-            .input("price", sql.Int, price)
-            .input("quantity", sql.Int, quantity)
-            .query(querys.insertAProductToSale);
-        res.json({ code, price, quantity});
+            .input("dni", sql.Int, dni)
+            .input("qual_1", sql.Int, qual_1)
+            .input("date_1", sql.Date, date_1)
+            .input("qual_2", sql.Int, qual_2)
+            .input("date_2", sql.Date, date_2)
+            .input("qual_3", sql.Int, qual_3)
+            .input("date_3", sql.Date, date_3)
+            .query(querys.addNewQualification);
+        res.json({ code, dni, qual_1, date_1, qual_2, date_2, qual_3, date_3 });
 
     } catch (error) {
         res.status(500);
@@ -41,56 +89,11 @@ export const insertAProductToSale = async (req, res) => {
     }
 }
 
-//Consulta los productos de una venta
-export const getProductsByIdSaleOfTheSale = async (req, res) => {
-    const { id_sale } = req.params;
+//Elimina una calificacion
+export const deleteQualificationByDniAndCourse = async (req, res) => {
+    const {code, dni } = req.params;
 
-    if (id_sale == null) {
-        return res.status(400).json({ msg: "Complete todos los campos." })
-    }
-    try {
-        const pool = await getConnection();
-
-        const result = await pool
-            .request()
-            .input("id_sale", id_sale)
-            .query(querys.getProductsByIdSaleOfTheSale);
-
-        res.send(result.recordsets[0]);
-    } catch (error) {
-        res.status(500);
-        res.status(error.message);
-    }
-}
-
-//Consulta un producto por el codigo
-export const getProductByCodeOfTheSale = async (req, res) => {
-    const { id_sale, code } = req.params;
-
-    if (id_sale == null || code == null ) {
-        return res.status(400).json({ msg: "Complete todos los campos." })
-    }
-    try {
-        const pool = await getConnection();
-
-        const result = await pool
-            .request()
-            .input("id_sale", id_sale)
-            .input("code", code)
-            .query(querys.getProductsByIdSaleOfTheSale);
-
-        res.send(result.recordsets[0][0]);
-    } catch (error) {
-        res.status(500);
-        res.status(error.message);
-    }
-}
-
-//Elimina un producto de la venta por el codigo
-export const deleteProductByCodeOfTheSale = async (req, res) => {
-    const {id_sale, code } = req.params;
-
-    if ( id_sale == null || code == null ) {
+    if ( code == null || dni == null ) {
         return res.status(400).json({ msg: "Complete todos los campos." })
     }
 
@@ -99,9 +102,9 @@ export const deleteProductByCodeOfTheSale = async (req, res) => {
 
         const result = await pool
             .request()
-            .input("id_sale", id_sale)
-            .input("code", code)
-            .query(querys.deleteProductByCodeOfTheSale);
+            .input("code", sql.Int, code)
+            .input("dni", sql.Int, dni)
+            .query(querys.deleteQualificationByDniAndCourse);
 
         res.sendStatus(204);
     } catch (error) {
@@ -110,53 +113,13 @@ export const deleteProductByCodeOfTheSale = async (req, res) => {
     }
 }
 
+//Actualiza un calificacion
+export const updateQualificationByDniAndCourse = async (req, res) => {
 
-//Elimina todos los productos de la venta
-export const deleteAllProductOfTheSale = async (req, res) => {
-    const {id_sale } = req.params;
+    const { qual_1, date_1, qual_2, date_2, qual_3, date_3 } = req.body;
+    const { code , dni } = req.params;
 
-    if ( id_sale == null ) {
-        return res.status(400).json({ msg: "Complete todos los campos." })
-    }
-    try {
-        const pool = await getConnection();
-
-        const result = await pool
-            .request()
-            .input("id_sale", id_sale)
-            .query(querys.deleteAllProductOfTheSale);
-
-        res.sendStatus(204);
-    } catch (error) {
-        res.status(500);
-        res.status(error.message);
-    }
-}
-
-//Contar cantidad de productos en venta
-export const countTotalItemsOfTheSale = async (req, res) => {
-    const { id_sale } = req.params;
-    try {
-    const pool = await getConnection();
-    const result = await pool
-        .request()
-        .input("id_sale", id_sale)
-        .query(querys.countTotalItemsOfTheSale);
-    res.json(result.recordsets);
-
-    } catch (error) {
-        res.status(500);
-        res.status(error.message);
-    }
-}
-
-//Actualiza un producto en la lista de venta
-export const updateProductsByCode = async (req, res) => {
-
-    const { price, quantity  } = req.body;
-    const { code } = req.params;
-
-    if ( price == null || quantity == null ) {
+    if ( code == null || dni == null ) {
         return res.status(400).json({ msg: "Complete todos los campos." })
     }
        
@@ -164,11 +127,16 @@ export const updateProductsByCode = async (req, res) => {
  const pool = await getConnection();
         await pool
             .request()
-            .input("price", sql.Int, price)
-            .input("quantity", sql.Int, quantity)
+            .input("qual_1", sql.Int, qual_1)
+            .input("date_1", sql.Date, date_1)
+            .input("qual_2", sql.Int, qual_2)
+            .input("date_2", sql.Date, date_2)
+            .input("qual_3", sql.Int, qual_3)
+            .input("date_3", sql.Date, date_3)
             .input("code", sql.Int, code)
-            .query(querys.updateProductsByCode);
-        res.json({ brand, description, price, quantity, unit });
+            .input("dni", sql.Int, dni)
+            .query(querys.updateQualificationByDniAndCourse);
+        res.json({ code, dni, qual_1, date_1, qual_2, date_2, qual_3, date_3 });
     } catch (error) {
 
         res.status(500);

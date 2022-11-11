@@ -2,11 +2,11 @@ import { getConnection, sql } from "../database/connection.js";
 import querys from "../database/querys.js";
 
 //Consulta la tabla de Proveedores
-export const getSuppliers = async (req, res) => {
+export const getEnrollments = async (req, res) => {
     try {
         const pool = await getConnection();
         const result = await pool.request()
-        .query(querys.getAllSuppliers)
+        .query(querys.getEnrollments)
         res.json(result.recordsets)
     } catch (error) {
         res.status(500);
@@ -14,44 +14,21 @@ export const getSuppliers = async (req, res) => {
     }
 }
 
-//Crea nuevo proveedor
-export const createNewSupplier = async (req, res) => {
 
-    const { supplier, address, city, phone} = req.body
 
-    if (supplier == null || address == null || city == null || phone == null) {
-        return res.status(400).json({ msg: "Complete todos los campos." })
-    }
-    try {
-        const pool = await getConnection();
+//Consulta una inscripcion por codigo
+export const getEnrollmentByCode = async (req, res) => {
+    const { code } = req.params;
 
-        await pool
-            .request()
-            .input("supplier", sql.VarChar, supplier)
-            .input("address", sql.VarChar, address)
-            .input("city", sql.VarChar, city)
-            .input("phone", sql.VarChar, phone)
-            .query(querys.addNewSupplier);
-        res.json({ supplier, address, city, phone });
-    } catch (error) {
-        res.status(500);
-        res.status(error.message);
-    }
-}
-
-//Consulta un proveedor por Id
-export const getSupplierById = async (req, res) => {
-    const { id } = req.params;
-
-    if (id == null) {
+    if (code == null) {
         return res.status(400).json({ msg: "Complete todos los campos." })
     }
     try {
         const pool = await getConnection();
         const result = await pool
             .request()
-            .input("id", id)
-            .query(querys.getSupplierById);
+            .input("cpde", sql.Int, code)
+            .query(querys.getEnrollmentByCode);
 
         res.send(result.recordsets[0]);
     } catch (error) {
@@ -60,12 +37,56 @@ export const getSupplierById = async (req, res) => {
     }
 }
 
-//Elimina un proveedor por Id
-export const deleteSupplierById = async (req, res) => {
-    const { id } = req.params;
-
+//Consulta una inscripcion por dni
+export const getEnrollmentByDni = async (req, res) => {
+    const { dni } = req.params;
 
     if (id == null) {
+        return res.status(400).json({ msg: "Complete todos los campos." })
+    }
+    try {
+        const pool = await getConnection();
+        const result = await pool
+            .request()
+            .input("dni", sql.Int, dni)
+            .query(querys.getEnrollmentByDni);
+
+        res.send(result.recordsets[0]);
+    } catch (error) {
+        res.status(500);
+        res.status(error.message);
+    }
+}
+
+//Crea nuevo inscripcion
+export const addNewEnrollment = async (req, res) => {
+
+    const { code, dni } = req.body
+
+    if (code == null || dni == null ) {
+        return res.status(400).json({ msg: "Complete todos los campos." })
+    }
+    try {
+        const pool = await getConnection();
+
+        await pool
+            .request()
+            .input("code", sql.VarChar, supplier)
+            .input("dni", sql.VarChar, address)
+            .query(querys.addNewEnrollment);
+        res.json({ code, dni });
+    } catch (error) {
+        res.status(500);
+        res.status(error.message);
+    }
+}
+
+//Elimina una inscripcion
+export const deleteEnrollmentByDni = async (req, res) => {
+    const { code, dni } = req.params;
+
+
+    if (code == null || dni == null) {
         return res.status(400).json({ msg: "Complete todos los campos." })
     }
     try {
@@ -73,8 +94,9 @@ export const deleteSupplierById = async (req, res) => {
 
         const result = await pool
             .request()
-            .input("id", id)
-            .query(querys.deleteSupplierById);
+            .input("code", sql.Int, code)
+            .input("dni", sql.Int, dni)
+            .query(querys.deleteEnrollmentByDni);
 
         res.sendStatus(204);
     } catch (error) {
@@ -85,13 +107,13 @@ export const deleteSupplierById = async (req, res) => {
 
 
 
-//Actualiza un cliente
-export const updateSupplierById = async (req, res) => {
+//Actualiza una inscripcion
+export const updateEnrollmentByDni = async (req, res) => {
 
-    const { supplier, address, city, phone } = req.body;
-    const { id } = req.params;
+    const { code } = req.body;
+    const { dni } = req.params;
 
-    if ( supplier == null || address == null || city == null || phone == null ) {
+    if ( code == null || dni == null ) {
 
         return res.status(400).json({ msg: "Complete todos los campos." })
         
@@ -99,15 +121,11 @@ export const updateSupplierById = async (req, res) => {
             const pool = await getConnection();
             await pool
             .request()
-            .input("supplier", sql.VarChar, supplier)
-            .input("address", sql.VarChar, address)
-            .input("city", sql.VarChar, city)
-            .input("phone", sql.VarChar, phone)
-            .input("id", sql.Int, id)
-            .query(querys.updateSupplierById);
-        res.json({ id, supplier, address, city, phone });
+            .input("code", sql.Int, code)
+            .input("dni", sql.Int, dni)
+            .query(querys.updateEnrollmentByDni);
+        res.json({ code, dni });
     try {
-
 
     } catch (error) {
         

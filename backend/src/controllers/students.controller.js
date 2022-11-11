@@ -25,7 +25,7 @@ export const getStudentByDni = async (req, res) => {
         const pool = await getConnection();
         const result = await pool
             .request()
-            .input("dni", dni)
+            .input("dni", sql.Int, dni)
             .query(querys.getStudentByDni);
 
         res.send(result.recordsets[0]);
@@ -36,14 +36,14 @@ export const getStudentByDni = async (req, res) => {
 }
 
 //Contar cantidad alumnos
-export const getTotalStudents = async (req, res) => {
+export const countTotalStudents = async (req, res) => {
     const { dni } = req.params;
     try {
     const pool = await getConnection();
     const result = await pool
         .request()
-        .input("dni", dni)
-        .query(querys.getTotalStudents);
+        .input("dni", sql.Int, dni)
+        .query(querys.countTotalStudents);
     res.json(result.recordsets);
 
     } catch (error) {
@@ -80,8 +80,7 @@ export const addNewStudent = async (req, res) => {
     }
 }
 
-
-//Elimina un cliente por dni
+//Elimina un alumno por dni
 export const deleteStudentByDni = async (req, res) => {
     const { dni } = req.params;
 
@@ -94,7 +93,7 @@ export const deleteStudentByDni = async (req, res) => {
 
         const result = await pool
             .request()
-            .input("dni", dni)
+            .input("dni", sql.Int, dni)
             .query(querys.deleteStudentByDni);
 
         res.sendStatus(204);
@@ -104,8 +103,7 @@ export const deleteStudentByDni = async (req, res) => {
     }
 }
 
-
-//Actualiza un cliente
+//Actualiza un alumno
 export const updateStudentByDni = async (req, res) => {
 
     const { name, surname, date_of_brith, date_of_admission, username, password } = req.body;

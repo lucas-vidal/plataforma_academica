@@ -1,7 +1,7 @@
 
 import {Router} from 'express'
-import { getTeachers, getTeacherByDni, getTotalTeachers, addNewTeacher, deleteTeacherByDni, updateTeacherByDni
-} from '../controllers/teachers.controller'
+import { getTeachers, getTeacherByDni, countTotalTeachers, addNewTeacher, deleteTeacherByDni, updateTeacherByDni
+} from '../controllers/teachers.controller.js'
 
         const router = Router()
         //Consulta docentes
@@ -9,7 +9,7 @@ import { getTeachers, getTeacherByDni, getTotalTeachers, addNewTeacher, deleteTe
         //Consulta un docente
         router.get('/teachers/:dni', getTeacherByDni)
         //Contar total de docentes
-        router.post('/teachers/count', getTotalTeachers)
+        router.post('/teachers/count', countTotalTeachers)
         //Insertar un nuevo docente
         router.post('/teachers', addNewTeacher)
         //Borrar un docente

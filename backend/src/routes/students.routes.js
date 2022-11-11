@@ -1,6 +1,6 @@
 
 import {Router} from 'express'
-import { getStudents, getStudentByDni, addNewStudent, getTotalStudents, deleteStudentByDni, updateStudentByDni
+import { getStudents, getStudentByDni, addNewStudent, countTotalStudents, deleteStudentByDni, updateStudentByDni
         } from '../controllers/students.controller.js'
 
         const router = Router()
@@ -9,7 +9,7 @@ import { getStudents, getStudentByDni, addNewStudent, getTotalStudents, deleteSt
         //Consulta un alumno
         router.get('/students/:dni', getStudentByDni)
         //Contar total de alumnos
-        router.post('/students/count', getTotalStudents)
+        router.post('/students/count', countTotalStudents)
         //Insertar un nuevo alumno
         router.post('/students', addNewStudent)
         //Borrar un alumno

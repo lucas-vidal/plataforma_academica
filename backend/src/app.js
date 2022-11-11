@@ -3,10 +3,10 @@ import config from './config.js';
 import cors from 'cors'
 
 import studentsRoutes from './routes/students.routes.js';
-// import docentesRoutes from './routes/docentes.routes.js';
-// import calificacionesRoutes from './routes/calificaciones.routes.js';
-// import materiasRoutes from './routes/materias.routes.js';
-// import inscripciones_materiasRoutes from './routes/inscripciones_materias.routes.js';
+import teachersRoutes from './routes/teachers.routes.js';
+import coursesRoutes from './routes/courses.routes.js';
+import qualificactionsRoutes from './routes/qualifications.routes.js';
+import enollmentRoutes from './routes/enrollment.routes.js';
 
 const app = express()
 
@@ -18,9 +18,9 @@ app.use(express.json());
 app.use(express.urlencoded({extended : false}));
 
 app.use(studentsRoutes);
-// app.use(docentesRoutes);
-// app.use(calificacionesRoutes);
-// app.use(materiasRoutes);
-// app.use(inscripciones_materiasRoutes);
+app.use(teachersRoutes);
+app.use(coursesRoutes);
+app.use(qualificactionsRoutes);
+app.use(enollmentRoutes);
 
 export default app

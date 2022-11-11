@@ -5,7 +5,7 @@ import querys from "../database/querys.js";
 export const getQualifications = async (req, res) => {
     try {
         const pool = await getConnection();
-        const result = await pool.request().query(querys.getSales)
+        const result = await pool.request().query(querys.getQualifications)
         res.json(result.recordsets)
     } catch (error) {
         res.status(500);

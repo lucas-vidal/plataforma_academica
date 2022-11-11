@@ -12,9 +12,9 @@ export default{
     getTeachers : 'SELECT * FROM teachers ORDER BY name DESC',
     getTeacherByDni : 'SELECT * FROM teachers WHERE dni = @dni',
     countTotalTeachers : 'SELECT COUNT (*) FROM teachers',
-    addNewTeacher : 'INSERT INTO teachers (name, surname, date_of_brith, user, password) VALUES (@name, @surname, @date_of_brith, @date_of_admission, @user, @password)',
+    addNewTeacher : 'INSERT INTO teachers (dni, name, surname, date_of_brith, username, password) VALUES (@dni, @name, @surname, @date_of_brith, @username, @password)',
     deleteTeacherByDni : 'DELETE FROM teachers WHERE dni = @dni',
-    updateTeacherByDni : 'UPDATE teachers SET name = @name, surname = @surname, date_of_brith = @date_of_brith, user = @user, password = @password WHERE dni = @dni',
+    updateTeacherByDni : 'UPDATE teachers SET name = @name, surname = @surname, date_of_brith = @date_of_brith, username = @username, password = @password WHERE dni = @dni',
 
     //Calificaciones
     getQualifications : 'SELECT * FROM qualifications',
@@ -27,15 +27,15 @@ export default{
     //Cursos
     getCourses : 'SELECT * FROM courses ORDER BY name DESC',
     getCourseByCode : 'SELECT * FROM courses WHERE code = @code',
-    addNewCourse : 'INSERT INTO qualifications (code, name, dni_1, dni_2, dni_3) VALUES (@code, @name, @dni_1, @dni_2, @dni_3)',
-    deleteCourseByCode : 'DELETE FROM qualifications WHERE code = @code ',
-    updateCourseByCode : 'UPDATE qualifications SET name = @name, dni_1 = @dni_1, dni_2 = @dni_2, dni_3 = @dni_3 WHERE code = @code',
+    addNewCourse : 'INSERT INTO courses (code, name, dni_1, dni_2, dni_3) VALUES (@code, @name, @dni_1, @dni_2, @dni_3)',
+    deleteCourseByCode : 'DELETE FROM courses WHERE code = @code ',
+    updateCourseByCode : 'UPDATE courses SET name = @name, dni_1 = @dni_1, dni_2 = @dni_2, dni_3 = @dni_3 WHERE code = @code',
 
     //Inscripciones
     getEnrollments : 'SELECT * FROM enrollment ORDER BY code DESC',
     getEnrollmentByCode : 'SELECT * FROM enrollment WHERE code = @code',
     getEnrollmentByDni : 'SELECT * FROM enrollment WHERE dni = @dni',
-    addNewEnrollment :'INSERT INTO enrollment (code, dni) VALUES ( @code, @dni);',
+    addNewEnrollment :'INSERT INTO enrollment (code, dni) VALUES ( @code, @dni)',
     deleteEnrollmentByDni : 'DELETE FROM enrollment WHERE code = @code and dni = @dni',
     updateEnrollmentByDni : 'UPDATE enrollment SET code = @code, dni = @dni WHERE code = @code and dni = @dni',
 

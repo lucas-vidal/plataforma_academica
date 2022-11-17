@@ -319,6 +319,10 @@ button.bg-alternate:focus {
 	background-color: #5c3a69 !important
 }
 
+.bg-verdi {
+	background-color: #E0F3FF !important
+}
+
 :root {
 	--blue: #007bff;
 	--indigo: #6610f2;

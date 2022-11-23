@@ -38,7 +38,7 @@ export const getCourseByCode = async (req, res) => {
 //Crea nuevo Curso
 export const addNewCourse = async (req, res) => {
 
-    const { code, name, dni_1, dni_2, dni_3 } = req.body
+    const { code, name, date_test1, date_test2, date_test3, date_test4, date_ap1, date_ap2, date_ap3, date_ap4 } = req.body
 
     if (code == null || name == null || dni_1 == null ) {
 
@@ -51,11 +51,16 @@ export const addNewCourse = async (req, res) => {
             .request()
             .input("code", sql.Int, code)
             .input("name", sql.VarChar, name)
-            .input("dni_1", sql.Int, dni_1)
-            .input("dni_2", sql.Int, dni_2)
-            .input("dni_3", sql.Int, dni_3)
+            .input("date_test1", sql.Int, date_test1)
+            .input("date_test2", sql.Int, date_test2)
+            .input("date_test3", sql.Int, date_test3)
+            .input("date_test4", sql.Int, date_test4)
+            .input("date_ap1", sql.Int, date_ap1)
+            .input("date_ap2", sql.Int, date_ap2)
+            .input("date_ap3", sql.Int, date_ap3)
+            .input("date_ap4", sql.Int, date_ap4)
             .query(querys.addNewCourse);
-        res.json({ code, name, dni_1, dni_2, dni_3 });
+        res.json({ code, name, date_test1, date_test2, date_test3, date_test4, date_ap1, date_ap2, date_ap3, date_ap4 });
 
     } catch (error) {
         res.status(500);
@@ -89,10 +94,10 @@ export const deleteCourseByCode = async (req, res) => {
 //Actualiza un curso
 export const updateCourseByCode = async (req, res) => {
 
-    const { name, dni_1, dni_2, dni_3  } = req.body;
+    const { name, date_test1, date_test2, date_test3, date_test4, date_ap1, date_ap2, date_ap3, date_ap4 } = req.body;
     const { code } = req.params;
 
-    if ( name == null || dni_1 == null) {
+    if ( name == null || code == null) {
         return res.status(400).json({ msg: "Complete todos los campos." })
     }
        
@@ -101,12 +106,17 @@ export const updateCourseByCode = async (req, res) => {
         await pool
             .request()
             .input("name", sql.VarChar, name)
-            .input("dni_1", sql.Int, dni_1)
-            .input("dni_2", sql.Int, dni_2)
-            .input("dni_3", sql.Int, dni_3)
+            .input("date_test1", sql.Int, date_test1)
+            .input("date_test2", sql.Int, date_test2)
+            .input("date_test3", sql.Int, date_test3)
+            .input("date_test4", sql.Int, date_test4)
+            .input("date_ap1", sql.Int, date_ap1)
+            .input("date_ap2", sql.Int, date_ap2)
+            .input("date_ap3", sql.Int, date_ap3)
+            .input("date_ap4", sql.Int, date_ap4)
             .input("code", sql.Int, code)
             .query(querys.updateCourseByCode);
-        res.json({ code, name, dni_1, dni_2, dni_3  });
+        res.json({ code, name, date_test1, date_test2, date_test3, date_test4, date_ap1, date_ap2, date_ap3, date_ap4 });
     } catch (error) {
 
         res.status(500);

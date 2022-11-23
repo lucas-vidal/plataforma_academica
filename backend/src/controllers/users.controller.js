@@ -2,11 +2,11 @@ import { getConnection, sql } from "../database/connection.js";
 import querys from "../database/querys.js";
 
 //Consulta la tabla de Alumnos
-export const getStudents = async (req, res) => {
+export const getUsers = async (req, res) => {
     try {
         const pool = await getConnection();
         const result = await pool.request()
-        .query(querys.getStudents)
+        .query(querys.getUsers)
         res.json(result.recordsets)
     } catch (error) {
         res.status(500);
@@ -15,7 +15,7 @@ export const getStudents = async (req, res) => {
 }
 
 //Consulta un Alumno por dni
-export const getStudentByDni = async (req, res) => {
+export const getUserByDni = async (req, res) => {
     const { dni } = req.params;
 
     if (dni == null) {
@@ -26,7 +26,7 @@ export const getStudentByDni = async (req, res) => {
         const result = await pool
             .request()
             .input("dni", sql.Int, dni)
-            .query(querys.getStudentByDni);
+            .query(querys.getUserByDni);
 
         res.send(result.recordsets[0]);
     } catch (error) {
@@ -36,14 +36,14 @@ export const getStudentByDni = async (req, res) => {
 }
 
 //Contar cantidad alumnos
-export const countTotalStudents = async (req, res) => {
+export const countTotalUsersStudents = async (req, res) => {
     const { dni } = req.params;
     try {
     const pool = await getConnection();
     const result = await pool
         .request()
         .input("dni", sql.Int, dni)
-        .query(querys.countTotalStudents);
+        .query(querys.countTotalUsersStudents);
     res.json(result.recordsets);
 
     } catch (error) {
@@ -52,12 +52,29 @@ export const countTotalStudents = async (req, res) => {
     }
 }
 
-//Crea nuevo Alumno
-export const addNewStudent = async (req, res) => {
+//Contar cantidad docentes
+export const countTotalUsersTeachers = async (req, res) => {
+    const { dni } = req.params;
+    try {
+    const pool = await getConnection();
+    const result = await pool
+        .request()
+        .input("dni", sql.Int, dni)
+        .query(querys.countTotalUsersTeachers);
+    res.json(result.recordsets);
 
-    const { dni, name, surname, date_of_brith, date_of_admission, username, password } = req.body
+    } catch (error) {
+        res.status(500);
+        res.status(error.message);
+    }
+}
 
-    if (dni == null || name == null || surname == null) {
+//Crea nuevo usuario
+export const addNewUser = async (req, res) => {
+
+    const { dni, name, surname, date_of_brith, date_of_admission, username, password, teacher, admin } = req.body
+
+    if (dni == null || name == null || surname == null || date_of_brith == null) {
         return res.status(400).json({ msg: "Complete todos los campos." })
     }
     try {
@@ -72,8 +89,10 @@ export const addNewStudent = async (req, res) => {
             .input("date_of_admission", sql.Date, date_of_admission)
             .input("username", sql.VarChar, username)
             .input("password", sql.VarChar, password)
-            .query(querys.addNewStudent);
-        res.json({ dni, name, surname, date_of_brith, date_of_admission, username, password });
+            .input("teacher", sql.Binary, teacher)
+            .input("admin", sql.Binary, admin)
+            .query(querys.addNewUser);
+        res.json({ dni, name, surname, date_of_brith, date_of_admission, username, password, teacher, admin });
     } catch (error) {
         res.status(500);
         res.status(error.message);
@@ -81,7 +100,7 @@ export const addNewStudent = async (req, res) => {
 }
 
 //Elimina un alumno por dni
-export const deleteStudentByDni = async (req, res) => {
+export const deleteUserByDni = async (req, res) => {
     const { dni } = req.params;
 
 
@@ -94,7 +113,7 @@ export const deleteStudentByDni = async (req, res) => {
         const result = await pool
             .request()
             .input("dni", sql.Int, dni)
-            .query(querys.deleteStudentByDni);
+            .query(querys.deleteUserByDni);
 
         res.sendStatus(204);
     } catch (error) {
@@ -104,9 +123,9 @@ export const deleteStudentByDni = async (req, res) => {
 }
 
 //Actualiza un alumno
-export const updateStudentByDni = async (req, res) => {
+export const updateUserByDni = async (req, res) => {
 
-    const { name, surname, date_of_brith, date_of_admission, username, password } = req.body;
+    const { name, surname, date_of_brith, date_of_admission, username, password, teacher, admin } = req.body;
     const { dni } = req.params;
 
     if (name == null || surname == null ) {
@@ -124,9 +143,11 @@ export const updateStudentByDni = async (req, res) => {
             .input("date_of_admission", sql.Date, date_of_admission)
             .input("username", sql.VarChar, username)
             .input("password", sql.VarChar, password)
+            .input("teacher", sql.Binary, teacher)
+            .input("admin", sql.Binary, admin)
             .input("dni", sql.Int, dni)
-            .query(querys.updateStudentByDni);
-        res.json({ name, surname, date_of_brith, date_of_admission, username, password });
+            .query(querys.updateUserByDni);
+        res.json({ name, surname, date_of_brith, date_of_admission, username, password, teacher, admin });
     try {
 
 

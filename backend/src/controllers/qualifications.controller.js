@@ -61,9 +61,9 @@ export const getQualificationByDniAndCourse = async (req, res) => {
 //Inserta un calificacion
 export const addNewQualification = async (req, res) => {
 
-    const { code, dni, qual_1, date_1, qual_2, date_2, qual_3, date_3 } = req.body
+    const { code, dni, qual_1, qual_2, qual_3, qual_4, ap1, ap2, ap3, ap4 } = req.body
 
-    if (code == null || price == null || quantity == null ) {
+    if (code == null || dni == null ) {
 
         return res.status(400).json({ msg: "Complete todos los campos." })
     }
@@ -75,13 +75,15 @@ export const addNewQualification = async (req, res) => {
             .input("code", sql.Int, code)
             .input("dni", sql.Int, dni)
             .input("qual_1", sql.Int, qual_1)
-            .input("date_1", sql.Date, date_1)
             .input("qual_2", sql.Int, qual_2)
-            .input("date_2", sql.Date, date_2)
             .input("qual_3", sql.Int, qual_3)
-            .input("date_3", sql.Date, date_3)
+            .input("qual_4", sql.Int, qual_4)
+            .input("ap1", sql.Int, ap1)
+            .input("ap2", sql.Int, ap2)
+            .input("ap3", sql.Int, ap3)
+            .input("ap4", sql.Int, ap4)
             .query(querys.addNewQualification);
-        res.json({ code, dni, qual_1, date_1, qual_2, date_2, qual_3, date_3 });
+        res.json({ code, dni, qual_1, qual_2, qual_3, qual_4, ap1, ap2, ap3, ap4 });
 
     } catch (error) {
         res.status(500);
@@ -116,7 +118,7 @@ export const deleteQualificationByDniAndCourse = async (req, res) => {
 //Actualiza un calificacion
 export const updateQualificationByDniAndCourse = async (req, res) => {
 
-    const { qual_1, date_1, qual_2, date_2, qual_3, date_3 } = req.body;
+    const { qual_1, qual_2, qual_3, qual_4, ap1, ap2, ap3, ap4  } = req.body;
     const { code , dni } = req.params;
 
     if ( code == null || dni == null ) {
@@ -128,15 +130,17 @@ export const updateQualificationByDniAndCourse = async (req, res) => {
         await pool
             .request()
             .input("qual_1", sql.Int, qual_1)
-            .input("date_1", sql.Date, date_1)
             .input("qual_2", sql.Int, qual_2)
-            .input("date_2", sql.Date, date_2)
             .input("qual_3", sql.Int, qual_3)
-            .input("date_3", sql.Date, date_3)
+            .input("qual_4", sql.Int, qual_4)
+            .input("ap1", sql.Int, ap1)
+            .input("ap2", sql.Int, ap2)
+            .input("ap3", sql.Int, ap3)
+            .input("ap4", sql.Int, ap4)
             .input("code", sql.Int, code)
             .input("dni", sql.Int, dni)
             .query(querys.updateQualificationByDniAndCourse);
-        res.json({ code, dni, qual_1, date_1, qual_2, date_2, qual_3, date_3 });
+        res.json({  code, dni, qual_1, qual_2, qual_3, qual_4, ap1, ap2, ap3, ap4 });
     } catch (error) {
 
         res.status(500);

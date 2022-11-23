@@ -1,20 +1,13 @@
 export default{
 
-    //Alumnos
-    getStudents : 'SELECT * FROM students ORDER BY name DESC',
-    getStudentByDni : 'SELECT * FROM students WHERE dni = @dni',
-    countTotalStudents : 'SELECT COUNT (*) FROM students',
-    addNewStudent : 'INSERT INTO students (dni, name, surname, date_of_brith, date_of_admission, username, password) VALUES (@dni, @name, @surname, @date_of_brith, @date_of_admission, @username, @password)',
-    deleteStudentByDni : 'DELETE FROM students WHERE dni = @dni',
-    updateStudentByDni : 'UPDATE students SET name = @name, surname = @surname, date_of_brith = @date_of_brith, date_of_admission = @date_of_admission, username = @username, password = @password WHERE dni = @dni',
-
-    //Docentes
-    getTeachers : 'SELECT * FROM teachers ORDER BY name DESC',
-    getTeacherByDni : 'SELECT * FROM teachers WHERE dni = @dni',
-    countTotalTeachers : 'SELECT COUNT (*) FROM teachers',
-    addNewTeacher : 'INSERT INTO teachers (dni, name, surname, date_of_brith, username, password) VALUES (@dni, @name, @surname, @date_of_brith, @username, @password)',
-    deleteTeacherByDni : 'DELETE FROM teachers WHERE dni = @dni',
-    updateTeacherByDni : 'UPDATE teachers SET name = @name, surname = @surname, date_of_brith = @date_of_brith, username = @username, password = @password WHERE dni = @dni',
+    //Usuarios
+    getUsers : 'SELECT * FROM users ORDER BY name DESC',
+    getUserByDni : 'SELECT * FROM users WHERE dni = @dni',
+    countTotalUsersStudents : 'SELECT COUNT (*) FROM users WHERE teacher = false AND admin = false',
+    countTotalUsersTeachers : 'SELECT COUNT (*) FROM users WHERE teacher = true',
+    addNewUser : 'INSERT INTO users (dni, name, surname, date_of_brith, date_of_admission, username, password, teacher, admin) VALUES (@dni, @name, @surname, @date_of_brith, @date_of_admission, @username, @password, @teacher, @admin)',
+    deleteUserByDni : 'DELETE FROM users WHERE dni = @dni',
+    updateUserByDni : 'UPDATE users SET name = @name, surname = @surname, date_of_brith = @date_of_brith, date_of_admission = @date_of_admission, username = @username, password = @password, teacher = @teacher, admin = @admin WHERE dni = @dni',
 
     //Calificaciones
     getQualifications : 'SELECT * FROM qualifications',
@@ -27,9 +20,9 @@ export default{
     //Cursos
     getCourses : 'SELECT * FROM courses ORDER BY name DESC',
     getCourseByCode : 'SELECT * FROM courses WHERE code = @code',
-    addNewCourse : 'INSERT INTO courses (code, name, dni_1, dni_2, dni_3) VALUES (@code, @name, @dni_1, @dni_2, @dni_3)',
+    addNewCourse : 'INSERT INTO courses (code, name,d ate_test1, date_test2, date_test3, date_test4, data_ap1, data_ap2, data_ap3, data_ap4) VALUES (@code, @name, @date_test1, @date_test2, @date_test3, @date_test4, @data_ap1, @data_ap2, @data_ap3, @data_ap4)',
     deleteCourseByCode : 'DELETE FROM courses WHERE code = @code ',
-    updateCourseByCode : 'UPDATE courses SET name = @name, dni_1 = @dni_1, dni_2 = @dni_2, dni_3 = @dni_3 WHERE code = @code',
+    updateCourseByCode : 'UPDATE courses SET name = @name, date_test1 = @date_test1, date_test2 = @date_test2, date_test3 = @date_test3, date_test4 = @date_test4, data_ap1 = @data_ap1, data_ap2 = @data_ap2, data_ap3 = @data_ap3, data_ap4 = @data_ap4 WHERE code = @code',
 
     //Inscripciones
     getEnrollments : 'SELECT * FROM enrollment ORDER BY code DESC',
@@ -39,4 +32,13 @@ export default{
     deleteEnrollmentByDni : 'DELETE FROM enrollment WHERE code = @code and dni = @dni',
     updateEnrollmentByDni : 'UPDATE enrollment SET code = @code, dni = @dni WHERE code = @code and dni = @dni',
 
+    //Notificaciones
+    getNotifications : 'SELECT * FROM notificactions ORDER BY id DESC',
+    getNotificationsByToDni : 'SELECT * FROM notificactions WHERE to_dni = @dni',
+    getNotificationsByFromDni : 'SELECT * FROM notificactions WHERE from_dni = @dni',
+    getNotificationById : 'SELECT * FROM notificactions WHERE id = @id',
+    addNewNotification : 'INSERT INTO notificactions (datatime, subject, from_dni, to_dni, message) VALUES (@datatime, @subject, @from_dni, @to_dni, @message)',
+    deleteNotificationById : 'DELETE FROM notificactions WHERE id = @id',
+    updateNotificationById : 'UPDATE notificactions SET datatime = @datatime, subject = @subject, from_dni = @from_dni, to_dni = @to_dni, message = @message WHERE id = @id',
+    
 }

@@ -192,8 +192,8 @@
                                                 <th class="text-center">ID</th>
                                                 <th class="text-left">Materia</th>
                                                 <th class="text-center">Fecha</th>
-                                                <th class="text-center">Cancelar</th>
-
+                                                <th class="text-center">Hora</th>
+                                                <th class="text-center">Desinscripcion</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -201,40 +201,36 @@
                                                 <td class="text-center">251</td>
                                                 <td class="text-left">Matematica y Estadistica</td>
                                                 <td class="text-center">17-11-2022</td>
+                                                <td class="text-center">18:00</td>
                                                 <td class="text-center"> 
-                                                    <button onclick="eliminarExamen()" class="mr-2 btn-icon btn-icon-only btn btn-outline-danger">
-                                                        <i class="pe-7s-trash btn-icon-wrapper"> </i>
-                                                    </button> 
+                                                    <button onclick="eliminarExamen()" class="mr-2 btn-icon btn-icon-only btn btn-outline-danger">Desinscribirse</button> 
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td class="text-center">62</td>
                                                 <td class="text-left">Fisica 1</td>
                                                 <td class="text-center">25-11-2022</td>
+                                                <td class="text-center">18:00</td>
                                                 <td class="text-center"> 
-                                                    <button onclick="eliminarExamen()" class="mr-2 btn-icon btn-icon-only btn btn-outline-danger">
-                                                        <i class="pe-7s-trash btn-icon-wrapper"> </i>
-                                                    </button> 
+                                                    <button onclick="eliminarExamen()" class="mr-2 btn-icon btn-icon-only btn btn-outline-danger">Desinscribirse</button> 
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td class="text-center">33</td>
                                                 <td class="text-left">Algebra y Gometria</td>
                                                 <td class="text-center">29-10-2022</td>
+                                                <td class="text-center">18:00</td>
                                                 <td class="text-center"> 
-                                                    <button onclick="eliminarExamen()" class="mr-2 btn-icon btn-icon-only btn btn-outline-danger">
-                                                        <i class="pe-7s-trash btn-icon-wrapper"> </i>
-                                                    </button> 
+                                                    <button onclick="eliminarExamen()" class="mr-2 btn-icon btn-icon-only btn btn-outline-danger">Desinscribirse</button> 
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td class="text-center">142</td>
                                                 <td class="text-left">Ingles 1</td>
                                                 <td class="text-center">15-11-2022</td>
+                                                <td class="text-center">18:00</td>
                                                 <td class="text-center"> 
-                                                    <button onclick="eliminarExamen()" class="mr-2 btn-icon btn-icon-only btn btn-outline-danger">
-                                                        <i class="pe-7s-trash btn-icon-wrapper"> </i>
-                                                    </button> 
+                                                    <button onclick="eliminarExamen()" class="mr-2 btn-icon btn-icon-only btn btn-outline-danger">Desinscribirse</button> 
                                                 </td>
                                             </tr>                                            
                                             
@@ -245,35 +241,66 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="main-card mb-3 card">
-                            <div class="card-body">
-                                <h5 class="card-title">Inscribirse a examenes</h5>
-                                <form class="needs-validation" novalidate>
-                                    
-                                    
-                                    <div class="form-row">
-                                        <div class="col-md-4 mb-3">
-                                            <label for="validationCustom03">Materia</label>
-                                            <input type="password" class="form-control" id="" placeholder="" required>
-                                            <div class="invalid-feedback">
-                                                Please provide a valid city.
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4 mb-3">
-                                            <label for="validationCustom04">Fecha</label>
-                                            <input type="password" class="form-control" id="validationCustom04" placeholder="" required>
-                                            <div class="invalid-feedback">
-                                                Please provide a valid state.
-                                            </div>
-                                        </div>
-                                        
-                                        
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="main-card mb-3 card">
+                                    <div class="card-header">INSCRIBIRSE A EXAMENES
+
                                     </div>
-                                    
-                                    <button class="btn btn-primary" type="submit">Modificar</button>
-                                </form>
-            
-                                
+                                    <div class="table-responsive">
+                                        <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th class="text-center">ID</th>
+                                                <th class="text-left">Materia</th>
+                                                <th class="text-center">Fecha</th>
+                                                <th class="text-center">Hora</th>
+                                                <th class="text-center">Inscripcion</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td class="text-center">251</td>
+                                                <td class="text-left">Matematica y Estadistica</td>
+                                                <td class="text-center">17-11-2022</td>
+                                                <td class="text-center">18:00</td>
+                                                <td class="text-center"> 
+                                                    <button onclick="inscribirExamen()" class="mr-2 btn-icon btn-icon-only btn btn-outline-success">Inscribir</button> 
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center">62</td>
+                                                <td class="text-left">Fisica 1</td>
+                                                <td class="text-center">25-11-2022</td>
+                                                <td class="text-center">18:00</td>
+                                                <td class="text-center"> 
+                                                    <button onclick="inscribirExamen()" class="mr-2 btn-icon btn-icon-only btn btn-outline-success">Inscribir</button> 
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center">33</td>
+                                                <td class="text-left">Algebra y Gometria</td>
+                                                <td class="text-center">29-10-2022</td>
+                                                <td class="text-center">18:00</td>
+                                                <td class="text-center"> 
+                                                    <button onclick="inscribirExamen()" class="mr-2 btn-icon btn-icon-only btn btn-outline-success">Inscribir</button> 
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center">142</td>
+                                                <td class="text-left">Ingles 1</td>
+                                                <td class="text-center">15-11-2022</td>
+                                                <td class="text-center">18:00</td>
+                                                <td class="text-center"> 
+                                                    <button onclick="inscribirExamen()" class="mr-2 btn-icon btn-icon-only btn btn-outline-success">Inscribir</button> 
+                                                </td>
+                                            </tr>                                            
+                                            
+                                            </tbody>
+                                        </table>
+                                    </div>
+                        
+                                </div>
                             </div>
                         </div>
 

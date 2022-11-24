@@ -24706,8 +24706,16 @@ a.fc-more:hover {
 
 	background-image: url("/assets/images/index-bg.jpg");
 	background-size: 100%;
-	width: 100%;
-	height: 100%;
-	opacity: 50%;
-  
-  }
+	background-repeat: no-repeat;
+
+	z-index: 1;
+	display: flex;
+    flex-direction: column;
+    height:100vh;
+    margin: 0;
+    }
+
+.transparencia {
+	background-color: rgba(10,100,200,0.7);
+	flex:1;
+	}

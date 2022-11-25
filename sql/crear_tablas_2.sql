@@ -6,8 +6,8 @@ date_of_brith DATE NOT NULL,
 date_of_admission DATE,
 username VARCHAR(20) NOT NULL,
 password VARCHAR(20) NOT NULL,
-teacher BINARY NOT NULL,
-admin BINARY NOT NULL,
+teacher BIT NOT NULL,
+admin BIT NOT NULL,
 );
 
 
@@ -36,6 +36,10 @@ ap1 INT,
 ap2 INT,
 ap3 INT,
 ap4 INT,
+give_ap1 BIT,
+give_ap2 BIT,
+give_ap3 BIT,
+give_ap4 BIT,
 );
 
 CREATE TABLE enrollment (
@@ -48,7 +52,7 @@ CREATE TABLE notifications (
 id INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
 datatime DATETIME NOT NULL,
 subject TEXT NOT NULL,
-from_dni text NOT NULL,
-to_dni text NOT NULL,
-message text NOT NULL,
+from_dni INT NOT NULL,
+to_dni INT NOT NULL,
+message TEXT NOT NULL,
 ); 

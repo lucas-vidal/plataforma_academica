@@ -7,11 +7,11 @@ import { getNotifications, getNotificationsByToDni, getNotificationsByFromDni, g
         //Consulta notificaciones
         router.get('/notifications', getNotifications)
         //Consulta notificaciones de salida
-        router.get('/notifications/:from_dni', getNotificationsByToDni)
+        router.get('/notifications/from_dni/:from_dni', getNotificationsByFromDni)
         //Consulta notificaciones de destino
-        router.get('/notifications/:to_dni', getNotificationsByFromDni)
+        router.get('/notifications/to_dni/:to_dni', getNotificationsByToDni)
         //Consulta una notificacion
-        router.get('/notifications/:id', getNotificationById)
+        router.get('/notifications/id/:id', getNotificationById)
         //Insertar una nueva notificacion
         router.post('/notifications', addNewNotification)
         //Borrar una notificacion

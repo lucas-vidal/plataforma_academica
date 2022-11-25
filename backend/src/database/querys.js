@@ -18,7 +18,7 @@ export default{
     updateQualificationByDniAndCourse : 'UPDATE qualifications SET qual_1 = @qual_1, date_1 = @date_1, qual_2 = @qual_2, date_2 = @date_2, qual_3 = @qual_3, date_3 = @date_3 WHERE code = @code and dni = @dni',
     
     //Cursos
-    getCourses : 'SELECT * FROM courses ORDER BY name DESC',
+    getCourses : 'SELECT * FROM courses',
     getCourseByCode : 'SELECT * FROM courses WHERE code = @code',
     addNewCourse : 'INSERT INTO courses (code, name,d ate_test1, date_test2, date_test3, date_test4, data_ap1, data_ap2, data_ap3, data_ap4) VALUES (@code, @name, @date_test1, @date_test2, @date_test3, @date_test4, @data_ap1, @data_ap2, @data_ap3, @data_ap4)',
     deleteCourseByCode : 'DELETE FROM courses WHERE code = @code ',
@@ -33,12 +33,12 @@ export default{
     updateEnrollmentByDni : 'UPDATE enrollment SET code = @code, dni = @dni WHERE code = @code and dni = @dni',
 
     //Notificaciones
-    getNotifications : 'SELECT * FROM notificactions ORDER BY id DESC',
-    getNotificationsByToDni : 'SELECT * FROM notificactions WHERE to_dni = @dni',
-    getNotificationsByFromDni : 'SELECT * FROM notificactions WHERE from_dni = @dni',
-    getNotificationById : 'SELECT * FROM notificactions WHERE id = @id',
-    addNewNotification : 'INSERT INTO notificactions (datatime, subject, from_dni, to_dni, message) VALUES (@datatime, @subject, @from_dni, @to_dni, @message)',
-    deleteNotificationById : 'DELETE FROM notificactions WHERE id = @id',
-    updateNotificationById : 'UPDATE notificactions SET datatime = @datatime, subject = @subject, from_dni = @from_dni, to_dni = @to_dni, message = @message WHERE id = @id',
+    getNotifications : 'SELECT * FROM notifications ORDER BY id DESC',
+    getNotificationsByToDni : 'SELECT * FROM notifications WHERE to_dni = @to_dni',
+    getNotificationsByFromDni : 'SELECT * FROM notifications WHERE from_dni = @from_dni',
+    getNotificationById : 'SELECT * FROM notifications WHERE id = @id',
+    addNewNotification : 'INSERT INTO notifications (datatime, subject, from_dni, to_dni, message) VALUES (@datatime, @subject, @from_dni, @to_dni, @message)',
+    deleteNotificationById : 'DELETE FROM notifications WHERE id = @id',
+    updateNotificationById : 'UPDATE notifications SET datatime = @datatime, subject = @subject, from_dni = @from_dni, to_dni = @to_dni, message = @message WHERE id = @id',
     
 }

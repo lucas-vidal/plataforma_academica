@@ -15,9 +15,9 @@ export const getNotifications = async (req, res) => {
 
 //Consulta una notificacion de destino por dni
 export const getNotificationsByToDni = async (req, res) => {
-    const { dni } = req.params;
+    const { to_dni } = req.params;
 
-    if (dni == null) {
+    if ( to_dni == null ) {
         return res.status(400).json({ msg: "Complete todos los campos." })
     }
     try {
@@ -25,7 +25,7 @@ export const getNotificationsByToDni = async (req, res) => {
 
         const result = await pool
             .request()
-            .input("dni", sql.Int, dni)
+            .input("to_dni", sql.Int, to_dni)
             .query(querys.getNotificationsByToDni);
 
         res.send(result.recordsets[0]);
@@ -37,9 +37,9 @@ export const getNotificationsByToDni = async (req, res) => {
 
 //Consulta una notificacion de salida por dni
 export const getNotificationsByFromDni = async (req, res) => {
-    const { dni } = req.params;
+    const { from_dni } = req.params;
 
-    if (dni == null) {
+    if ( from_dni == null) {
         return res.status(400).json({ msg: "Complete todos los campos." })
     }
     try {
@@ -47,7 +47,7 @@ export const getNotificationsByFromDni = async (req, res) => {
 
         const result = await pool
             .request()
-            .input("dni", sql.Int, dni)
+            .input("from_dni", sql.Int, from_dni)
             .query(querys.getNotificationsByFromDni);
 
         res.send(result.recordsets[0]);

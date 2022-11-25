@@ -26,7 +26,7 @@ export const getCourseByCode = async (req, res) => {
         const result = await pool
             .request()
             .input("code", sql.Int, code)
-            .query(querys.getProductByCode);
+            .query(querys.getCourseByCode);
 
         res.send(result.recordsets[0]);
     } catch (error) {

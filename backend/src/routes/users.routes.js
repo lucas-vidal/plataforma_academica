@@ -1,13 +1,15 @@
 
 import {Router} from 'express'
-import { getUsers, getUserByDni, addNewUser, countTotalUsersStudents, countTotalUsersTeachers, deleteUserByDni, updateUserByDni
+import { getUsers, getUserByDni, getUserByUsername, countTotalUsersStudents, countTotalUsersTeachers, addNewUser, deleteUserByDni, updateUserByDni
         } from '../controllers/users.controller.js'
 
         const router = Router()
         //Consulta alumnos
         router.get('/users', getUsers)
         //Consulta un alumno
-        router.get('/users/:dni', getUserByDni)
+        router.get('/users/dni/:dni', getUserByDni)
+        //Consulta un alumno
+        router.get('/users/username/:username', getUserByUsername)
         //Contar total de alumnos
         router.post('/users/count_students', countTotalUsersStudents)
         //Contar total de docentes

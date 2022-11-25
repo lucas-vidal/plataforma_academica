@@ -3,6 +3,7 @@ export default{
     //Usuarios
     getUsers : 'SELECT * FROM users ORDER BY name DESC',
     getUserByDni : 'SELECT * FROM users WHERE dni = @dni',
+    getUserByUsername : 'SELECT * FROM users WHERE username = @username',
     countTotalUsersStudents : 'SELECT COUNT (*) FROM users WHERE teacher = false AND admin = false',
     countTotalUsersTeachers : 'SELECT COUNT (*) FROM users WHERE teacher = true',
     addNewUser : 'INSERT INTO users (dni, name, surname, date_of_brith, date_of_admission, username, password, teacher, admin) VALUES (@dni, @name, @surname, @date_of_brith, @date_of_admission, @username, @password, @teacher, @admin)',

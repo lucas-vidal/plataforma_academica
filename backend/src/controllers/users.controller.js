@@ -35,6 +35,27 @@ export const getUserByDni = async (req, res) => {
     }
 }
 
+//Consulta un Alumno por dni
+export const getUserByUsername = async (req, res) => {
+    const { username } = req.params;
+
+    if (username == null) {
+        return res.status(400).json({ msg: "Complete todos los campos." })
+    }
+    try {
+        const pool = await getConnection();
+        const result = await pool
+            .request()
+            .input("username", sql.VarChar, username)
+            .query(querys.getUserByUsername);
+
+        res.send(result.recordsets[0]);
+    } catch (error) {
+        res.status(500);
+        res.status(error.message);
+    }
+}
+
 //Contar cantidad alumnos
 export const countTotalUsersStudents = async (req, res) => {
     const { dni } = req.params;

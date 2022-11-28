@@ -5,7 +5,7 @@ const string = localStorage.userdata;
 var userdata = JSON.parse(string);
 
 //ENVIA MENSAJE DE ERROR DE AUTENTICACION
-function error(){
+function errorAutenticacion(){
     const div = document.querySelector("#error");
     div.textContent = "Error de autenticacion, ingrese su usuario y cotraseña correctamente.";
 }
@@ -44,7 +44,7 @@ function login() {
         }
         catch (error) {
             limpiarInputs()
-            error()
+            errorAutenticacion()
             console.log(error)
         }
     }
@@ -64,11 +64,11 @@ function redireccion() {
 }
 
 
-                // localStorage.setItem('dni', data_user[0].dni);
-                // localStorage.setItem('name', data_user[0].name);
-                // localStorage.setItem('surname', data_user[0].surname);
-                // localStorage.setItem('date_of_brith', data_user[0].date_of_brith);
-                // localStorage.setItem('date_of_admission', data_user[0].date_of_admission);
-                // localStorage.setItem('username', data_user[0].username);
-                // localStorage.setItem('teacher', data_user[0].teacher);
-                // localStorage.setItem('admin', data_user[0].admin);
+    // localStorage.setItem('dni', data_user[0].dni);
+    // localStorage.setItem('name', data_user[0].name);
+    // localStorage.setItem('surname', data_user[0].surname);
+    // localStorage.setItem('date_of_brith', data_user[0].date_of_brith);
+    // localStorage.setItem('date_of_admission', data_user[0].date_of_admission);
+    // localStorage.setItem('username', data_user[0].username);
+    // localStorage.setItem('teacher', data_user[0].teacher);
+    // localStorage.setItem('admin', data_user[0].admin);

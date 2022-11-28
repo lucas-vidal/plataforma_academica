@@ -19,7 +19,6 @@
     var menu_act_cuenta = '<li><a href="javascript:void(0)" class="mm-active"><i class="metismenu-icon pe-7s-user"></i>Cuenta</a></li>';
     var menu_act_actividadPractica = '<li><a href="javascript:void(0)" class="mm-active"><i class="metismenu-icon pe-7s-notebook"></i>Actividades Practicas</a></li>';
 
-
     var menu_home = '<li><a href="javascript:void(0)" onclick="homeAct()"><i class="metismenu-icon pe-7s-home"></i>Home</a></li>';
     var menu_materias = '<li><a href="javascript:void(0)" onclick="materiasAct()"><i class="metismenu-icon pe-7s-albums"></i>Materias</a></li>';
     var menu_examenes = '<li><a href="javascript:void(0)" onclick="examenesAct()"><i class="metismenu-icon pe-7s-note"></i>Examenes</a></li>';
@@ -30,9 +29,6 @@
     var menu_docentes = '<li><a href="javascript:void(0)" onclick="docentesAct()"><i class="metismenu-icon pe-7s-users"></i>Docentes</a></li>';
     var menu_cuenta = '<li><a href="javascript:void(0)" onclick="cuentaAct()"><i class="metismenu-icon pe-7s-user"></i>Cuenta</a></li>';
     var menu_actividadPractica = '<li><a href="javascript:void(0)" onclick="actividadPracticaAct()"><i class="metismenu-icon pe-7s-notebook"></i>Actividades Practicas</a></li>';
-
-
-
 
 //DATOS DE PERFIL
 function perfil() {
@@ -66,7 +62,9 @@ function onload() {
         window.location.href = "/index.html";
     }
     perfil();
-    homeOnload(perfilAct)}
+    menuHomeOnload(perfilAct)
+    tituloHome()
+}
 
 //LOGOUT SALIDA DE LA PLATAFORMA
 function logout() {
@@ -74,15 +72,8 @@ function logout() {
     window.location.href = "/index.html";
 }
 
-
-
-//MENU SLIDEBAR
-// function menu() {
-
-
-// }
-
-function homeOnload(perfil) {
+//MENU
+function menuHomeOnload(perfil) {
     const menu = document.querySelector("#menu");    
     switch (perfil) {
         case "alumno":
@@ -92,13 +83,12 @@ function homeOnload(perfil) {
             menu.innerHTML =  menu_act_home + menu_materias + menu_examenes + menu_actividadPractica + menu_calificaciones + menu_calendario + menu_notificaciones
             break;
         case "administrador":
-            menu.innerHTML =  menu_act_home + menu_alumnos + menu_docentes +  menu_materias + menu_examenes + menu_actividadPractica + menu_calificaciones + menu_notificaciones
+            menu.innerHTML =  menu_act_home + menu_alumnos + menu_docentes +  menu_materias + menu_examenes + menu_actividadPractica + menu_calificaciones + menu_calendario + menu_notificaciones
             break;
-
     }
 }
 
-function homeAct() {
+function menuHome() {
     const menu = document.querySelector("#menu");    
     switch (perfilAct) {
         case "alumno":
@@ -108,21 +98,18 @@ function homeAct() {
             menu.innerHTML =  menu_act_home + menu_materias + menu_examenes + menu_actividadPractica + menu_calificaciones + menu_calendario + menu_notificaciones
             break;
         case "administrador":
-            menu.innerHTML =  menu_act_home + menu_alumnos + menu_docentes +  menu_materias + menu_examenes + menu_actividadPractica + menu_calificaciones + menu_notificaciones
+            menu.innerHTML =  menu_act_home + menu_alumnos + menu_docentes +  menu_materias + menu_examenes + menu_actividadPractica + menu_calificaciones + menu_calendario + menu_notificaciones
             break;
     }
 }
-
-function alumnosAct() {
+function menuAlumnos() {
     const menu = document.querySelector("#menu");    
-    menu.innerHTML =   menu_home + menu_act_alumnos + menu_docentes +  menu_materias + menu_examenes + menu_actividadPractica + menu_calificaciones + menu_notificaciones
+    menu.innerHTML =   menu_home + menu_act_alumnos + menu_docentes +  menu_materias + menu_examenes + menu_actividadPractica + menu_calificaciones + menu_calendario + menu_notificaciones
 }
-
-function docentesAct() {
-    menu.innerHTML =   menu_home + menu_alumnos + menu_act_docentes +  menu_materias + menu_examenes + menu_actividadPractica + menu_calificaciones + menu_notificaciones
+function menuDocentes() {
+    menu.innerHTML =   menu_home + menu_alumnos + menu_act_docentes +  menu_materias + menu_examenes + menu_actividadPractica + menu_calificaciones + menu_calendario + menu_notificaciones
 }
-
-function materiasAct() {
+function menuMaterias() {
     const menu = document.querySelector("#menu");    
     switch (perfilAct) {
         case "alumno":
@@ -132,12 +119,11 @@ function materiasAct() {
             menu.innerHTML =   menu_home + menu_act_materias + menu_examenes + menu_actividadPractica + menu_calificaciones + menu_calendario + menu_notificaciones
             break;
         case "administrador":
-            menu.innerHTML =   menu_home + menu_alumnos + menu_docentes +  menu_act_materias + menu_examenes + menu_actividadPractica + menu_calificaciones + menu_notificaciones
+            menu.innerHTML =   menu_home + menu_alumnos + menu_docentes +  menu_act_materias + menu_examenes + menu_actividadPractica + menu_calificaciones + menu_calendario + menu_notificaciones
             break;
     }
 }
-
-function examenesAct() {
+function menuExamenes() {
     const menu = document.querySelector("#menu");    
     switch (perfilAct) {
         case "alumno":
@@ -147,12 +133,11 @@ function examenesAct() {
             menu.innerHTML =   menu_home + menu_materias + menu_act_examenes + menu_actividadPractica + menu_calificaciones + menu_calendario + menu_notificaciones
             break;
         case "administrador":
-            menu.innerHTML =   menu_home + menu_alumnos + menu_docentes +  menu_materias + menu_act_examenes + menu_actividadPractica + menu_calificaciones + menu_notificaciones
+            menu.innerHTML =   menu_home + menu_alumnos + menu_docentes +  menu_materias + menu_act_examenes + menu_actividadPractica + menu_calificaciones + menu_calendario + menu_notificaciones
             break;
     }
 }
-
-function calificacionesAct() {
+function menuCalificaciones() {
     const menu = document.querySelector("#menu");    
     switch (perfilAct) {
         case "alumno":
@@ -162,12 +147,11 @@ function calificacionesAct() {
             menu.innerHTML =   menu_home + menu_materias + menu_examenes + menu_actividadPractica + menu_act_calificaciones + menu_calendario + menu_notificaciones
             break;
         case "administrador":
-            menu.innerHTML =   menu_home + menu_alumnos + menu_docentes +  menu_materias + menu_examenes + menu_actividadPractica + menu_act_calificaciones + menu_notificaciones
+            menu.innerHTML =   menu_home + menu_alumnos + menu_docentes +  menu_materias + menu_examenes + menu_actividadPractica + menu_act_calificaciones + menu_calendario + menu_notificaciones
             break;
     }
 }
-
-function calendarioAct() {
+function menuCalendario() {
     const menu = document.querySelector("#menu");    
     switch (perfilAct) {
         case "alumno":
@@ -176,10 +160,12 @@ function calendarioAct() {
         case "docente":
             menu.innerHTML =   menu_home + menu_materias + menu_examenes + menu_actividadPractica + menu_calificaciones + menu_act_calendario + menu_notificaciones
             break;
+        case "administrador":
+            menu.innerHTML =   menu_home + menu_alumnos + menu_docentes +  menu_materias + menu_examenes + menu_actividadPractica + menu_calificaciones + menu_act_calendario + menu_notificaciones
+            break;
     }
 }
-
-function notificacionesAct() {
+function menuNotificaciones() {
     const menu = document.querySelector("#menu");    
     switch (perfilAct) {
         case "alumno":
@@ -189,12 +175,11 @@ function notificacionesAct() {
             menu.innerHTML =  menu_home + menu_materias + menu_examenes + menu_actividadPractica + menu_calificaciones + menu_calendario + menu_act_notificaciones
             break;
         case "administrador":
-            menu.innerHTML =   menu_home + menu_alumnos + menu_docentes +  menu_materias + menu_examenes + menu_actividadPractica + menu_calificaciones + menu_act_notificaciones
+            menu.innerHTML =   menu_home + menu_alumnos + menu_docentes +  menu_materias + menu_examenes + menu_actividadPractica + menu_calificaciones + menu_calendario + menu_act_notificaciones
             break;
     }
 }
-
-function cuentaAct() {
+function menuCuenta() {
     const menu = document.querySelector("#menu");    
     switch (perfilAct) {
         case "alumno":
@@ -204,12 +189,11 @@ function cuentaAct() {
             menu.innerHTML =   menu_home + menu_materias + menu_examenes + menu_actividadPractica + menu_calificaciones + menu_calendario + menu_notificaciones
             break;
         case "administrador":
-            menu.innerHTML =   menu_home + menu_alumnos + menu_docentes +  menu_materias + menu_examenes + menu_actividadPractica + menu_calificaciones + menu_notificaciones
+            menu.innerHTML =   menu_home + menu_alumnos + menu_docentes +  menu_materias + menu_examenes + menu_actividadPractica + menu_calificaciones + menu_calendario + menu_notificaciones
             break;
     }
 }
-
-function actividadPracticaAct() {
+function menuActividadPractica() {
     const menu = document.querySelector("#menu");    
     switch (perfilAct) {
         case "alumno":
@@ -219,93 +203,176 @@ function actividadPracticaAct() {
             menu.innerHTML =   menu_home + menu_materias + menu_examenes + menu_act_actividadPractica + menu_calificaciones + menu_calendario + menu_notificaciones
             break;
         case "administrador":
-            menu.innerHTML =   menu_home + menu_alumnos + menu_docentes +  menu_materias + menu_examenes + menu_act_actividadPractica + menu_calificaciones + menu_notificaciones
+            menu.innerHTML =   menu_home + menu_alumnos + menu_docentes +  menu_materias + menu_examenes + menu_act_actividadPractica + menu_calificaciones + menu_calendario + menu_notificaciones
             break;
     }
 }
 
+//TITULOS
+function tituloHome(){
+    var icon = "home"
+    var title = "Home"
+    var description = "Aqui podras ver un resumen del estado de tu carrera."
+    tit_str1 = '<div class="page-title-wrapper"><div class="page-title-heading"><div class="page-title-icon"><i class="pe-7s-' 
+    tit_str2 = icon + ' icon-gradient bg-mean-fruit"></i></div><div>' 
+    tit_str3 = title + '<div class="page-title-subheading">' 
+    tit_str4 = description + '</div></div></div></div>'
 
-// function alumnoHomeAct() {
-//     menu.innerHTML =  menu_act_home +  menu_materias + menu_examenes + menu_calificaciones + menu_calendario + menu_notificaciones;
-// }
-// function alumnoMateriasAct() {
-//     const menu = document.querySelector("#menu");
-//     menu.innerHTML =  menu_home +  menu_act_materias + menu_examenes + menu_calificaciones + menu_calendario + menu_notificaciones;
-// }
-// function alumnoExamenesAct() {
-//     const menu = document.querySelector("#menu");
-//     menu.innerHTML = menu_home +  menu_materias + menu_act_examenes + calificaciones + calendario + notificaciones;
-// }
-// function alumnoCalificacionesAct() {
-//     const menu = document.querySelector("#menu");
-//     menu.innerHTML = home +  alumnos + examenes + menu_act_calificaciones + calendario + notificaciones;
-// }
-// function alumnoCalendarioAct() {
-//     const menu = document.querySelector("#menu");
-//     menu.innerHTML =  home +  materias + examenes + calificaciones + menu_act_calendario + notificaciones;
-// }
-// function alumnoNotificacionesAct() {
-//     const menu = document.querySelector("#menu");
-//     menu.innerHTML = home +  materias + examenes + calificaciones + calendario + menu_act_notificaciones;
-// }
+    const titleTag = document.querySelector("#title");   
+    titleTag.innerHTML =  tit_str1 + tit_str2 + tit_str3 + tit_str4;
+}
+
+function tituloAlumnos(){
+    var icon = "study"
+    var title = "Alumnos"
+    var description = "Aqui podras ver el listado de los alumnos de la plataforma."
+    tit_str1 = '<div class="page-title-wrapper"><div class="page-title-heading"><div class="page-title-icon"><i class="pe-7s-' 
+    tit_str2 = icon + ' icon-gradient bg-mean-fruit"></i></div><div>' 
+    tit_str3 = title + '<div class="page-title-subheading">' 
+    tit_str4 = description + '</div></div></div></div>'
+
+    const titleTag = document.querySelector("#title");   
+    titleTag.innerHTML =  tit_str1 + tit_str2 + tit_str3 + tit_str4;
+}
+
+function tituloDocentes(){
+    var icon = "users"
+    var title = "Docentes"
+    var description = "Aqui podras ver el listado de docentes de la plataforma."
+    tit_str1 = '<div class="page-title-wrapper"><div class="page-title-heading"><div class="page-title-icon"><i class="pe-7s-' 
+    tit_str2 = icon + ' icon-gradient bg-mean-fruit"></i></div><div>' 
+    tit_str3 = title + '<div class="page-title-subheading">' 
+    tit_str4 = description + '</div></div></div></div>'
+
+    const titleTag = document.querySelector("#title");   
+    titleTag.innerHTML =  tit_str1 + tit_str2 + tit_str3 + tit_str4;
+}
+
+function tituloMaterias(){
+    var icon = "albums"
+    var title = "Materias"
+    var description = "Aqui podras ver las materias."
+    tit_str1 = '<div class="page-title-wrapper"><div class="page-title-heading"><div class="page-title-icon"><i class="pe-7s-' 
+    tit_str2 = icon + ' icon-gradient bg-mean-fruit"></i></div><div>' 
+    tit_str3 = title + '<div class="page-title-subheading">' 
+    tit_str4 = description + '</div></div></div></div>'
+
+    const titleTag = document.querySelector("#title");   
+    titleTag.innerHTML =  tit_str1 + tit_str2 + tit_str3 + tit_str4;
+}
+
+function tituloExamenes(){
+    var icon = "note"
+    var title = "Examenes"
+    var description = "Aqui podras ver los examenes de las materias."
+    tit_str1 = '<div class="page-title-wrapper"><div class="page-title-heading"><div class="page-title-icon"><i class="pe-7s-' 
+    tit_str2 = icon + ' icon-gradient bg-mean-fruit"></i></div><div>' 
+    tit_str3 = title + '<div class="page-title-subheading">' 
+    tit_str4 = description + '</div></div></div></div>'
+
+    const titleTag = document.querySelector("#title");   
+    titleTag.innerHTML =  tit_str1 + tit_str2 + tit_str3 + tit_str4;
+}
+
+function tituloActividadesPracticas(){
+    var icon = "notebook"
+    var title = "Actividades Practicas"
+    var description = "Aqui podras ver las actividades practicas"
+    tit_str1 = '<div class="page-title-wrapper"><div class="page-title-heading"><div class="page-title-icon"><i class="pe-7s-' 
+    tit_str2 = icon + ' icon-gradient bg-mean-fruit"></i></div><div>' 
+    tit_str3 = title + '<div class="page-title-subheading">' 
+    tit_str4 = description + '</div></div></div></div>'
+
+    const titleTag = document.querySelector("#title");   
+    titleTag.innerHTML =  tit_str1 + tit_str2 + tit_str3 + tit_str4;
+}
+
+function tituloCalificaciones(){
+    var icon = "check"
+    var title = "Calificaciones"
+    var description = "Aqui podras ver las calificaciones de las materias."
+    tit_str1 = '<div class="page-title-wrapper"><div class="page-title-heading"><div class="page-title-icon"><i class="pe-7s-' 
+    tit_str2 = icon + ' icon-gradient bg-mean-fruit"></i></div><div>' 
+    tit_str3 = title + '<div class="page-title-subheading">' 
+    tit_str4 = description + '</div></div></div></div>'
+
+    const titleTag = document.querySelector("#title");   
+    titleTag.innerHTML =  tit_str1 + tit_str2 + tit_str3 + tit_str4;
+}
+
+function tituloCalendario(){
+    var icon = "date"
+    var title = "Calendario"
+    var description = "Aqui podras ver el calendario academico."
+    tit_str1 = '<div class="page-title-wrapper"><div class="page-title-heading"><div class="page-title-icon"><i class="pe-7s-' 
+    tit_str2 = icon + ' icon-gradient bg-mean-fruit"></i></div><div>' 
+    tit_str3 = title + '<div class="page-title-subheading">' 
+    tit_str4 = description + '</div></div></div></div>'
+
+    const titleTag = document.querySelector("#title");   
+    titleTag.innerHTML =  tit_str1 + tit_str2 + tit_str3 + tit_str4;
+}
+
+function tituloNotificaciones(){
+    var icon = "bell"
+    var title = "Notificaciones"
+    var description = "Aqui podras ver las notificaciones que recibas de los usuarios de la plataforma."
+    tit_str1 = '<div class="page-title-wrapper"><div class="page-title-heading"><div class="page-title-icon"><i class="pe-7s-' 
+    tit_str2 = icon + ' icon-gradient bg-mean-fruit"></i></div><div>' 
+    tit_str3 = title + '<div class="page-title-subheading">' 
+    tit_str4 = description + '</div></div></div></div>'
+
+    const titleTag = document.querySelector("#title");   
+    titleTag.innerHTML =  tit_str1 + tit_str2 + tit_str3 + tit_str4;
+}
 
 
-// function docenteHomeAct() {
-//     const menu = document.querySelector("#menu");
-//     menu.innerHTML = home_act +  materias + examenes + calificaciones + calendario + notificaciones;
-// }
-// function docenteMateriasAct() {
-//     const menu = document.querySelector("#menu");
-//     menu.innerHTML = home +  materias_act + examenes + calificaciones + calendario + notificaciones;
-// }
-// function docenteExamenesAct() {
-//     const menu = document.querySelector("#menu");
-//     menu.innerHTML = home +  materias + examenes_act + examenes + calendario + notificaciones;
-// }
-// function docenteCalificacionesAct() {
-//     const menu = document.querySelector("#menu");
-//     menu.innerHTML = home +  materias + examenes + calificaciones_act + calendario + notificaciones;
-// }
-// function docenteCalendarioAct() {
-//     const menu = document.querySelector("#menu");
-//     menu.innerHTML = home +  materias + examenes + calificaciones + calendario_act + notificaciones;
-// }
-// function docenteNotificacionesAct() {
-//     const menu = document.querySelector("#menu");
-//     return menu.innerHTML = home +  materias + examenes + calificaciones + calendario + notificaciones_act;
-// }
 
 
-// function administradorHomeAct() {
-//     const menu = document.querySelector("#menu");
-//     menu.innerHTML = home_act + alumnos + docentes +  materias + examenes + calificaciones + calendario + notificaciones;
-// }
-// function administradorAlumnosAct() {
-//     const menu = document.querySelector("#menu");
-//     menu.innerHTML = home + alumnos_act + docentes +  materias + examenes + calificaciones + calendario + notificaciones;
-// }
-// function administradorDocentesAct() {
-//     const menu = document.querySelector("#menu");
-//     menu.innerHTML = home + alumnos + docentes_act +  materias + examenes + calificaciones + calendario + notificaciones;
-// }
-// function administradorMateriasAct() {
-//     const menu = document.querySelector("#menu");
-//     menu.innerHTML = home + alumnos + docentes +  materias_act + examenes + calificaciones + calendario + notificaciones;    
+//FUNCIONALIDADES
+function homeAct(){
+    menuHome();
+    tituloHome();
+}
 
-// }
-// function administradorExamenesAct() {
-//     const menu = document.querySelector("#menu");
-//     menu.innerHTML = home + alumnos + docentes +  materias + examenes_act + calificaciones + calendario + notificaciones;
-// }
-// function administradorCalificacionesAct() {
-//     const menu = document.querySelector("#menu");
-//     menu.innerHTML = home + alumnos + docentes +  materias + examenes + calificaciones_act + calendario + notificaciones;
-// }
-// function administradorCalendarioAct() {
-//     const menu = document.querySelector("#menu");
-//     menu.innerHTML = home + alumnos + docentes +  materias + examenes + calificaciones + calendario_act + notificaciones;
-// }
-// function administradorNotificacionesAct() {
-//     const menu = document.querySelector("#menu");
-//     menu.innerHTML = home + alumnos + docentes +  materias + examenes + calificaciones + calendario + notificaciones_act;
-// }
+function alumnosAct(){ 
+    menuAlumnos();
+    tituloAlumnos();
+}
+
+function docentesAct(){
+    menuDocentes();
+    tituloDocentes();
+}
+
+function materiasAct(){
+    menuMaterias();
+    tituloMaterias();
+}
+
+function examenesAct(){
+    menuExamenes()
+    tituloExamenes();
+}
+
+function actividadPracticaAct(){
+    menuActividadPractica();
+    tituloActividadesPracticas();
+}
+
+function calificacionesAct(){
+    menuCalificaciones();
+    tituloCalificaciones();
+}
+
+function calendarioAct(){
+    menuCalendario();
+    tituloCalendario();
+}
+
+function notificacionesAct(){
+    menuNotificaciones();
+    tituloNotificaciones();
+}
+
+

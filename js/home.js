@@ -3,40 +3,70 @@
     const string = localStorage.userdata;
     userdata = JSON.parse(string);
 
-    var alumno = '<li class="app-sidebar__heading">Alumno</li>'
-    var docente = '<li class="app-sidebar__heading">Docente</li>'
-    var administrador = '<li class="app-sidebar__heading">Administrador</li>'
+    let perfilAct;
+    var prf_alumno = '<li class="app-sidebar__heading">Alumno</li>'
+    var prf_docente = '<li class="app-sidebar__heading">Docente</li>'
+    var prf_administrador = '<li class="app-sidebar__heading">Administrador</li>'
 
-    var home_act = '<li><a class="mm-active"><i class="metismenu-icon pe-7s-home"></i>Home</a></li>';
-    var materias_act = '<li><a class="mm-active"><i class="metismenu-icon pe-7s-albums"></i>Materias</a></li>';
-    var examenes_act = '<li><a class="mm-active"><i class="metismenu-icon pe-7s-note"></i>Examenes</a></li>';
-    var calificaciones_act = '<li><a class="mm-active"><i class="metismenu-icon pe-7s-check"></i>Calificaciones</a></li>'; 
-    var calendario_act = '<li><a class="mm-active"><i class="metismenu-icon pe-7s-date"></i>Calendario</a></li>';
-    var notificaciones_act = '<li><a class="mm-active"><i class="metismenu-icon pe-7s-bell"></i>Notificaciones</a></li>'; 
+    var menu_act_home = '<li><a href="javascript:void(0)" class="mm-active"><i class="metismenu-icon pe-7s-home"></i>Home</a></li>';
+    var menu_act_materias = '<li><a href="javascript:void(0)" class="mm-active"><i class="metismenu-icon pe-7s-albums"></i>Materias</a></li>';
+    var menu_act_examenes = '<li><a href="javascript:void(0)" class="mm-active"><i class="metismenu-icon pe-7s-note"></i>Examenes</a></li>';
+    var menu_act_calificaciones = '<li><a href="javascript:void(0)" class="mm-active"><i class="metismenu-icon pe-7s-check"></i>Calificaciones</a></li>'; 
+    var menu_act_calendario = '<li><a href="javascript:void(0)" class="mm-active"><i class="metismenu-icon pe-7s-date"></i>Calendario</a></li>';
+    var menu_act_notificaciones = '<li><a href="javascript:void(0)" class="mm-active"><i class="metismenu-icon pe-7s-bell"></i>Notificaciones</a></li>'; 
+    var menu_act_alumnos = '<li><a href="javascript:void(0)" class="mm-active"><i class="metismenu-icon pe-7s-study"></i>Alumnos</a></li>';
+    var menu_act_docentes = '<li><a href="javascript:void(0)" class="mm-active"><i class="metismenu-icon pe-7s-users"></i>Docentes</a></li>';
+    var menu_act_cuenta = '<li><a href="javascript:void(0)" class="mm-active"><i class="metismenu-icon pe-7s-user"></i>Cuenta</a></li>';
+    var menu_act_actividadPractica = '<li><a href="javascript:void(0)" class="mm-active"><i class="metismenu-icon pe-7s-notebook"></i>Actividades Practicas</a></li>';
 
-    var home = '<li><a onclick="alumnoHomeAct()"><i class="metismenu-icon pe-7s-home"></i>Home</a></li>';
-    var materias = '<li><a onclick="alumnoMateriasAct()"><i class="metismenu-icon pe-7s-albums"></i>Materias</a></li>';
-    var examenes = '<li><a onclick="alumnoExamenesAct()"><i class="metismenu-icon pe-7s-note"></i>Examenes</a></li>';
-    var calificaciones = '<li><a onclick="alumnoCalificacionesAct()"><i class="metismenu-icon pe-7s-check"></i>Calificaciones</a></li>'; 
-    var calendario = '<li><a onclick="alumnoCalendarioAct()"><i class="metismenu-icon pe-7s-date"></i>Calendario</a></li>';
-    var notificaciones = '<li><a onclick="alumnoNotificacionesAct()"><i class="metismenu-icon pe-7s-bell"></i>Notificaciones</a></li>'; 
 
-function onloaded() {
+    var menu_home = '<li><a href="javascript:void(0)" onclick="homeAct()"><i class="metismenu-icon pe-7s-home"></i>Home</a></li>';
+    var menu_materias = '<li><a href="javascript:void(0)" onclick="materiasAct()"><i class="metismenu-icon pe-7s-albums"></i>Materias</a></li>';
+    var menu_examenes = '<li><a href="javascript:void(0)" onclick="examenesAct()"><i class="metismenu-icon pe-7s-note"></i>Examenes</a></li>';
+    var menu_calificaciones = '<li><a href="javascript:void(0)" onclick="calificacionesAct()"><i class="metismenu-icon pe-7s-check"></i>Calificaciones</a></li>'; 
+    var menu_calendario = '<li><a href="javascript:void(0)" onclick="calendarioAct()"><i class="metismenu-icon pe-7s-date"></i>Calendario</a></li>';
+    var menu_notificaciones = '<li><a href="javascript:void(0)" onclick="notificacionesAct()"><i class="metismenu-icon pe-7s-bell"></i>Notificaciones</a></li>'; 
+    var menu_alumnos = '<li><a href="javascript:void(0)" onclick="alumnosAct()"><i class="metismenu-icon pe-7s-study"></i>Alumnos</a></li>';
+    var menu_docentes = '<li><a href="javascript:void(0)" onclick="docentesAct()"><i class="metismenu-icon pe-7s-users"></i>Docentes</a></li>';
+    var menu_cuenta = '<li><a href="javascript:void(0)" onclick="cuentaAct()"><i class="metismenu-icon pe-7s-user"></i>Cuenta</a></li>';
+    var menu_actividadPractica = '<li><a href="javascript:void(0)" onclick="actividadPracticaAct()"><i class="metismenu-icon pe-7s-notebook"></i>Actividades Practicas</a></li>';
 
-    if (userdata == null) {
-        window.location.href = "/index.html";
-    }
-    
 
+
+
+//DATOS DE PERFIL
+function perfil() {
     const name_surname = document.querySelector("#name_surname");
     name_surname.textContent = userdata.surname + ", " + userdata.name ;
 
     const dni = document.querySelector("#dni");
     dni.textContent = userdata.dni;
 
-    menu_home();
-
+    if (userdata.admin == false && userdata.teacher == false) {
+        const perfil = document.querySelector("#perfil");
+        perfil.innerHTML =  prf_alumno;    
+        perfilAct = "alumno"
+    }
+    if (userdata.admin == false && userdata.teacher == true) {
+        const perfil = document.querySelector("#perfil");
+        perfil.innerHTML =  prf_docente;   
+        perfilAct = "docente"
+    }
+    if (userdata.admin == true && userdata.teacher == false) {
+        const perfil = document.querySelector("#perfil");
+        perfil.innerHTML =  prf_administrador;   
+        perfilAct = "administrador" 
+    }
 }
+
+//CARGA DATOS EN LA PAGINA AL INICIAR
+function onload() {
+
+    if (userdata == null) {
+        window.location.href = "/index.html";
+    }
+    perfil();
+    homeOnload(perfilAct)}
 
 //LOGOUT SALIDA DE LA PLATAFORMA
 function logout() {
@@ -44,94 +74,238 @@ function logout() {
     window.location.href = "/index.html";
 }
 
-function menu_home() {
 
-    if (userdata.admin == false && userdata.teacher == false) {
-        alumnoHomeAct()
+
+//MENU SLIDEBAR
+// function menu() {
+
+
+// }
+
+function homeOnload(perfil) {
+    const menu = document.querySelector("#menu");    
+    switch (perfil) {
+        case "alumno":
+            menu.innerHTML =  menu_act_home + menu_materias + menu_examenes + menu_actividadPractica + menu_calificaciones + menu_calendario + menu_notificaciones
+            break;
+        case "docente":
+            menu.innerHTML =  menu_act_home + menu_materias + menu_examenes + menu_actividadPractica + menu_calificaciones + menu_calendario + menu_notificaciones
+            break;
+        case "administrador":
+            menu.innerHTML =  menu_act_home + menu_alumnos + menu_docentes +  menu_materias + menu_examenes + menu_actividadPractica + menu_calificaciones + menu_notificaciones
+            break;
+
     }
+}
 
-    if (userdata.admin == false && userdata.teacher == true) {
-        docenteHomeAct()
+function homeAct() {
+    const menu = document.querySelector("#menu");    
+    switch (perfilAct) {
+        case "alumno":
+            menu.innerHTML =  menu_act_home + menu_materias + menu_examenes + menu_actividadPractica + menu_calificaciones + menu_calendario + menu_notificaciones
+            break;
+        case "docente":
+            menu.innerHTML =  menu_act_home + menu_materias + menu_examenes + menu_actividadPractica + menu_calificaciones + menu_calendario + menu_notificaciones
+            break;
+        case "administrador":
+            menu.innerHTML =  menu_act_home + menu_alumnos + menu_docentes +  menu_materias + menu_examenes + menu_actividadPractica + menu_calificaciones + menu_notificaciones
+            break;
     }
+}
 
-    if (userdata.admin == true && userdata.teacher == false) {
-        administradorHomeAct()
+function alumnosAct() {
+    const menu = document.querySelector("#menu");    
+    menu.innerHTML =   menu_home + menu_act_alumnos + menu_docentes +  menu_materias + menu_examenes + menu_actividadPractica + menu_calificaciones + menu_notificaciones
+}
+
+function docentesAct() {
+    menu.innerHTML =   menu_home + menu_alumnos + menu_act_docentes +  menu_materias + menu_examenes + menu_actividadPractica + menu_calificaciones + menu_notificaciones
+}
+
+function materiasAct() {
+    const menu = document.querySelector("#menu");    
+    switch (perfilAct) {
+        case "alumno":
+            menu.innerHTML =   menu_home + menu_act_materias + menu_examenes + menu_actividadPractica + menu_calificaciones + menu_calendario + menu_notificaciones
+            break;
+        case "docente":
+            menu.innerHTML =   menu_home + menu_act_materias + menu_examenes + menu_actividadPractica + menu_calificaciones + menu_calendario + menu_notificaciones
+            break;
+        case "administrador":
+            menu.innerHTML =   menu_home + menu_alumnos + menu_docentes +  menu_act_materias + menu_examenes + menu_actividadPractica + menu_calificaciones + menu_notificaciones
+            break;
     }
 }
 
-function alumnoHomeAct() {
-    const menu = document.querySelector("#menu");
-    menu.innerHTML = alumno + home_act +  materias + examenes + calificaciones + calendario + notificaciones;
+function examenesAct() {
+    const menu = document.querySelector("#menu");    
+    switch (perfilAct) {
+        case "alumno":
+            menu.innerHTML =   menu_home + menu_materias + menu_act_examenes + menu_actividadPractica + menu_calificaciones + menu_calendario + menu_notificaciones
+            break;
+        case "docente":
+            menu.innerHTML =   menu_home + menu_materias + menu_act_examenes + menu_actividadPractica + menu_calificaciones + menu_calendario + menu_notificaciones
+            break;
+        case "administrador":
+            menu.innerHTML =   menu_home + menu_alumnos + menu_docentes +  menu_materias + menu_act_examenes + menu_actividadPractica + menu_calificaciones + menu_notificaciones
+            break;
+    }
 }
-function alumnoMateriasAct() {
-    const menu = document.querySelector("#menu");
-    menu.innerHTML = alumno + home +  materias_act + examenes + calificaciones + calendario + notificaciones;
+
+function calificacionesAct() {
+    const menu = document.querySelector("#menu");    
+    switch (perfilAct) {
+        case "alumno":
+            menu.innerHTML =   menu_home + menu_materias + menu_examenes + menu_actividadPractica + menu_act_calificaciones + menu_calendario + menu_notificaciones
+            break;
+        case "docente":
+            menu.innerHTML =   menu_home + menu_materias + menu_examenes + menu_actividadPractica + menu_act_calificaciones + menu_calendario + menu_notificaciones
+            break;
+        case "administrador":
+            menu.innerHTML =   menu_home + menu_alumnos + menu_docentes +  menu_materias + menu_examenes + menu_actividadPractica + menu_act_calificaciones + menu_notificaciones
+            break;
+    }
 }
-function alumnoExamenesAct() {
-    const menu = document.querySelector("#menu");
-    menu.innerHTML = alumno + home +  materias + examenes_act + calificaciones + calendario + notificaciones;
+
+function calendarioAct() {
+    const menu = document.querySelector("#menu");    
+    switch (perfilAct) {
+        case "alumno":
+            menu.innerHTML =   menu_home + menu_materias + menu_examenes + menu_actividadPractica + menu_calificaciones + menu_act_calendario + menu_notificaciones
+            break;
+        case "docente":
+            menu.innerHTML =   menu_home + menu_materias + menu_examenes + menu_actividadPractica + menu_calificaciones + menu_act_calendario + menu_notificaciones
+            break;
+    }
 }
-function alumnoCalificacionesAct() {
-    const menu = document.querySelector("#menu");
-    menu.innerHTML = alumno + home +  materias + examenes + calificaciones_act + calendario + notificaciones;
+
+function notificacionesAct() {
+    const menu = document.querySelector("#menu");    
+    switch (perfilAct) {
+        case "alumno":
+            menu.innerHTML =  menu_home + menu_materias + menu_examenes + menu_actividadPractica + menu_calificaciones + menu_calendario + menu_act_notificaciones
+            break;
+        case "docente":
+            menu.innerHTML =  menu_home + menu_materias + menu_examenes + menu_actividadPractica + menu_calificaciones + menu_calendario + menu_act_notificaciones
+            break;
+        case "administrador":
+            menu.innerHTML =   menu_home + menu_alumnos + menu_docentes +  menu_materias + menu_examenes + menu_actividadPractica + menu_calificaciones + menu_act_notificaciones
+            break;
+    }
 }
-function alumnoCalendarioAct() {
-    const menu = document.querySelector("#menu");
-    menu.innerHTML = alumno + home +  materias + examenes + calificaciones + calendario_act + notificaciones;
+
+function cuentaAct() {
+    const menu = document.querySelector("#menu");    
+    switch (perfilAct) {
+        case "alumno":
+            menu.innerHTML =   menu_home + menu_materias + menu_examenes + menu_actividadPractica + menu_calificaciones + menu_calendario + menu_notificaciones
+            break;
+        case "docente":
+            menu.innerHTML =   menu_home + menu_materias + menu_examenes + menu_actividadPractica + menu_calificaciones + menu_calendario + menu_notificaciones
+            break;
+        case "administrador":
+            menu.innerHTML =   menu_home + menu_alumnos + menu_docentes +  menu_materias + menu_examenes + menu_actividadPractica + menu_calificaciones + menu_notificaciones
+            break;
+    }
 }
-function alumnoNotificacionesAct() {
-    const menu = document.querySelector("#menu");
-    menu.innerHTML = alumno + home +  materias + examenes + calificaciones + calendario + notificaciones_act;
+
+function actividadPracticaAct() {
+    const menu = document.querySelector("#menu");    
+    switch (perfilAct) {
+        case "alumno":
+            menu.innerHTML =   menu_home + menu_materias + menu_examenes + menu_act_actividadPractica + menu_calificaciones + menu_calendario + menu_notificaciones
+            break;
+        case "docente":
+            menu.innerHTML =   menu_home + menu_materias + menu_examenes + menu_act_actividadPractica + menu_calificaciones + menu_calendario + menu_notificaciones
+            break;
+        case "administrador":
+            menu.innerHTML =   menu_home + menu_alumnos + menu_docentes +  menu_materias + menu_examenes + menu_act_actividadPractica + menu_calificaciones + menu_notificaciones
+            break;
+    }
 }
 
 
-function docenteHomeAct() {
-    const menu = document.querySelector("#menu");
-    menu.innerHTML = docente + home_act +  materias + examenes + calificaciones + calendario + notificaciones;
-}
-function docenteMateriasAct() {
-    const menu = document.querySelector("#menu");
-    menu.innerHTML = docente + home +  materias_act + examenes + calificaciones + calendario + notificaciones;
-}
-function docenteExamenesAct() {
-    const menu = document.querySelector("#menu");
-    menu.innerHTML = docente + home +  materias + examenes_act + examenes + calendario + notificaciones;
-}
-function docenteCalificacionesAct() {
-    const menu = document.querySelector("#menu");
-    menu.innerHTML = docente + home +  materias + examenes + calificaciones_act + calendario + notificaciones;
-}
-function docenteCalendarioAct() {
-    const menu = document.querySelector("#menu");
-    menu.innerHTML = docente + home +  materias + examenes + calificaciones + calendario_act + notificaciones;
-}
-function docenteNotificacionesAct() {
-    const menu = document.querySelector("#menu");
-    menu.innerHTML = docente + home +  materias + examenes + calificaciones + calendario + notificaciones_act;
-}
+// function alumnoHomeAct() {
+//     menu.innerHTML =  menu_act_home +  menu_materias + menu_examenes + menu_calificaciones + menu_calendario + menu_notificaciones;
+// }
+// function alumnoMateriasAct() {
+//     const menu = document.querySelector("#menu");
+//     menu.innerHTML =  menu_home +  menu_act_materias + menu_examenes + menu_calificaciones + menu_calendario + menu_notificaciones;
+// }
+// function alumnoExamenesAct() {
+//     const menu = document.querySelector("#menu");
+//     menu.innerHTML = menu_home +  menu_materias + menu_act_examenes + calificaciones + calendario + notificaciones;
+// }
+// function alumnoCalificacionesAct() {
+//     const menu = document.querySelector("#menu");
+//     menu.innerHTML = home +  alumnos + examenes + menu_act_calificaciones + calendario + notificaciones;
+// }
+// function alumnoCalendarioAct() {
+//     const menu = document.querySelector("#menu");
+//     menu.innerHTML =  home +  materias + examenes + calificaciones + menu_act_calendario + notificaciones;
+// }
+// function alumnoNotificacionesAct() {
+//     const menu = document.querySelector("#menu");
+//     menu.innerHTML = home +  materias + examenes + calificaciones + calendario + menu_act_notificaciones;
+// }
 
 
-function administradorHomeAct() {
-    const menu = document.querySelector("#menu");
-    menu.innerHTML = administrador + home_act +  materias + examenes + calificaciones + calendario + notificaciones;
-}
-function administradorMateriasAct() {
-    const menu = document.querySelector("#menu");
-    menu.innerHTML = administrador + home +  materias_act + examenes + calificaciones + calendario + notificaciones;
-}
-function administradorExamenesAct() {
-    const menu = document.querySelector("#menu");
-    menu.innerHTML = administrador + home +  materias + examenes_act + examenes + calendario + notificaciones;
-}
-function administradorCalificacionesAct() {
-    const menu = document.querySelector("#menu");
-    menu.innerHTML = administrador + home +  materias + examenes + calificaciones_act + calendario + notificaciones;
-}
-function administradorCalendarioAct() {
-    const menu = document.querySelector("#menu");
-    menu.innerHTML = administrador + home +  materias + examenes + calificaciones + calendario_act + notificaciones;
-}
-function administradorNotificacionesAct() {
-    const menu = document.querySelector("#menu");
-    menu.innerHTML = administrador + home +  materias + examenes + calificaciones + calendario + notificaciones_act;
-}
+// function docenteHomeAct() {
+//     const menu = document.querySelector("#menu");
+//     menu.innerHTML = home_act +  materias + examenes + calificaciones + calendario + notificaciones;
+// }
+// function docenteMateriasAct() {
+//     const menu = document.querySelector("#menu");
+//     menu.innerHTML = home +  materias_act + examenes + calificaciones + calendario + notificaciones;
+// }
+// function docenteExamenesAct() {
+//     const menu = document.querySelector("#menu");
+//     menu.innerHTML = home +  materias + examenes_act + examenes + calendario + notificaciones;
+// }
+// function docenteCalificacionesAct() {
+//     const menu = document.querySelector("#menu");
+//     menu.innerHTML = home +  materias + examenes + calificaciones_act + calendario + notificaciones;
+// }
+// function docenteCalendarioAct() {
+//     const menu = document.querySelector("#menu");
+//     menu.innerHTML = home +  materias + examenes + calificaciones + calendario_act + notificaciones;
+// }
+// function docenteNotificacionesAct() {
+//     const menu = document.querySelector("#menu");
+//     return menu.innerHTML = home +  materias + examenes + calificaciones + calendario + notificaciones_act;
+// }
+
+
+// function administradorHomeAct() {
+//     const menu = document.querySelector("#menu");
+//     menu.innerHTML = home_act + alumnos + docentes +  materias + examenes + calificaciones + calendario + notificaciones;
+// }
+// function administradorAlumnosAct() {
+//     const menu = document.querySelector("#menu");
+//     menu.innerHTML = home + alumnos_act + docentes +  materias + examenes + calificaciones + calendario + notificaciones;
+// }
+// function administradorDocentesAct() {
+//     const menu = document.querySelector("#menu");
+//     menu.innerHTML = home + alumnos + docentes_act +  materias + examenes + calificaciones + calendario + notificaciones;
+// }
+// function administradorMateriasAct() {
+//     const menu = document.querySelector("#menu");
+//     menu.innerHTML = home + alumnos + docentes +  materias_act + examenes + calificaciones + calendario + notificaciones;    
+
+// }
+// function administradorExamenesAct() {
+//     const menu = document.querySelector("#menu");
+//     menu.innerHTML = home + alumnos + docentes +  materias + examenes_act + calificaciones + calendario + notificaciones;
+// }
+// function administradorCalificacionesAct() {
+//     const menu = document.querySelector("#menu");
+//     menu.innerHTML = home + alumnos + docentes +  materias + examenes + calificaciones_act + calendario + notificaciones;
+// }
+// function administradorCalendarioAct() {
+//     const menu = document.querySelector("#menu");
+//     menu.innerHTML = home + alumnos + docentes +  materias + examenes + calificaciones + calendario_act + notificaciones;
+// }
+// function administradorNotificacionesAct() {
+//     const menu = document.querySelector("#menu");
+//     menu.innerHTML = home + alumnos + docentes +  materias + examenes + calificaciones + calendario + notificaciones_act;
+// }

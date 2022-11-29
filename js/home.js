@@ -2,6 +2,7 @@
     var userdata;
     const string = localStorage.userdata;
     userdata = JSON.parse(string);
+    const API = 'http://localhost:3000';
 
     let perfilAct;
     var prf_alumno = '<li class="app-sidebar__heading">Alumno</li>'
@@ -30,6 +31,8 @@
     var menu_cuenta = '<li><a href="javascript:void(0)" onclick="cuentaAct()"><i class="metismenu-icon pe-7s-user"></i>Cuenta</a></li>';
     var menu_actividadPractica = '<li><a href="javascript:void(0)" onclick="actividadPracticaAct()"><i class="metismenu-icon pe-7s-notebook"></i>Actividades Practicas</a></li>';
 
+    
+
 //DATOS DE PERFIL
 function perfil() {
     const name_surname = document.querySelector("#name_surname");
@@ -54,10 +57,8 @@ function perfil() {
         perfilAct = "administrador" 
     }
 }
-
 //CARGA DATOS EN LA PAGINA AL INICIAR
 function onload() {
-
     if (userdata == null) {
         window.location.href = "/index.html";
     }
@@ -65,13 +66,11 @@ function onload() {
     menuHomeOnload(perfilAct)
     tituloHome()
 }
-
 //LOGOUT SALIDA DE LA PLATAFORMA
 function logout() {
     localStorage.clear();
     window.location.href = "/index.html";
 }
-
 //MENU
 function menuHomeOnload(perfil) {
     const menu = document.querySelector("#menu");    
@@ -87,7 +86,6 @@ function menuHomeOnload(perfil) {
             break;
     }
 }
-
 function menuHome() {
     const menu = document.querySelector("#menu");    
     switch (perfilAct) {
@@ -207,7 +205,6 @@ function menuActividadPractica() {
             break;
     }
 }
-
 //TITULOS
 function tituloHome(){
     var icon = "home"
@@ -221,7 +218,6 @@ function tituloHome(){
     const titleTag = document.querySelector("#title");   
     titleTag.innerHTML =  tit_str1 + tit_str2 + tit_str3 + tit_str4;
 }
-
 function tituloAlumnos(){
     var icon = "study"
     var title = "Alumnos"
@@ -234,7 +230,6 @@ function tituloAlumnos(){
     const titleTag = document.querySelector("#title");   
     titleTag.innerHTML =  tit_str1 + tit_str2 + tit_str3 + tit_str4;
 }
-
 function tituloDocentes(){
     var icon = "users"
     var title = "Docentes"
@@ -247,7 +242,6 @@ function tituloDocentes(){
     const titleTag = document.querySelector("#title");   
     titleTag.innerHTML =  tit_str1 + tit_str2 + tit_str3 + tit_str4;
 }
-
 function tituloMaterias(){
     var icon = "albums"
     var title = "Materias"
@@ -260,7 +254,6 @@ function tituloMaterias(){
     const titleTag = document.querySelector("#title");   
     titleTag.innerHTML =  tit_str1 + tit_str2 + tit_str3 + tit_str4;
 }
-
 function tituloExamenes(){
     var icon = "note"
     var title = "Examenes"
@@ -273,7 +266,6 @@ function tituloExamenes(){
     const titleTag = document.querySelector("#title");   
     titleTag.innerHTML =  tit_str1 + tit_str2 + tit_str3 + tit_str4;
 }
-
 function tituloActividadesPracticas(){
     var icon = "notebook"
     var title = "Actividades Practicas"
@@ -286,7 +278,6 @@ function tituloActividadesPracticas(){
     const titleTag = document.querySelector("#title");   
     titleTag.innerHTML =  tit_str1 + tit_str2 + tit_str3 + tit_str4;
 }
-
 function tituloCalificaciones(){
     var icon = "check"
     var title = "Calificaciones"
@@ -299,7 +290,6 @@ function tituloCalificaciones(){
     const titleTag = document.querySelector("#title");   
     titleTag.innerHTML =  tit_str1 + tit_str2 + tit_str3 + tit_str4;
 }
-
 function tituloCalendario(){
     var icon = "date"
     var title = "Calendario"
@@ -312,7 +302,6 @@ function tituloCalendario(){
     const titleTag = document.querySelector("#title");   
     titleTag.innerHTML =  tit_str1 + tit_str2 + tit_str3 + tit_str4;
 }
-
 function tituloNotificaciones(){
     var icon = "bell"
     var title = "Notificaciones"
@@ -327,6 +316,30 @@ function tituloNotificaciones(){
 }
 
 
+function cargarDatosAlumnos(){
+    const cargarDatosAlumnos = async () => {
+        try {
+            const respuesta = await fetch(API + '/users', {
+                method: 'GET',
+                headers: new Headers({ 'Content-type': 'application/json' }),
+                mode: 'cors'
+            });
+            const userdata = await respuesta.json();
+
+            if (userdata.admin == false && userdata.teacher == false) {
+                const body = document.querySelector("#body");
+                body.innerHTML =  prf_alumno;    
+            }
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
+    cargarDatosAlumnos();
+}
+
+
+
 
 
 //FUNCIONALIDADES
@@ -338,6 +351,7 @@ function homeAct(){
 function alumnosAct(){ 
     menuAlumnos();
     tituloAlumnos();
+    cargarDatosAlumnos()
 }
 
 function docentesAct(){

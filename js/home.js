@@ -331,14 +331,17 @@ function homeAct(){
 function alumnosAct(){ 
     menuAlumnos();
     tituloAlumnos();
-    inputsAlumnos();
-    tablaAlumnos()
+    inputsUsuarios();
+    tablaUsuarios()
     cargarDatosAlumnos()
 }
 
 function docentesAct(){
     menuDocentes();
     tituloDocentes();
+    inputsUsuarios();
+    tablaUsuarios()
+    cargarDatosDocentes()
 }
 
 function materiasAct(){
@@ -375,7 +378,45 @@ function notificacionesAct(){
 
 
 
-function inputsAlumnos(){
+
+
+
+function cargarDatosAlumnos(){
+    const cargarDatosAlumnos = async () => {
+        try {
+            const respuesta = await fetch(API + '/users', );
+            const usersdata = await respuesta.json();
+            const alumnosdata = usersdata[0].filter(usersdata => usersdata.admin == false && usersdata.teacher == false);
+            ordenarPorApellido(alumnosdata)
+            alumnosdata.map((alumnodata) => tablaDatosUsuarios(alumnodata));
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
+    cargarDatosAlumnos();
+}
+
+function cargarDatosDocentes(){
+    const cargarDatosDocentes = async () => {
+        try {
+            const respuesta = await fetch(API + '/users', );
+            const usersdata = await respuesta.json();
+            const alumnosdata = usersdata[0].filter(usersdata => usersdata.admin == false && usersdata.teacher == true);
+            ordenarPorApellido(alumnosdata)
+            alumnosdata.map((alumnodata) => tablaDatosUsuarios(alumnodata));
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
+    cargarDatosDocentes();
+}
+
+
+
+
+function inputsUsuarios(){
     var str01 = '<div class="row"><div class="col-md-12 align-middle"><div class="needs-validation" novalidate><div class="form-row">'
     var str02 = '<div class="col-md-3 mb-3"><input type="number" class="form-control" id="dni" placeholder="DNI" value="" required></div>'
     var str03 = '<div class="col-md-3 mb-3"><input type="text" class="form-control" id="name" placeholder="Apellidos" required></div>'
@@ -393,7 +434,7 @@ function inputsAlumnos(){
     var str15 = '<div class="col-md-1 mb-3"><input type="number" class="form-control" id="ano2" placeholder="Año" required></div>'
     var str16 = '<div class="col-md-4 mb-3"><div class="row">'
     var str17 = '<div class="col-md-4"><button onclick="agregarUsuario()" class="btn btn-success" type="submit"style="width: 100%; font-size: 100%;">Agregar</button></div>'
-    var str18 = '<div class="col-md-4" id="botonModificar"><button onclick="actualizarAlumno()" class="btn btn-primary"style="width: 100%; font-size: 100%;">Modificar</button></div>'
+    var str18 = '<div class="col-md-4" id="botonModificar"><button onclick="actualizarUsuario()" class="btn btn-primary"style="width: 100%; font-size: 100%;">Modificar</button></div>'
     var str19 = '<div class="col-md-4"><button onclick="limpiarInputs("dni","name","surname")" class="btn btn-danger"type="submit" style="width: 100%; font-size: 100%;">Limpiar</button></div>'
     var str20 = '</div></div></div></div></div></div>'
 
@@ -401,7 +442,7 @@ function inputsAlumnos(){
     return titleTag.innerHTML =  str01 + str02 + str03 + str04 + str05 + str06 + str07 + str08 + str09 + str10 + str11 + str12 + str13 + str14 + str15 + str16 + str17 + str18 + str19 + str20;
 }
 
-function tablaAlumnos(){
+function tablaUsuarios(){
     var str01 = '<div class="col-md-12"><div class="main-card mb-3 card"><div class="table-responsive">'
     var str02 = '<table class="align-middle mb-0 table table-borderless table-striped table-hover"><thead><tr>'
     var str03 = '<th class="text-center bg-secondary text-white">DNI</th>'
@@ -412,45 +453,24 @@ function tablaAlumnos(){
     var str08 = '<th class="text-center bg-secondary text-white">Password</th>'
     var str09 = '<th class="text-center bg-secondary text-white">Modificar</th>'
     var str10 = '<th class="text-center bg-secondary text-white">Eliminar</th>'
-    var str11 = '</tr></thead><tbody id="tabla1"><tr>'
-    var str12 = '</tr></tbody></table></div></div></div>'
+    var str11 = '</tr></thead><tbody id="tabla1">'
+    var str12 = '</tbody></table></div></div></div>'
     
     const titleTag = document.querySelector("#body2");   
     return titleTag.innerHTML =  str01 + str02 + str03 + str04 + str05 + str06 + str07 + str08 + str09 + str10 + str11 + str12 ;
 
 }
 
-
-
-
-function cargarDatosAlumnos(){
-    const leerDatosAlumnos = async () => {
-        try {
-            const respuesta = await fetch(API + '/users', );
-            const usersdata = await respuesta.json();
-            const alumnosdata = usersdata[0].filter(usersdata => usersdata.admin == false && usersdata.teacher == false);
-            ordenarPorApellido(alumnosdata)
-            alumnosdata.map((alumnodata) => tablaDatosAlumnos(alumnodata));
-        }
-        catch (error) {
-            console.log(error)
-        }
-    }
-    leerDatosAlumnos();
-}
-
-
-
-function tablaDatosAlumnos(data){
+function tablaDatosUsuarios(data){
     var str01 = '<tr><td class="text-center">' + data.dni + '</td>'
     var str02 = '<td class="text-center">' + data.surname + '</td>'
     var str03 = '<td class="text-center">' + data.name + '</td>'
     var str04 = '<td class="text-center">' + convertirStringData(data.date_of_brith) + '</td>'
     var str05 = '<td class="text-center">' + convertirStringData(data.date_of_admission) + '</td>'
     var str06 = '<td class="text-center">' + data.password + '</td>'
-    var str07 = '<td class="text-center"><button onclick="modificarAlumno(' + data.dni + ')" class="btn-icon btn-icon-only btn btn-outline-success">'
+    var str07 = '<td class="text-center"><button onclick="modificarUsuario(' + data.dni + ')" class="btn-icon btn-icon-only btn btn-outline-success">'
     var str08 = '<i class="pe-7s-note btn-icon-wrapper"> </i></button></td>'
-    var str09 = '<td class="text-center"><button onclick="eliminarAlumno(' + data.dni + ')" class="btn-icon btn-icon-only btn btn-outline-danger">'
+    var str09 = '<td class="text-center"><button onclick="eliminarUsuario(' + data.dni + ')" class="btn-icon btn-icon-only btn btn-outline-danger">'
     var str10 = '<i class="pe-7s-trash btn-icon-wrapper"></i></button></td>'
     var str11 = '</tr></tbody></table></div></div></div>'
     
@@ -474,6 +494,14 @@ function convertirStringDataTime(dataTime){
     return dateObject
 }
 
+function convertirDataTimeInObjct(dataTime){
+    let dateString = dataTime
+    , reggie = /(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})/
+    , [, year, month, day] = reggie.exec(dateString)
+    , dateObject = [day, month, year];
+    return dateObject
+}
+
 function ordenarPorApellido(data){
     data.sort(function (a, b) {
     if (a.surname < b.surname) {
@@ -485,3 +513,118 @@ function ordenarPorApellido(data){
     return 0;
   });
 }
+
+function eliminarUsuario(dni){
+    var option = confirm("Desea eliminar este usuario?");
+    if (option == true) {
+            const eliminarUsuario = async () => {
+        try {
+            const respuesta = await fetch(API + '/users/' + dni, {
+                    method: 'DELETE',
+                    headers: {'Content-type': 'application/json'}
+                })
+
+        } catch (error) {
+            console.log(error)
+        };
+}
+eliminarUsuario();
+	} 
+
+}
+
+function actualizarUsuario(dni){
+    var name = document.getElementById("name").value
+    var surname = document.getElementById("surname").value
+    var password = document.getElementById("pasword").value
+    var dia1 = document.getElementById("dia1").value
+    var mes1 = document.getElementById("mes1").value
+    var año1 = document.getElementById("año1").value
+    var dia2 = document.getElementById("dia2").value
+    var mes2 = document.getElementById("mes2").value
+    var año2 = document.getElementById("año2").value
+    var option = confirm("Desea modificar este usuario?");
+    if (option == true) {
+    const actualizarUsuario = async () => {
+        try {
+            const respuesta = await fetch(API + '/users/' + dni, {
+                    method: 'PUT',
+                    headers: new Headers({ 'Content-type': 'application/json'}),
+                    mode: 'cors',
+                    body: JSON.stringify(
+                    {
+                        "name": name,
+                        "surname": surname,
+                        "date_of_brith": año1 + '-' + mes1 + '-' + dia1 + 'T00:00:00.000Z',
+                        "date_of_admission": año2 + '-' + mes2 + '-' + dia2 + 'T00:00:00.000Z',
+                        "password": password
+                   })
+                });
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    actualizarUsuario();
+}
+}
+
+
+
+
+
+
+//BOTON MODIFICAR EN LISTADO DE PROVEEDORES
+function modificarUsuario(dni){
+    const cargarUnProveedorEnInputs = async () => {
+        try {
+            const respuesta = await fetch(API + '/users/' + dni, {
+                    method: 'GET',
+                    headers: new Headers({ 'Content-type': 'application/json'}),
+                    mode: 'cors'
+                });
+            const userdata = await respuesta.json();
+            const datatime_admission = convertirDataTimeInObjct(userdata.date_of_admission)
+            const datatime_brith = convertirDataTimeInObjct(userdata.date_of_brith)
+
+
+            document.getElementById("dni").value = userdata[0].dni
+            document.getElementById("name").value = userdata[0].name
+            document.getElementById("surname").value = userdata[0].surname
+            document.getElementById("password").value = userdata[0].password
+            document.getElementById("año1").value = datatime_brith.año
+            document.getElementById("mes1").value = datatime_brith.año
+            document.getElementById("dia1").value = datatime_brith.año
+            document.getElementById("año2").value = datatime_admission.año
+            document.getElementById("mes3").value = datatime_admission.mes
+            document.getElementById("dia4").value = datatime_admission.dia
+            document.getElementById("botonModificar").innerHTML = '<button onclick="actualizarUsuario(' + dni + ')" class="btn btn-primary"style="width: 100%; font-size: 100%;">Modificar</button>';
+
+
+            // cargarDatosAlumnos()
+
+
+
+
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    cargarUnProveedorEnInputs();
+}
+
+// function actu1() {
+//     $(document).ready(function () {
+//         $("#body1").location.reload();;
+//     });
+// }
+// function actu2() {
+
+//     $(function () {
+
+//         $("#body2").location.reload(cargarDatosAlumnos());
+
+//     });
+// }
+
+

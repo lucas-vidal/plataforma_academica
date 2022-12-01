@@ -316,27 +316,7 @@ function tituloNotificaciones(){
 }
 
 
-function cargarDatosAlumnos(){
-    const cargarDatosAlumnos = async () => {
-        try {
-            const respuesta = await fetch(API + '/users', {
-                method: 'GET',
-                headers: new Headers({ 'Content-type': 'application/json' }),
-                mode: 'cors'
-            });
-            const userdata = await respuesta.json();
 
-            if (userdata.admin == false && userdata.teacher == false) {
-                const body = document.querySelector("#body");
-                body.innerHTML =  prf_alumno;    
-            }
-        }
-        catch (error) {
-            console.log(error)
-        }
-    }
-    cargarDatosAlumnos();
-}
 
 
 
@@ -351,6 +331,8 @@ function homeAct(){
 function alumnosAct(){ 
     menuAlumnos();
     tituloAlumnos();
+    inputsAlumnos();
+    tablaAlumnos()
     cargarDatosAlumnos()
 }
 
@@ -390,3 +372,116 @@ function notificacionesAct(){
 }
 
 
+
+
+
+function inputsAlumnos(){
+    var str01 = '<div class="row"><div class="col-md-12 align-middle"><div class="needs-validation" novalidate><div class="form-row">'
+    var str02 = '<div class="col-md-3 mb-3"><input type="number" class="form-control" id="dni" placeholder="DNI" value="" required></div>'
+    var str03 = '<div class="col-md-3 mb-3"><input type="text" class="form-control" id="name" placeholder="Apellidos" required></div>'
+    var str04 = '<div class="col-md-3 mb-3"><input type="text" class="form-control" id="surname" placeholder="Nombres" required></div>'
+    var str05 = '<div class="col-md-3 mb-3"><input type="text" class="form-control" id="password" placeholder="Password" required></div>'
+    var str06 = '</div></div></div></div><div class="row">'
+    var str07 = '<div class="col-md-12 align-middle"><div class="needs-validation" novalidate><div class="form-row">'
+    var str08 = '<div class="col-md-1 mb-3"><p class="text-right">Fecha Nacimiento</p></div>'
+    var str09 = '<div class="col-md-1 mb-3"><input type="number" class="form-control" id="dia1" placeholder="Dia" value="" required></div>'
+    var str10 = '<div class="col-md-1 mb-3"><input type="number" class="form-control" id="mes1" placeholder="Mes" required></div>'
+    var str11 = '<div class="col-md-1 mb-3"><input type="number" class="form-control" id="ano1" placeholder="Año" required></div>'
+    var str12 = '<div class="col-md-1 mb-3"><p class="text-right">Fecha de Ingreso</p></div>'
+    var str13 = '<div class="col-md-1 mb-3"><input type="number" class="form-control" id="dia2" placeholder="Dia" value="" required></div>'
+    var str14 = '<div class="col-md-1 mb-3"><input type="number" class="form-control" id="mes2" placeholder="Mes" required></div>'
+    var str15 = '<div class="col-md-1 mb-3"><input type="number" class="form-control" id="ano2" placeholder="Año" required></div>'
+    var str16 = '<div class="col-md-4 mb-3"><div class="row">'
+    var str17 = '<div class="col-md-4"><button onclick="agregarUsuario()" class="btn btn-success" type="submit"style="width: 100%; font-size: 100%;">Agregar</button></div>'
+    var str18 = '<div class="col-md-4" id="botonModificar"><button onclick="actualizarAlumno()" class="btn btn-primary"style="width: 100%; font-size: 100%;">Modificar</button></div>'
+    var str19 = '<div class="col-md-4"><button onclick="limpiarInputs("dni","name","surname")" class="btn btn-danger"type="submit" style="width: 100%; font-size: 100%;">Limpiar</button></div>'
+    var str20 = '</div></div></div></div></div></div>'
+
+    const titleTag = document.querySelector("#body1");   
+    return titleTag.innerHTML =  str01 + str02 + str03 + str04 + str05 + str06 + str07 + str08 + str09 + str10 + str11 + str12 + str13 + str14 + str15 + str16 + str17 + str18 + str19 + str20;
+}
+
+function tablaAlumnos(){
+    var str01 = '<div class="col-md-12"><div class="main-card mb-3 card"><div class="table-responsive">'
+    var str02 = '<table class="align-middle mb-0 table table-borderless table-striped table-hover"><thead><tr>'
+    var str03 = '<th class="text-center bg-secondary text-white">DNI</th>'
+    var str04 = '<th class="text-center bg-secondary text-white">Apellidos</th>'
+    var str05 = '<th class="text-center bg-secondary text-white">Nombres</th>'
+    var str06 = '<th class="text-center bg-secondary text-white">Fecha de Nacimiento</th>'
+    var str07 = '<th class="text-center bg-secondary text-white">Fecha de Ingreso</th>'
+    var str08 = '<th class="text-center bg-secondary text-white">Password</th>'
+    var str09 = '<th class="text-center bg-secondary text-white">Modificar</th>'
+    var str10 = '<th class="text-center bg-secondary text-white">Eliminar</th>'
+    var str11 = '</tr></thead><tbody id="tabla1"><tr>'
+    var str12 = '</tr></tbody></table></div></div></div>'
+    
+    const titleTag = document.querySelector("#body2");   
+    return titleTag.innerHTML =  str01 + str02 + str03 + str04 + str05 + str06 + str07 + str08 + str09 + str10 + str11 + str12 ;
+
+}
+
+
+
+
+function cargarDatosAlumnos(){
+    const leerDatosAlumnos = async () => {
+        try {
+            const respuesta = await fetch(API + '/users', );
+            const usersdata = await respuesta.json();
+            const alumnosdata = usersdata[0].filter(usersdata => usersdata.admin == false && usersdata.teacher == false);
+            ordenarPorApellido(alumnosdata)
+            alumnosdata.map((alumnodata) => tablaDatosAlumnos(alumnodata));
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
+    leerDatosAlumnos();
+}
+
+
+
+function tablaDatosAlumnos(data){
+    var str01 = '<tr><td class="text-center">' + data.dni + '</td>'
+    var str02 = '<td class="text-center">' + data.surname + '</td>'
+    var str03 = '<td class="text-center">' + data.name + '</td>'
+    var str04 = '<td class="text-center">' + convertirStringData(data.date_of_brith) + '</td>'
+    var str05 = '<td class="text-center">' + convertirStringData(data.date_of_admission) + '</td>'
+    var str06 = '<td class="text-center">' + data.password + '</td>'
+    var str07 = '<td class="text-center"><button onclick="modificarAlumno(' + data.dni + ')" class="btn-icon btn-icon-only btn btn-outline-success">'
+    var str08 = '<i class="pe-7s-note btn-icon-wrapper"> </i></button></td>'
+    var str09 = '<td class="text-center"><button onclick="eliminarAlumno(' + data.dni + ')" class="btn-icon btn-icon-only btn btn-outline-danger">'
+    var str10 = '<i class="pe-7s-trash btn-icon-wrapper"></i></button></td>'
+    var str11 = '</tr></tbody></table></div></div></div>'
+    
+    const titleTag = document.querySelector("#tabla1");   
+    return titleTag.insertAdjacentHTML("afterbegin",  str01 + str02 + str03 + str04 + str05 + str06 + str07 + str08 + str09 + str10 + str11);   
+}
+
+function convertirStringData(dataTime){
+    let dateString = dataTime
+    , reggie = /(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})/
+    , [, year, month, day] = reggie.exec(dateString)
+    , dateObject = day + "-" + month + "-" + year ;
+    return dateObject
+}
+
+function convertirStringDataTime(dataTime){
+    let dateString = dataTime
+    , reggie = /(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})/
+    , [, year, month, day, hours, minutes, seconds] = reggie.exec(dateString)
+    , dateObject = day + "/" + month + "/" + year + " " + hours + ":" + minutes + ":" + seconds;
+    return dateObject
+}
+
+function ordenarPorApellido(data){
+    data.sort(function (a, b) {
+    if (a.surname < b.surname) {
+      return 1;
+    }
+    if (a.surname > b.surname) {
+      return -1;
+    }
+    return 0;
+  });
+}

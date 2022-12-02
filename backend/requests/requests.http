@@ -1,8 +1,6 @@
 
 //PRDUCTOS
-@api_students = http://localhost:3000/students
-
-### REQUEST PRODUCT
+@api_students = http://localhost:3000/users
 GET {{api_students}}
 
 ### ADD PRODUCT
@@ -10,18 +8,20 @@ POST {{api_students}}
 Content-Type: application/json
 
      {
-      "dni": 34988562,
-      "name": "Armando",
-      "surname": "Predes",
-      "date_of_brith": "1991-09-15",
-      "date_of_admission": "2022-07-01",
-      "username": "paredes",
-      "password": "12345"
+      "dni": 37468845,
+      "name": "Matiasss",
+      "surname": "Escobario",
+      "date_of_brith": "1992-08-16T00:00:00.000Z",
+      "date_of_admission": "2022-03-01T00:00:00.000Z",
+      "username": "escobar",
+      "password": "123454",
+      "teacher": false,
+      "admin": false
      }
 
 
 ### REQUEST PRODUCT BY CODE
-GET {{api_students}}/34988562
+GET {{api_students}}/dni/27468845
 
 ### COUNT TOTAL PRODUCT
 POST {{api_students}}/count

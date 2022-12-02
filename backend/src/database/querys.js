@@ -8,7 +8,7 @@ export default{
     countTotalUsersTeachers : 'SELECT COUNT (*) FROM users WHERE teacher = true',
     addNewUser : 'INSERT INTO users (dni, name, surname, date_of_brith, date_of_admission, username, password, teacher, admin) VALUES (@dni, @name, @surname, @date_of_brith, @date_of_admission, @username, @password, @teacher, @admin)',
     deleteUserByDni : 'DELETE FROM users WHERE dni = @dni',
-    updateUserByDni : 'UPDATE users SET name = @name, surname = @surname, date_of_brith = @date_of_brith, date_of_admission = @date_of_admission, username = @username, password = @password, teacher = @teacher, admin = @admin WHERE dni = @dni',
+    updateUserByDni : 'UPDATE users SET name = @name, surname = @surname, date_of_brith = @date_of_brith, date_of_admission = @date_of_admission, password = @password WHERE dni = @dni',
 
     //Calificaciones
     getQualifications : 'SELECT * FROM qualifications',

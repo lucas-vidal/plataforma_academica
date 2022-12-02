@@ -110,8 +110,8 @@ export const addNewUser = async (req, res) => {
             .input("date_of_admission", sql.Date, date_of_admission)
             .input("username", sql.VarChar, username)
             .input("password", sql.VarChar, password)
-            .input("teacher", sql.Binary, teacher)
-            .input("admin", sql.Binary, admin)
+            .input("teacher", sql.Bit, teacher)
+            .input("admin", sql.Bit, admin)
             .query(querys.addNewUser);
         res.json({ dni, name, surname, date_of_brith, date_of_admission, username, password, teacher, admin });
     } catch (error) {

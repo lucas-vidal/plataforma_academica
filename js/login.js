@@ -24,14 +24,13 @@ function login() {
     
     const searchUser = async () => {
         try {
-            const respuesta = await fetch(API + '/users/username/' + username, {
+            const respuesta = await fetch(API + '/users/dni/' + username, {
                 method: 'GET',
                 headers: new Headers({ 'Content-type': 'application/json' }),
                 mode: 'cors'
             });
             const user_data = await respuesta.json();
-            console.log(user_data)
-            if (username == user_data[0].username && password == user_data[0].password) {
+            if (username == user_data[0].dni && password == user_data[0].password) {
 
                 var userdata = JSON.stringify(user_data[0]);
                 localStorage.setItem('userdata', userdata);

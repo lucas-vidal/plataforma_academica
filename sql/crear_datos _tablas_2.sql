@@ -42,9 +42,9 @@ INSERT INTO qualifications (code, dni, qual_1, qual_2, qual_3, qual_4, ap1, ap2,
 
 
 /****** COURSES  ******/
-INSERT INTO courses (code, name, date_test1, date_test2, date_test3, date_test4, date_ap1, date_ap2, date_ap3, date_ap4) VALUES ( 20221001, 'Matematica 1', '2022-06-19T18:00:00', '', '', '', '', '', '', '');
-INSERT INTO courses (code, name, date_test1, date_test2, date_test3, date_test4, date_ap1, date_ap2, date_ap3, date_ap4) VALUES ( 20222002, 'Informatica 1', '2022-06-08T18:00:00', '', '', '', '', '', '', '');
-INSERT INTO courses (code, name, date_test1, date_test2, date_test3, date_test4, date_ap1, date_ap2, date_ap3, date_ap4) VALUES ( 20223003, 'Fisica 1', '2022-06-25T18:00:00', '', '', '', '', '', '', '');
+INSERT INTO courses (code, name, career, date_test1, date_test2, date_test3, date_test4, date_ap1, date_ap2, date_ap3, date_ap4) VALUES ( 20221001, 'Matematica 1',101, '2022-06-19T18:00:00', '', '', '', '', '', '', '');
+INSERT INTO courses (code, name, career, date_test1, date_test2, date_test3, date_test4, date_ap1, date_ap2, date_ap3, date_ap4) VALUES ( 20222002, 'Informatica 1',102 ,'2022-06-08T18:00:00', '', '', '', '', '', '', '');
+INSERT INTO courses (code, name, career, date_test1, date_test2, date_test3, date_test4, date_ap1, date_ap2, date_ap3, date_ap4) VALUES ( 20223003, 'Fisica 1',103 ,'2022-06-25T18:00:00', '', '', '', '', '', '', '');
 
 
 
@@ -79,5 +79,9 @@ INSERT INTO notifications (datatime, subject, from_dni, to_dni, message) VALUES 
 INSERT INTO notifications (datatime, subject, from_dni, to_dni, message) VALUES ( '2022-06-19T19:30:00', 'Tema de examen2', 22254879, 34988562, 'Testeo de mensajes para ver cuantos caracteres entran aca');
 INSERT INTO notifications (datatime, subject, from_dni, to_dni, message) VALUES ( '2022-06-19T19:50:00', 'Tema de examen3', 22995987, 35899875, 'Testeo de mensajes para ver cuantos caracteres entran aca');
 INSERT INTO notifications (datatime, subject, from_dni, to_dni, message) VALUES ( '2022-06-19T18:00:00', 'Re: Tema de examen', 34135573, 29656789, 're-envio: Testeo de mensajes para ver cuantos caracteres entran aca');
+
+INSERT INTO careers (code, name) VALUES ( 101, 'Licenciatura Sistemas');
+INSERT INTO careers (code, name) VALUES ( 102, 'Licenciatura Ciencia de Datos');
+INSERT INTO careers (code, name) VALUES ( 103, 'Licenciatura Informatica');
 
 

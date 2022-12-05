@@ -35,6 +35,13 @@ function login() {
                 var userdata = JSON.stringify(user_data[0]);
                 localStorage.setItem('userdata', userdata);
 
+                var perfilActivo;
+                localStorage.setItem('perfilAct', perfilActivo);
+
+                var menuActivo;
+                localStorage.setItem('menuActivo', menuActivo);
+
+
                 window.location.href = "/home.html";
             }
             else{

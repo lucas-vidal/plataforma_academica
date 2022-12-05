@@ -1,43 +1,15 @@
-
     var userdata;
     const string = localStorage.userdata;
     userdata = JSON.parse(string);
     const API = 'http://localhost:3000';
-    var estado
+    // var perfilAct
 
-    let perfilAct;
+//DATOS DE PERFIL
+function perfil() {
     var prf_alumno = '<li class="app-sidebar__heading">Alumno</li>'
     var prf_docente = '<li class="app-sidebar__heading">Docente</li>'
     var prf_administrador = '<li class="app-sidebar__heading">Administrador</li>'
 
-    var menu_act_home = '<li><a href="javascript:void(0)" class="mm-active"><i class="metismenu-icon pe-7s-home"></i>Home</a></li>';
-    var menu_act_materias = '<li><a href="javascript:void(0)" class="mm-active"><i class="metismenu-icon pe-7s-albums"></i>Materias</a></li>';
-    var menu_act_examenes = '<li><a href="javascript:void(0)" class="mm-active"><i class="metismenu-icon pe-7s-note"></i>Examenes</a></li>';
-    var menu_act_calificaciones = '<li><a href="javascript:void(0)" class="mm-active"><i class="metismenu-icon pe-7s-check"></i>Calificaciones</a></li>'; 
-    var menu_act_calendario = '<li><a href="javascript:void(0)" class="mm-active"><i class="metismenu-icon pe-7s-date"></i>Calendario</a></li>';
-    var menu_act_notificaciones = '<li><a href="javascript:void(0)" class="mm-active"><i class="metismenu-icon pe-7s-bell"></i>Notificaciones</a></li>'; 
-    var menu_act_administradores = '<li><a href="javascript:void(0)" class="mm-active"><i class="metismenu-icon pe-7s-user"></i>Administradores</a></li>';
-    var menu_act_alumnos = '<li><a href="javascript:void(0)" class="mm-active"><i class="metismenu-icon pe-7s-study"></i>Alumnos</a></li>';
-    var menu_act_docentes = '<li><a href="javascript:void(0)" class="mm-active"><i class="metismenu-icon pe-7s-users"></i>Docentes</a></li>';
-    var menu_act_cuenta = '<li><a href="javascript:void(0)" class="mm-active"><i class="metismenu-icon pe-7s-user"></i>Cuenta</a></li>';
-    var menu_act_actividadPractica = '<li><a href="javascript:void(0)" class="mm-active"><i class="metismenu-icon pe-7s-notebook"></i>Actividades Practicas</a></li>';
-
-    var menu_home = '<li><a href="javascript:void(0)" onclick="homeAct()"><i class="metismenu-icon pe-7s-home"></i>Home</a></li>';
-    var menu_materias = '<li><a href="javascript:void(0)" onclick="materiasAct()"><i class="metismenu-icon pe-7s-albums"></i>Materias</a></li>';
-    var menu_examenes = '<li><a href="javascript:void(0)" onclick="examenesAct()"><i class="metismenu-icon pe-7s-note"></i>Examenes</a></li>';
-    var menu_calificaciones = '<li><a href="javascript:void(0)" onclick="calificacionesAct()"><i class="metismenu-icon pe-7s-check"></i>Calificaciones</a></li>'; 
-    var menu_calendario = '<li><a href="javascript:void(0)" onclick="calendarioAct()"><i class="metismenu-icon pe-7s-date"></i>Calendario</a></li>';
-    var menu_notificaciones = '<li><a href="javascript:void(0)" onclick="notificacionesAct()"><i class="metismenu-icon pe-7s-bell"></i>Notificaciones</a></li>'; 
-    var menu_administradores = '<li><a href="javascript:void(0)" onclick="administradoresAct()"><i class="metismenu-icon pe-7s-user"></i>Administradores</a></li>';
-    var menu_alumnos = '<li><a href="javascript:void(0)" onclick="alumnosAct()"><i class="metismenu-icon pe-7s-study"></i>Alumnos</a></li>';
-    var menu_docentes = '<li><a href="javascript:void(0)" onclick="docentesAct()"><i class="metismenu-icon pe-7s-users"></i>Docentes</a></li>';
-    var menu_cuenta = '<li><a href="javascript:void(0)" onclick="cuentaAct()"><i class="metismenu-icon pe-7s-user"></i>Cuenta</a></li>';
-    var menu_actividadPractica = '<li><a href="javascript:void(0)" onclick="actividadPracticaAct()"><i class="metismenu-icon pe-7s-notebook"></i>Actividades Practicas</a></li>';
-
-    
-
-//DATOS DE PERFIL
-function perfil() {
     const name_surname = document.querySelector("#name_surname_prf");
     name_surname.textContent = userdata.surname + ", " + userdata.name ;
 
@@ -47,17 +19,17 @@ function perfil() {
     if (userdata.admin == false && userdata.teacher == false) {
         const perfil = document.querySelector("#perfil");
         perfil.innerHTML =  prf_alumno;    
-        perfilAct = "alumno"
+        localStorage.perfilActivo = "alumno"
     }
     if (userdata.admin == false && userdata.teacher == true) {
         const perfil = document.querySelector("#perfil");
         perfil.innerHTML =  prf_docente;   
-        perfilAct = "docente"
+        localStorage.perfilActivo = "docente"
     }
     if (userdata.admin == true && userdata.teacher == false) {
         const perfil = document.querySelector("#perfil");
         perfil.innerHTML =  prf_administrador;   
-        perfilAct = "administrador" 
+        localStorage.perfilActivo = "administrador" 
     }
 }
 //CARGA DATOS EN LA PAGINA AL INICIAR
@@ -66,32 +38,79 @@ function onload() {
         window.location.href = "/index.html";
     }
     perfil();
-    menuHomeOnload(perfilAct)
-    tituloHome()
+    switch (localStorage.menuActivo) {
+        case "home":
+            homeAct()
+            break;
+        case "administradores":
+            administradoresAct()
+            break;  
+        case "alumnos":
+            alumnosAct()
+            break;  
+        case "docentes":
+            docentesAct()
+            break;  
+        case "materias":
+            materiasAct()
+            break;  
+        case "examenes":
+            examenesAct()
+            break;  
+        case "actividades_practicas":
+            actividadPracticaAct()
+            break;  
+        case "calificaciones":
+            calificacionesAct()
+            break;  
+        case "calendario":
+            calendarioAct()
+            break;  
+        case "notificaciones":
+            notificacionesAct()
+            break; 
+        default:
+            homeAct()
+            break; 
+    }
+
 }
 //LOGOUT SALIDA DE LA PLATAFORMA
 function logout() {
     localStorage.clear();
     window.location.href = "/index.html";
 }
-//MENU
-function menuHomeOnload(perfil) {
-    const menu = document.querySelector("#menu");    
-    switch (perfil) {
-        case "alumno":
-            menu.innerHTML =  menu_act_home + menu_materias + menu_examenes + menu_actividadPractica + menu_calificaciones + menu_calendario + menu_notificaciones
-            break;
-        case "docente":
-            menu.innerHTML =  menu_act_home + menu_materias + menu_examenes + menu_actividadPractica + menu_calificaciones + menu_calendario + menu_notificaciones
-            break;
-        case "administrador":
-            menu.innerHTML =  menu_act_home + menu_administradores + menu_alumnos + menu_docentes +  menu_materias + menu_examenes + menu_actividadPractica + menu_calificaciones + menu_calendario + menu_notificaciones
-            break;
-    }
-}
+
+//MENUS
+var menu_act_home = '<li><a href="javascript:void(0)" class="mm-active"><i class="metismenu-icon pe-7s-home"></i>Home</a></li>';
+var menu_act_materias = '<li><a href="javascript:void(0)" class="mm-active"><i class="metismenu-icon pe-7s-albums"></i>Materias</a></li>';
+var menu_act_carreras = '<li><a href="javascript:void(0)" class="mm-active"><i class="metismenu-icon pe-7s-way"></i>Carreras</a></li>';
+var menu_act_examenes = '<li><a href="javascript:void(0)" class="mm-active"><i class="metismenu-icon pe-7s-note"></i>Examenes</a></li>';
+var menu_act_calificaciones = '<li><a href="javascript:void(0)" class="mm-active"><i class="metismenu-icon pe-7s-check"></i>Calificaciones</a></li>'; 
+var menu_act_calendario = '<li><a href="javascript:void(0)" class="mm-active"><i class="metismenu-icon pe-7s-date"></i>Calendario</a></li>';
+var menu_act_notificaciones = '<li><a href="javascript:void(0)" class="mm-active"><i class="metismenu-icon pe-7s-bell"></i>Notificaciones</a></li>'; 
+var menu_act_administradores = '<li><a href="javascript:void(0)" class="mm-active"><i class="metismenu-icon pe-7s-user"></i>Administradores</a></li>';
+var menu_act_alumnos = '<li><a href="javascript:void(0)" class="mm-active"><i class="metismenu-icon pe-7s-study"></i>Alumnos</a></li>';
+var menu_act_docentes = '<li><a href="javascript:void(0)" class="mm-active"><i class="metismenu-icon pe-7s-users"></i>Docentes</a></li>';
+var menu_act_cuenta = '<li><a href="javascript:void(0)" class="mm-active"><i class="metismenu-icon pe-7s-user"></i>Cuenta</a></li>';
+var menu_act_actividadPractica = '<li><a href="javascript:void(0)" class="mm-active"><i class="metismenu-icon pe-7s-notebook"></i>Actividades Practicas</a></li>';
+
+var menu_home = '<li><a href="javascript:void(0)" onclick="homeAct()"><i class="metismenu-icon pe-7s-home"></i>Home</a></li>';
+var menu_materias = '<li><a href="javascript:void(0)" onclick="materiasAct()"><i class="metismenu-icon pe-7s-albums"></i>Materias</a></li>';
+var menu_carreras = '<li><a href="javascript:void(0)" onclick="carrerasAct()"><i class="metismenu-icon pe-7s-way"></i>Carreras</a></li>';
+var menu_examenes = '<li><a href="javascript:void(0)" onclick="examenesAct()"><i class="metismenu-icon pe-7s-note"></i>Examenes</a></li>';
+var menu_calificaciones = '<li><a href="javascript:void(0)" onclick="calificacionesAct()"><i class="metismenu-icon pe-7s-check"></i>Calificaciones</a></li>'; 
+var menu_calendario = '<li><a href="javascript:void(0)" onclick="calendarioAct()"><i class="metismenu-icon pe-7s-date"></i>Calendario</a></li>';
+var menu_notificaciones = '<li><a href="javascript:void(0)" onclick="notificacionesAct()"><i class="metismenu-icon pe-7s-bell"></i>Notificaciones</a></li>'; 
+var menu_administradores = '<li><a href="javascript:void(0)" onclick="administradoresAct()"><i class="metismenu-icon pe-7s-user"></i>Administradores</a></li>';
+var menu_alumnos = '<li><a href="javascript:void(0)" onclick="alumnosAct()"><i class="metismenu-icon pe-7s-study"></i>Alumnos</a></li>';
+var menu_docentes = '<li><a href="javascript:void(0)" onclick="docentesAct()"><i class="metismenu-icon pe-7s-users"></i>Docentes</a></li>';
+var menu_cuenta = '<li><a href="javascript:void(0)" onclick="cuentaAct()"><i class="metismenu-icon pe-7s-user"></i>Cuenta</a></li>';
+var menu_actividadPractica = '<li><a href="javascript:void(0)" onclick="actividadPracticaAct()"><i class="metismenu-icon pe-7s-notebook"></i>Actividades Practicas</a></li>';
+
 function menuHome() {
     const menu = document.querySelector("#menu");    
-    switch (perfilAct) {
+    switch (localStorage.perfilActivo) {
         case "alumno":
             menu.innerHTML =  menu_act_home + menu_materias + menu_examenes + menu_actividadPractica + menu_calificaciones + menu_calendario + menu_notificaciones
             break;
@@ -99,25 +118,29 @@ function menuHome() {
             menu.innerHTML =  menu_act_home + menu_materias + menu_examenes + menu_actividadPractica + menu_calificaciones + menu_calendario + menu_notificaciones
             break;
         case "administrador":
-            menu.innerHTML =  menu_act_home + menu_administradores + menu_alumnos + menu_docentes +  menu_materias + menu_examenes + menu_actividadPractica + menu_calificaciones + menu_calendario + menu_notificaciones
+            menu.innerHTML =  menu_act_home + menu_administradores + menu_alumnos + menu_docentes +  menu_carreras + menu_examenes + menu_actividadPractica + menu_calificaciones + menu_calendario + menu_notificaciones
             break;
     }
 }
 function menuAdministradores() {    
     const menu = document.querySelector("#menu");    
-    menu.innerHTML =   menu_home + menu_act_administradores + menu_alumnos + menu_docentes +  menu_materias + menu_examenes + menu_actividadPractica + menu_calificaciones + menu_calendario + menu_notificaciones
+    menu.innerHTML =   menu_home + menu_act_administradores + menu_alumnos + menu_docentes +  menu_carreras + menu_examenes + menu_actividadPractica + menu_calificaciones + menu_calendario + menu_notificaciones
 }
 function menuAlumnos() {
     const menu = document.querySelector("#menu");    
-    menu.innerHTML =   menu_home + menu_administradores + menu_act_alumnos + menu_docentes +  menu_materias + menu_examenes + menu_actividadPractica + menu_calificaciones + menu_calendario + menu_notificaciones
+    menu.innerHTML =   menu_home + menu_administradores + menu_act_alumnos + menu_docentes +  menu_carreras + menu_examenes + menu_actividadPractica + menu_calificaciones + menu_calendario + menu_notificaciones
 }
 function menuDocentes() {
     const menu = document.querySelector("#menu");    
-    menu.innerHTML =   menu_home + menu_administradores + menu_alumnos + menu_act_docentes +  menu_materias + menu_examenes + menu_actividadPractica + menu_calificaciones + menu_calendario + menu_notificaciones
+    menu.innerHTML =   menu_home + menu_administradores + menu_alumnos + menu_act_docentes +  menu_carreras + menu_examenes + menu_actividadPractica + menu_calificaciones + menu_calendario + menu_notificaciones
+}
+function menuCarreras() {
+    const menu = document.querySelector("#menu");    
+    menu.innerHTML =   menu_home + menu_administradores + menu_alumnos + menu_docentes +  menu_act_carreras + menu_examenes + menu_actividadPractica + menu_calificaciones + menu_calendario + menu_notificaciones
 }
 function menuMaterias() {
     const menu = document.querySelector("#menu");    
-    switch (perfilAct) {
+    switch (localStorage.perfilActivo) {
         case "alumno":
             menu.innerHTML =   menu_home + menu_act_materias + menu_examenes + menu_actividadPractica + menu_calificaciones + menu_calendario + menu_notificaciones
             break;
@@ -125,13 +148,14 @@ function menuMaterias() {
             menu.innerHTML =   menu_home + menu_act_materias + menu_examenes + menu_actividadPractica + menu_calificaciones + menu_calendario + menu_notificaciones
             break;
         case "administrador":
-            menu.innerHTML =   menu_home + menu_administradores + menu_alumnos + menu_docentes +  menu_act_materias + menu_examenes + menu_actividadPractica + menu_calificaciones + menu_calendario + menu_notificaciones
+            menu.innerHTML =   menu_home + menu_administradores + menu_alumnos + menu_docentes +  menu_act_carreras + menu_examenes + menu_actividadPractica + menu_calificaciones + menu_calendario + menu_notificaciones
             break;
     }
 }
+
 function menuExamenes() {
     const menu = document.querySelector("#menu");    
-    switch (perfilAct) {
+    switch (localStorage.perfilActivo) {
         case "alumno":
             menu.innerHTML =   menu_home + menu_materias + menu_act_examenes + menu_actividadPractica + menu_calificaciones + menu_calendario + menu_notificaciones
             break;
@@ -139,13 +163,13 @@ function menuExamenes() {
             menu.innerHTML =   menu_home + menu_materias + menu_act_examenes + menu_actividadPractica + menu_calificaciones + menu_calendario + menu_notificaciones
             break;
         case "administrador":
-            menu.innerHTML =   menu_home + menu_administradores + menu_alumnos + menu_docentes +  menu_materias + menu_act_examenes + menu_actividadPractica + menu_calificaciones + menu_calendario + menu_notificaciones
+            menu.innerHTML =   menu_home + menu_administradores + menu_alumnos + menu_docentes +  menu_carreras + menu_act_examenes + menu_actividadPractica + menu_calificaciones + menu_calendario + menu_notificaciones
             break;
     }
 }
 function menuCalificaciones() {
     const menu = document.querySelector("#menu");    
-    switch (perfilAct) {
+    switch (localStorage.perfilActivo) {
         case "alumno":
             menu.innerHTML =   menu_home + menu_materias + menu_examenes + menu_actividadPractica + menu_act_calificaciones + menu_calendario + menu_notificaciones
             break;
@@ -153,13 +177,13 @@ function menuCalificaciones() {
             menu.innerHTML =   menu_home + menu_materias + menu_examenes + menu_actividadPractica + menu_act_calificaciones + menu_calendario + menu_notificaciones
             break;
         case "administrador":
-            menu.innerHTML =   menu_home + menu_administradores + menu_alumnos + menu_docentes +  menu_materias + menu_examenes + menu_actividadPractica + menu_act_calificaciones + menu_calendario + menu_notificaciones
+            menu.innerHTML =   menu_home + menu_administradores + menu_alumnos + menu_docentes +  menu_carreras + menu_examenes + menu_actividadPractica + menu_act_calificaciones + menu_calendario + menu_notificaciones
             break;
     }
 }
 function menuCalendario() {
     const menu = document.querySelector("#menu");    
-    switch (perfilAct) {
+    switch (localStorage.perfilActivo) {
         case "alumno":
             menu.innerHTML =   menu_home + menu_materias + menu_examenes + menu_actividadPractica + menu_calificaciones + menu_act_calendario + menu_notificaciones
             break;
@@ -167,13 +191,13 @@ function menuCalendario() {
             menu.innerHTML =   menu_home + menu_materias + menu_examenes + menu_actividadPractica + menu_calificaciones + menu_act_calendario + menu_notificaciones
             break;
         case "administrador":
-            menu.innerHTML =   menu_home + menu_administradores + menu_alumnos + menu_docentes +  menu_materias + menu_examenes + menu_actividadPractica + menu_calificaciones + menu_act_calendario + menu_notificaciones
+            menu.innerHTML =   menu_home + menu_administradores + menu_alumnos + menu_docentes +  menu_carreras + menu_examenes + menu_actividadPractica + menu_calificaciones + menu_act_calendario + menu_notificaciones
             break;
     }
 }
 function menuNotificaciones() {
     const menu = document.querySelector("#menu");    
-    switch (perfilAct) {
+    switch (localStorage.perfilActivo) {
         case "alumno":
             menu.innerHTML =  menu_home + menu_materias + menu_examenes + menu_actividadPractica + menu_calificaciones + menu_calendario + menu_act_notificaciones
             break;
@@ -181,13 +205,13 @@ function menuNotificaciones() {
             menu.innerHTML =  menu_home + menu_materias + menu_examenes + menu_actividadPractica + menu_calificaciones + menu_calendario + menu_act_notificaciones
             break;
         case "administrador":
-            menu.innerHTML =   menu_home + menu_administradores + menu_alumnos + menu_docentes +  menu_materias + menu_examenes + menu_actividadPractica + menu_calificaciones + menu_calendario + menu_act_notificaciones
+            menu.innerHTML =   menu_home + menu_administradores + menu_alumnos + menu_docentes +  menu_carreras + menu_examenes + menu_actividadPractica + menu_calificaciones + menu_calendario + menu_act_notificaciones
             break;
     }
 }
 function menuCuenta() {
     const menu = document.querySelector("#menu");    
-    switch (perfilAct) {
+    switch (localStorage.perfilActivo) {
         case "alumno":
             menu.innerHTML =   menu_home + menu_materias + menu_examenes + menu_actividadPractica + menu_calificaciones + menu_calendario + menu_notificaciones
             break;
@@ -195,13 +219,13 @@ function menuCuenta() {
             menu.innerHTML =   menu_home + menu_materias + menu_examenes + menu_actividadPractica + menu_calificaciones + menu_calendario + menu_notificaciones
             break;
         case "administrador":
-            menu.innerHTML =   menu_home + menu_administradores + menu_alumnos + menu_docentes +  menu_materias + menu_examenes + menu_actividadPractica + menu_calificaciones + menu_calendario + menu_notificaciones
+            menu.innerHTML =   menu_home + menu_administradores + menu_alumnos + menu_docentes +  menu_carreras + menu_examenes + menu_actividadPractica + menu_calificaciones + menu_calendario + menu_notificaciones
             break;
     }
 }
 function menuActividadPractica() {
     const menu = document.querySelector("#menu");    
-    switch (perfilAct) {
+    switch (localStorage.perfilActivo) {
         case "alumno":
             menu.innerHTML =   menu_home + menu_materias + menu_examenes + menu_act_actividadPractica + menu_calificaciones + menu_calendario + menu_notificaciones
             break;
@@ -209,7 +233,7 @@ function menuActividadPractica() {
             menu.innerHTML =   menu_home + menu_materias + menu_examenes + menu_act_actividadPractica + menu_calificaciones + menu_calendario + menu_notificaciones
             break;
         case "administrador":
-            menu.innerHTML =   menu_home + menu_administradores + menu_alumnos + menu_docentes +  menu_materias + menu_examenes + menu_act_actividadPractica + menu_calificaciones + menu_calendario + menu_notificaciones
+            menu.innerHTML =   menu_home + menu_administradores + menu_alumnos + menu_docentes +  menu_carreras + menu_examenes + menu_act_actividadPractica + menu_calificaciones + menu_calendario + menu_notificaciones
             break;
     }
 }
@@ -266,6 +290,18 @@ function tituloMaterias(){
     var icon = "albums"
     var title = "Materias"
     var description = "Aqui podras ver las materias."
+    tit_str1 = '<div class="page-title-wrapper"><div class="page-title-heading"><div class="page-title-icon"><i class="pe-7s-' 
+    tit_str2 = icon + ' icon-gradient bg-mean-fruit"></i></div><div>' 
+    tit_str3 = title + '<div class="page-title-subheading">' 
+    tit_str4 = description + '</div></div></div></div>'
+
+    const titleTag = document.querySelector("#title");   
+    titleTag.innerHTML =  tit_str1 + tit_str2 + tit_str3 + tit_str4;
+}
+function tituloCarreras(){
+    var icon = "way"
+    var title = "Carreras"
+    var description = "Aqui podras ver las carreras de la plataforma."
     tit_str1 = '<div class="page-title-wrapper"><div class="page-title-heading"><div class="page-title-icon"><i class="pe-7s-' 
     tit_str2 = icon + ' icon-gradient bg-mean-fruit"></i></div><div>' 
     tit_str3 = title + '<div class="page-title-subheading">' 
@@ -336,78 +372,80 @@ function tituloNotificaciones(){
 }
 
 
-
-
-
-
-
-
 //FUNCIONALIDADES
 function homeAct(){
-    estado = "home"
+    localStorage.menuActivo = "home";
     menuHome();
     tituloHome();
 }
 
 function administradoresAct(){ 
-    estado = "administradores"
+    localStorage.menuActivo = "administradores"
     menuAdministradores();
     tituloAdministradores();
-    inputsUsuarios(1,0);
-    tablaUsuarios();
+    inputsUsuariosAdminHTML(1,0);
+    tablaUsuariosHTML();
     cargarDatosAdministradores();
 }
 
 function alumnosAct(){ 
-    estado = "alumno"
+    localStorage.menuActivo = "alumnos"
     menuAlumnos();
     tituloAlumnos();
-    inputsUsuarios(0,0);
-    tablaUsuarios();
+    inputsUsuariosAdminHTML(0,0);
+    tablaUsuariosHTML();
     cargarDatosAlumnos();
 }
 
 function docentesAct(){
-    estado = "docente"
+    localStorage.menuActivo = "docentes"
     menuDocentes();
     tituloDocentes();
-    inputsUsuarios(0,1);
-    tablaUsuarios();
+    inputsUsuariosAdminHTML(0,1);
+    tablaUsuariosHTML();
     cargarDatosDocentes();
 }
 
 function materiasAct(){
-    estado = "materias"
+    localStorage.menuActivo = "materias"
     menuMaterias();
     tituloMaterias();
+    tablaMateriasAdminHTML()
 }
+function carrerasAct(){
+    localStorage.menuActivo = "carreras"
+    menuCarreras();
+    tituloCarreras();
+    tablaCarrerasHTML()
+    cargarDatosCarreras();
 
+}
 function examenesAct(){
-    estado = "examenes"
+    localStorage.menuActivo = "examenes"
     menuExamenes();
     tituloExamenes();
 }
 
 function actividadPracticaAct(){
-    estado = "actividad_practica"
+    localStorage.menuActivo = "actividades_practicas"
     menuActividadPractica();
     tituloActividadesPracticas();
 }
 
 function calificacionesAct(){
-    estado = "calificaciones"
+    localStorage.menuActivo = "calificaciones"
     menuCalificaciones();
     tituloCalificaciones();
 }
 
 function calendarioAct(){
-    estado = "calendario"
+    localStorage.menuActivo = "calendario"
     menuCalendario();
     tituloCalendario();
 }
 
 function notificacionesAct(){
-    estado = "notificaciones"
+    localStorage.menuActivo = "notificaciones"
     menuNotificaciones();
     tituloNotificaciones();
 }
@@ -417,7 +455,7 @@ function notificacionesAct(){
 
 
 
-
+////////ADMINISTRACION DE USUARIOS//////////
 
 function cargarDatosAlumnos(){
     const cargarDatosAlumnos = async () => {
@@ -426,7 +464,7 @@ function cargarDatosAlumnos(){
             const usersdata = await respuesta.json();
             const alumnosdata = usersdata[0].filter(usersdata => usersdata.admin == false && usersdata.teacher == false);
             ordenarPorApellido(alumnosdata)
-            alumnosdata.map((alumnodata) => tablaDatosUsuarios(alumnodata));
+            alumnosdata.map((alumnodata) => tablaDatosUsuariosHTML(alumnodata));
         }
         catch (error) {
             console.log(error)
@@ -442,7 +480,7 @@ function cargarDatosDocentes(){
             const usersdata = await respuesta.json();
             const alumnosdata = usersdata[0].filter(usersdata => usersdata.admin == false && usersdata.teacher == true);
             ordenarPorApellido(alumnosdata)
-            alumnosdata.map((alumnodata) => tablaDatosUsuarios(alumnodata));
+            alumnosdata.map((alumnodata) => tablaDatosUsuariosHTML(alumnodata));
         }
         catch (error) {
             console.log(error)
@@ -458,7 +496,7 @@ function cargarDatosAdministradores(){
             const usersdata = await respuesta.json();
             const alumnosdata = usersdata[0].filter(usersdata => usersdata.admin == true && usersdata.teacher == false);
             ordenarPorApellido(alumnosdata)
-            alumnosdata.map((alumnodata) => tablaDatosUsuarios(alumnodata));
+            alumnosdata.map((alumnodata) => tablaDatosUsuariosHTML(alumnodata));
         }
         catch (error) {
             console.log(error)
@@ -468,10 +506,7 @@ function cargarDatosAdministradores(){
 }
 
 
-
-
-
-function inputsUsuarios(admin, teacher){
+function inputsUsuariosAdminHTML(admin, teacher){
     var str01 = '<div class="row"><div class="col-md-12 align-middle"><div class="needs-validation" novalidate><div class="form-row">'
     var str02 = '<div class="col-md-3 mb-3"><input type="number" class="form-control" id="dni" placeholder="DNI" value="" required></div>'
     var str03 = '<div class="col-md-3 mb-3"><input type="text" class="form-control" id="surname" placeholder="Apellidos" required></div>'
@@ -497,20 +532,7 @@ function inputsUsuarios(admin, teacher){
     return titleTag.innerHTML =  str01 + str02 + str03 + str04 + str05 + str06 + str07 + str08 + str09 + str10 + str11 + str12 + str13 + str14 + str15 + str16 + str17 + str18 + str19 + str20;
 }
 
-function limpiarInputs(in1, in2, in3, in4, in5, in6, in7, in8, in9, in10) {
-    document.getElementById(in1).value = ""
-    document.getElementById(in2).value = ""
-    document.getElementById(in3).value = ""
-    document.getElementById(in4).value = ""
-    document.getElementById(in5).value = ""
-    document.getElementById(in6).value = ""
-    document.getElementById(in7).value = ""
-    document.getElementById(in8).value = ""
-    document.getElementById(in9).value = ""
-    document.getElementById(in10).value = ""
-}
-
-function tablaUsuarios(){
+function tablaUsuariosHTML(){
     var str01 = '<div class="col-md-12"><div class="main-card mb-3 card"><div class="table-responsive">'
     var str02 = '<table class="align-middle mb-0 table table-borderless table-striped table-hover"><thead><tr>'
     var str03 = '<th class="text-center bg-secondary text-white">DNI</th>'
@@ -528,14 +550,14 @@ function tablaUsuarios(){
     return titleTag.innerHTML =  str01 + str02 + str03 + str04 + str05 + str06 + str07 + str08 + str09 + str10 + str11 + str12 ;
 }
 
-function tablaDatosUsuarios(data){
+function tablaDatosUsuariosHTML(data){
     var str01 = '<tr><td class="text-center">' + data.dni + '</td>'
     var str02 = '<td class="text-center">' + data.surname + '</td>'
     var str03 = '<td class="text-center">' + data.name + '</td>'
     var str04 = '<td class="text-center">' + convertirStringData(data.date_of_brith) + '</td>'
     var str05 = '<td class="text-center">' + convertirStringData(data.date_of_admission) + '</td>'
     var str06 = '<td class="text-center">' + data.password + '</td>'
-    var str07 = '<td class="text-center"><button onclick="cargarDatosEnInputs(' + data.dni + ')" class="btn-icon btn-icon-only btn btn-outline-success">'
+    var str07 = '<td class="text-center"><button onclick="cargarDatosUsuariosEnInputs(' + data.dni + ')" class="btn-icon btn-icon-only btn btn-outline-success">'
     var str08 = '<i class="pe-7s-note btn-icon-wrapper"> </i></button></td>'
     var str09 = '<td class="text-center"><button onclick="eliminarUsuario(' + data.dni + ')" class="btn-icon btn-icon-only btn btn-outline-danger">'
     var str10 = '<i class="pe-7s-trash btn-icon-wrapper"></i></button></td>'
@@ -545,8 +567,8 @@ function tablaDatosUsuarios(data){
     return titleTag.insertAdjacentHTML("afterbegin",  str01 + str02 + str03 + str04 + str05 + str06 + str07 + str08 + str09 + str10 + str11);   
 }
 
-function cargarDatosEnInputs(dni){
-    const cargarDatosEnInputs = async () => {
+function cargarDatosUsuariosEnInputs(dni){
+    const cargarDatosUsuariosEnInputs = async () => {
         try {
             const respuesta = await fetch(API + '/users/dni/' + dni, {
                     method: 'GET',
@@ -572,7 +594,7 @@ function cargarDatosEnInputs(dni){
             console.log(error)
         }
     }
-    cargarDatosEnInputs();
+    cargarDatosUsuariosEnInputs();
 }
 
 function agregarUsuario(teacher, admin){
@@ -609,8 +631,8 @@ function agregarUsuario(teacher, admin){
                         })
                     }); 
                     limpiarInputs("dni","name","surname","password","dia1","mes1","ano1","dia2","mes2","ano2")
-                    tablaUsuarios();
-                    switch (estado) {
+                    tablaUsuariosHTML();
+                    switch (localStorage.menuActivo) {
                         case "alumno":
                             cargarDatosAlumnos();
                             break;
@@ -660,8 +682,8 @@ function actualizarUsuario(dni){
                    })
                 });
                 limpiarInputs("dni","name","surname","password","dia1","mes1","ano1","dia2","mes2","ano2")
-                tablaUsuarios();
-                switch (estado) {
+                tablaUsuariosHTML();
+                switch (localStorage.menuActivo) {
                     case "alumno":
                         cargarDatosAlumnos();
                         break;
@@ -691,8 +713,8 @@ function eliminarUsuario(dni) {
                     method: 'DELETE',
                     headers: { 'Content-type': 'application/json' }
                 })
-                tablaUsuarios();
-                switch (estado) {
+                tablaUsuariosHTML();
+                switch (localStorage.menuActivo) {
                     case "alumno":
                         cargarDatosAlumnos();
                         break;
@@ -716,71 +738,86 @@ function eliminarUsuario(dni) {
 
 
 
+function cargarDatosCarreras(){
+    const cargarDatosCarreras = async () => {
+        try {
+            const respuesta = await fetch(API + '/careers', );
+            const careers = await respuesta.json();
+            // const alumnosdata = usersdata[0].filter(usersdata => usersdata.admin == false && usersdata.teacher == false);
+            console.log(careers[0])
+            ordenarPorCodigo(careers[0])
+            careers[0].map((career) => tablaDatosCarrerasHTML(career));
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
+    cargarDatosCarreras();
+}
 
 
+function inputsCarrerasAdminHTML(admin, teacher){
+    var str01 = '<div class="row"><div class="col-md-12 align-middle"><div class="needs-validation" novalidate><div class="form-row">'
+    var str02 = '<div class="col-md-3 mb-3"><input type="number" class="form-control" id="dni" placeholder="Codigo" value="" required></div>'
+    var str03 = '<div class="col-md-6 mb-3"><input type="text" class="form-control" id="surname" placeholder="Nombre" required></div>'
+    var str17 = '<div class="col-md-1"><button onclick="agregarUsuario(' + teacher + ',' + admin + ')" class="btn btn-success" type="submit"style="width: 100%; font-size: 100%;">Agregar</button></div>'
+    var str18 = '<div class="col-md-1" id="botonModificar"><button onclick="actualizarUsuario()" class="btn btn-primary"style="width: 100%; font-size: 100%;">Modificar</button></div>'
+    var str19 = '<div class="col-md-1"><button onclick=limpiarInputs("dni","name","surname","password","dia1","mes1","ano1","dia2","mes2","ano2") class="btn btn-danger"type="submit" style="width: 100%; font-size: 100%;">Limpiar</button></div>'
+    var str06 = '</div></div></div></div>'
+    
 
 
+    const titleTag = document.querySelector("#body1");   
+    return titleTag.innerHTML =  str01 + str02 + str03 + str17 + str18 + str19 + str20;
+}
+function tablaCarrerasHTML(){
+    var str01 = '<div class="col-md-12"><div class="main-card mb-3 card"><div class="table-responsive">'
+    var str02 = '<table class="align-middle mb-0 table table-borderless table-striped table-hover"><thead><tr>'
+    var str03 = '<th class="text-center bg-secondary text-white">Codigo</th>'
+    var str04 = '<th class="text-left bg-secondary text-white">Carrera</th>'
+    var str05 = '<th class="text-center bg-secondary text-white">Materias</th>'
+    var str06 = '<th class="text-center bg-secondary text-white">Modificar</th>'
+    var str07 = '<th class="text-center bg-secondary text-white">Eliminar</th>'
+    var str08 = '</tr></thead><tbody id="tabla1">'
+    var str09 = '</tbody></table></div></div></div>'
+    
+    const titleTag = document.querySelector("#body2");   
+    return titleTag.innerHTML =  str01 + str02 + str03 + str04 + str05 + str06 + str07 + str08 + str09;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+function tablaDatosCarrerasHTML(data){
+    console.log(data)
+    var str01 = '<tr><td class="text-center">' + data.code + '</td>'
+    var str02 = '<td class="text-left">' + data.name + '</td>'
+    var str05 = '<td class="text-center"><button onclick="cargarMateriasCarreras(' + data.code + ')" class="btn-icon btn-icon-only btn btn-outline-info">'
+    var str06 = '<i class=" btn-icon-wrapper">Ver Materias</i></button></td>'
+    var str07 = '<td class="text-center"><button onclick="cargarDatosCarrerasEnInputs(' + data.code + ')" class="btn-icon btn-icon-only btn btn-outline-success">'
+    var str08 = '<i class="pe-7s-note btn-icon-wrapper"> </i></button></td>'
+    var str09 = '<td class="text-center"><button onclick="eliminarCarrera(' + data.code + ')" class="btn-icon btn-icon-only btn btn-outline-danger">'
+    var str10 = '<i class="pe-7s-trash btn-icon-wrapper"></i></button></td>'
+    var str11 = '</tr></tbody></table></div></div></div>'
+    
+    const titleTag = document.querySelector("#tabla1");   
+    return titleTag.insertAdjacentHTML("afterbegin",  str01 + str02 + str05 + str06 + str07 + str08 + str09 + str10 + str11);   
+}
 
 
 
 
 
 ////////AUXILARES///////////
-
+function limpiarInputs(in1, in2, in3, in4, in5, in6, in7, in8, in9, in10) {
+    document.getElementById(in1).value = ""
+    document.getElementById(in2).value = ""
+    document.getElementById(in3).value = ""
+    document.getElementById(in4).value = ""
+    document.getElementById(in5).value = ""
+    document.getElementById(in6).value = ""
+    document.getElementById(in7).value = ""
+    document.getElementById(in8).value = ""
+    document.getElementById(in9).value = ""
+    document.getElementById(in10).value = ""
+}
 
 function convertirStringData(dataTime){
     let dateString = dataTime
@@ -816,4 +853,48 @@ function ordenarPorApellido(data){
     }
     return 0;
   });
+}
+
+function ordenarPorNombre(data){
+    data.sort(function (a, b) {
+    if (a.name < b.name) {
+      return 1;
+    }
+    if (a.name > b.name) {
+      return -1;
+    }
+    return 0;
+  });
+}
+
+function ordenarPorCodigo(data){
+    data.sort(function (a, b) {
+    if (a.code < b.code) {
+      return 1;
+    }
+    if (a.code > b.code) {
+      return -1;
+    }
+    return 0;
+  });
+}
+
+
+
+function tablaMateriasAdminHTML(){
+    var str01 = '<div class="col-md-12"><div class="main-card mb-3 card"><div class="table-responsive">'
+    var str02 = '<table class="align-middle mb-0 table table-borderless table-striped table-hover"><thead><tr>'
+    var str03 = '<th class="text-center bg-secondary text-white">Materia</th>'
+    var str04 = '<th class="text-center bg-secondary text-white">Nombre</th>'
+    var str05 = '<th class="text-center bg-secondary text-white">Año</th>'
+    var str06 = '<th class="text-center bg-secondary text-white">Carrera</th>'
+    var str07 = '<th class="text-center bg-secondary text-white">Fecha de Ingreso</th>'
+    var str08 = '<th class="text-center bg-secondary text-white">Password</th>'
+    var str09 = '<th class="text-center bg-secondary text-white">Modificar</th>'
+    var str10 = '<th class="text-center bg-secondary text-white">Eliminar</th>'
+    var str11 = '</tr></thead><tbody id="tabla1">'
+    var str12 = '</tbody></table></div></div></div>'
+    
+    const titleTag = document.querySelector("#body2");   
+    return titleTag.innerHTML =  str01 + str02 + str03 + str04 + str05 + str06 + str07 + str08 + str09 + str10 + str11 + str12 ;
 }

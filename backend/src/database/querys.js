@@ -42,4 +42,11 @@ export default{
     deleteNotificationById : 'DELETE FROM notifications WHERE id = @id',
     updateNotificationById : 'UPDATE notifications SET datatime = @datatime, subject = @subject, from_dni = @from_dni, to_dni = @to_dni, message = @message WHERE id = @id',
     
+    //Carreras
+    getCareers : 'SELECT * FROM careers',
+    getCareerByCode : 'SELECT * FROM careers WHERE code = @code',
+    addNewCareer : 'INSERT INTO careers (code, name) VALUES (@code, @name)',
+    deleteCareerByCode : 'DELETE FROM careers WHERE code = @code ',
+    updateCareerByCode : 'UPDATE careers SET name = @name WHERE code = @code',
+    
 }

@@ -21,10 +21,11 @@ export default{
     //Cursos
     getCourses : 'SELECT * FROM courses',
     getCourseByCode : 'SELECT * FROM courses WHERE code = @code',
-    addNewCourse : 'INSERT INTO courses (code, name,d ate_test1, date_test2, date_test3, date_test4, data_ap1, data_ap2, data_ap3, data_ap4) VALUES (@code, @name, @date_test1, @date_test2, @date_test3, @date_test4, @data_ap1, @data_ap2, @data_ap3, @data_ap4)',
+    getCourseByCareer : 'SELECT * FROM courses WHERE career = @career',
+    addNewCourse : 'INSERT INTO courses (code, name, career, season, teacher, date_test1, date_test2, date_test3, date_test4, date_ap1, date_ap2, date_ap3, date_ap4) VALUES (@code, @name, @career, @season, @teacher, @date_test1, @date_test2, @date_test3, @date_test4, @date_ap1, @date_ap2, @date_ap3, @date_ap4)',
     deleteCourseByCode : 'DELETE FROM courses WHERE code = @code ',
-    updateCourseByCode : 'UPDATE courses SET name = @name, date_test1 = @date_test1, date_test2 = @date_test2, date_test3 = @date_test3, date_test4 = @date_test4, data_ap1 = @data_ap1, data_ap2 = @data_ap2, data_ap3 = @data_ap3, data_ap4 = @data_ap4 WHERE code = @code',
-
+    updateCourseByCode : 'UPDATE courses SET name = @name, career = @career, season = @season, teacher = @teacher, date_test1 = @date_test1, date_test2 = @date_test2, date_test3 = @date_test3, date_test4 = @date_test4, date_ap1 = @date_ap1, date_ap2 = @date_ap2, date_ap3 = @date_ap3, date_ap4 = @date_ap4 WHERE code = @code',
+    
     //Inscripciones
     getEnrollments : 'SELECT * FROM enrollment ORDER BY code DESC',
     getEnrollmentByCode : 'SELECT * FROM enrollment WHERE code = @code',

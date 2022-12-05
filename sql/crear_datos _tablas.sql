@@ -42,9 +42,35 @@ INSERT INTO qualifications (code, dni, qual_1, qual_2, qual_3, qual_4, ap1, ap2,
 
 
 /****** COURSES  ******/
-INSERT INTO courses (code, name, career, date_test1, date_test2, date_test3, date_test4, date_ap1, date_ap2, date_ap3, date_ap4) VALUES ( 20221001, 'Matematica 1',101, '2022-06-19T18:00:00', '', '', '', '', '', '', '');
-INSERT INTO courses (code, name, career, date_test1, date_test2, date_test3, date_test4, date_ap1, date_ap2, date_ap3, date_ap4) VALUES ( 20222002, 'Informatica 1',102 ,'2022-06-08T18:00:00', '', '', '', '', '', '', '');
-INSERT INTO courses (code, name, career, date_test1, date_test2, date_test3, date_test4, date_ap1, date_ap2, date_ap3, date_ap4) VALUES ( 20223003, 'Fisica 1',103 ,'2022-06-25T18:00:00', '', '', '', '', '', '', '');
+INSERT INTO courses (code, name, career, season, teacher, date_test1, date_test2, date_test3, date_test4, date_ap1, date_ap2, date_ap3, date_ap4) VALUES ( 1001010, 'Matematica 1',101, 1,29656789 ,'', '', '', '', '', '', '', '');
+INSERT INTO courses (code, name, career, season, teacher, date_test1, date_test2, date_test3, date_test4, date_ap1, date_ap2, date_ap3, date_ap4) VALUES ( 1001011, 'Informatica 1',101 ,1,22995987 ,'', '', '', '', '', '', '', '');
+INSERT INTO courses (code, name, career, season, teacher, date_test1, date_test2, date_test3, date_test4, date_ap1, date_ap2, date_ap3, date_ap4) VALUES ( 1001012, 'Fisica 1',101 , 1, 22995987,'', '', '', '', '', '', '', '');
+INSERT INTO courses (code, name, career, season, teacher, date_test1, date_test2, date_test3, date_test4, date_ap1, date_ap2, date_ap3, date_ap4) VALUES ( 1001013, 'Matematica 2',101, 2,29656789 ,'', '', '', '', '', '', '', '');
+INSERT INTO courses (code, name, career, season, teacher, date_test1, date_test2, date_test3, date_test4, date_ap1, date_ap2, date_ap3, date_ap4) VALUES ( 1001014, 'Informatica 2',101 ,2,22995987 ,'', '', '', '', '', '', '', '');
+INSERT INTO courses (code, name, career, season, teacher, date_test1, date_test2, date_test3, date_test4, date_ap1, date_ap2, date_ap3, date_ap4) VALUES ( 1001015, 'Fisica 2',101 , 2, 22995987,'', '', '', '', '', '', '', '');
+INSERT INTO courses (code, name, career, season, teacher, date_test1, date_test2, date_test3, date_test4, date_ap1, date_ap2, date_ap3, date_ap4) VALUES ( 1001016, 'Matematica 3',101, 3,29656789 ,'', '', '', '', '', '', '', '');
+INSERT INTO courses (code, name, career, season, teacher, date_test1, date_test2, date_test3, date_test4, date_ap1, date_ap2, date_ap3, date_ap4) VALUES ( 1001017, 'Informatica 3',101 ,3,22995987 ,'', '', '', '', '', '', '', '');
+INSERT INTO courses (code, name, career, season, teacher, date_test1, date_test2, date_test3, date_test4, date_ap1, date_ap2, date_ap3, date_ap4) VALUES ( 1001018, 'Fisica 3',101 , 3, 22995987,'', '', '', '', '', '', '', '');
+
+INSERT INTO courses (code, name, career, season, teacher, date_test1, date_test2, date_test3, date_test4, date_ap1, date_ap2, date_ap3, date_ap4) VALUES ( 1001020, 'Aritma 1',102, 1,29656789 ,'', '', '', '', '', '', '', '');
+INSERT INTO courses (code, name, career, season, teacher, date_test1, date_test2, date_test3, date_test4, date_ap1, date_ap2, date_ap3, date_ap4) VALUES ( 1001021, 'Inatica 1',102 ,1,22995987 ,'', '', '', '', '', '', '', '');
+INSERT INTO courses (code, name, career, season, teacher, date_test1, date_test2, date_test3, date_test4, date_ap1, date_ap2, date_ap3, date_ap4) VALUES ( 1001022, 'Fia 1',102 , 1, 22995987,'', '', '', '', '', '', '', '');
+INSERT INTO courses (code, name, career, season, teacher, date_test1, date_test2, date_test3, date_test4, date_ap1, date_ap2, date_ap3, date_ap4) VALUES ( 1001023, 'Mat 2',102, 2,29656789 ,'', '', '', '', '', '', '', '');
+INSERT INTO courses (code, name, career, season, teacher, date_test1, date_test2, date_test3, date_test4, date_ap1, date_ap2, date_ap3, date_ap4) VALUES ( 1001024, 'Infoa 2',102 ,2,22995987 ,'', '', '', '', '', '', '', '');
+INSERT INTO courses (code, name, career, season, teacher, date_test1, date_test2, date_test3, date_test4, date_ap1, date_ap2, date_ap3, date_ap4) VALUES ( 1001025, 'Fisdfg 2',102 , 2, 22995987,'', '', '', '', '', '', '', '');
+INSERT INTO courses (code, name, career, season, teacher, date_test1, date_test2, date_test3, date_test4, date_ap1, date_ap2, date_ap3, date_ap4) VALUES ( 1001026, 'sdfasd 3',102, 3,29656789 ,'', '', '', '', '', '', '', '');
+INSERT INTO courses (code, name, career, season, teacher, date_test1, date_test2, date_test3, date_test4, date_ap1, date_ap2, date_ap3, date_ap4) VALUES ( 1001027, 'asdf 3',102 ,3,22995987 ,'', '', '', '', '', '', '', '');
+INSERT INTO courses (code, name, career, season, teacher, date_test1, date_test2, date_test3, date_test4, date_ap1, date_ap2, date_ap3, date_ap4) VALUES ( 1001028, 'asd 3',102 , 3, 22995987,'', '', '', '', '', '', '', '');
+
+INSERT INTO courses (code, name, career, season, teacher, date_test1, date_test2, date_test3, date_test4, date_ap1, date_ap2, date_ap3, date_ap4) VALUES ( 1001031, 'Arghj 1',103, 1,29656789 ,'', '', '', '', '', '', '', '');
+INSERT INTO courses (code, name, career, season, teacher, date_test1, date_test2, date_test3, date_test4, date_ap1, date_ap2, date_ap3, date_ap4) VALUES ( 1001032, 'gfhja 1',103 ,1,22995987 ,'', '', '', '', '', '', '', '');
+INSERT INTO courses (code, name, career, season, teacher, date_test1, date_test2, date_test3, date_test4, date_ap1, date_ap2, date_ap3, date_ap4) VALUES ( 1001033, 'ghjhghha 1',103 , 1, 22995987,'', '', '', '', '', '', '', '');
+INSERT INTO courses (code, name, career, season, teacher, date_test1, date_test2, date_test3, date_test4, date_ap1, date_ap2, date_ap3, date_ap4) VALUES ( 1001034, 'ghjjj 2',103, 2,29656789 ,'', '', '', '', '', '', '', '');
+INSERT INTO courses (code, name, career, season, teacher, date_test1, date_test2, date_test3, date_test4, date_ap1, date_ap2, date_ap3, date_ap4) VALUES ( 1001035, 'Ighjghjgh 2',103 ,2,22995987 ,'', '', '', '', '', '', '', '');
+INSERT INTO courses (code, name, career, season, teacher, date_test1, date_test2, date_test3, date_test4, date_ap1, date_ap2, date_ap3, date_ap4) VALUES ( 1001036, 'jgh 2',103 , 2, 22995987,'', '', '', '', '', '', '', '');
+INSERT INTO courses (code, name, career, season, teacher, date_test1, date_test2, date_test3, date_test4, date_ap1, date_ap2, date_ap3, date_ap4) VALUES ( 1001037, 'eeee 3',103, 3,29656789 ,'', '', '', '', '', '', '', '');
+INSERT INTO courses (code, name, career, season, teacher, date_test1, date_test2, date_test3, date_test4, date_ap1, date_ap2, date_ap3, date_ap4) VALUES ( 1001038, 'rrrr 3',103 ,3,22995987 ,'', '', '', '', '', '', '', '');
+INSERT INTO courses (code, name, career, season, teacher, date_test1, date_test2, date_test3, date_test4, date_ap1, date_ap2, date_ap3, date_ap4) VALUES ( 1001039, 'eeeeewwwe 3',103 , 3, 22995987,'', '', '', '', '', '', '', '');
 
 
 

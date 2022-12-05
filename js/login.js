@@ -41,6 +41,8 @@ function login() {
                 var menuActivo;
                 localStorage.setItem('menuActivo', menuActivo);
 
+                var careerAct;
+                localStorage.setItem('careerActual', careerAct);
 
                 window.location.href = "/home.html";
             }

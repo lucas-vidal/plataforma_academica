@@ -1,23 +1,27 @@
 
 //PRDUCTOS
-@api_students = http://localhost:3000/users
+@api_students = http://localhost:3000/courses
 GET {{api_students}}
 
 ### ADD PRODUCT
 POST {{api_students}}
 Content-Type: application/json
 
-     {
-      "dni": 37468845,
-      "name": "Matiasss",
-      "surname": "Escobario",
-      "date_of_brith": "1992-08-16T00:00:00.000Z",
-      "date_of_admission": "2022-03-01T00:00:00.000Z",
-      "username": "escobar",
-      "password": "123454",
-      "teacher": false,
-      "admin": false
-     }
+{
+      "code": 234232,
+      "name": "asdvbcvba",
+      "career": 101,
+      "season": 1,
+      "teacher": 22995987,
+      "date_test1": "",
+      "date_test2": "",
+      "date_test3": "",
+      "date_test4": "1900-01-01T00:00:00.000",
+      "date_ap1": "1900-01-01T00:00:00.000",
+      "date_ap2": "1900-01-01T00:00:00.000Z",
+      "date_ap3": "1900-01-01T00:00:00.000Z",
+      "date_ap4": "1900-01-01T00:00:00.000Z"
+}
 
 
 ### REQUEST PRODUCT BY CODE
@@ -30,16 +34,22 @@ POST {{api_students}}/count
 DELETE {{api_students}}/34988562
 
 ### UPDATE PRODUCT
-PUT {{api_students}}/34988562
+PUT {{api_students}}/code/1001010
 Content-Type: application/json
 
 {
-      "name": "Armandos",
-      "surname": "Predes",
-      "date_of_brith": "1991-09-15T00:00:00.000Z",
-      "date_of_admission": "2022-07-01T00:00:00.000Z",
-      "username": "paredes",
-      "password": "12345"
+      "name": "sdf sd ",
+      "career": 101,
+      "season": 2,
+      "teacher": 1555,
+      "date_test1": "1900-01-01T00:00:00.000",
+      "date_test2": "1900-01-01T00:00:00.000",
+      "date_test3": "1900-01-01T00:00:00.000",
+      "date_test4": "1900-01-01T00:00:00.000",
+      "date_ap1": "1900-01-01T00:00:00.000",
+      "date_ap2": "1900-01-01T00:00:00.000Z",
+      "date_ap3": "1900-01-01T00:00:00.000Z",
+      "date_ap4": "1900-01-01T00:00:00.000Z"
 }
 
 

@@ -13,9 +13,9 @@ Content-Type: application/json
       "career": 101,
       "season": 1,
       "teacher": 22995987,
-      "date_test1": "",
-      "date_test2": "",
-      "date_test3": "",
+      "date_test1": "1900-01-01T00:00:00.000",
+      "date_test2": "1900-01-01T00:00:00.000",
+      "date_test3": "1900-01-01T00:00:00.000",
       "date_test4": "1900-01-01T00:00:00.000",
       "date_ap1": "1900-01-01T00:00:00.000",
       "date_ap2": "1900-01-01T00:00:00.000Z",
@@ -34,11 +34,11 @@ POST {{api_students}}/count
 DELETE {{api_students}}/34988562
 
 ### UPDATE PRODUCT
-PUT {{api_students}}/code/1001010
+PUT {{api_students}}/1001010
 Content-Type: application/json
 
 {
-      "name": "sdf sd ",
+      "name": "Matematica 1",
       "career": 101,
       "season": 2,
       "teacher": 1555,

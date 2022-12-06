@@ -1,18 +1,18 @@
 
 /****** USERS  ******/
-INSERT INTO users (dni, name, surname, date_of_brith, date_of_admission, username, password, teacher, admin) VALUES (34135573, 'Lucas Omar', 'Vidal', '1988-06-04', '2022-03-01', 'vidal', '12345', 0, 1);
-INSERT INTO users (dni, name, surname, date_of_brith, date_of_admission, username, password, teacher, admin) VALUES (31223556, 'Daniel', 'Guerrero', '1990-10-19', '2022-03-01', 'alumno', 'alumno1234', 0, 0);
-INSERT INTO users (dni, name, surname, date_of_brith, date_of_admission, username, password, teacher, admin) VALUES (32546221, 'Rodrigo', 'Mendez', '1987-08-01', '2022-03-01', 'mendez', '12345', 0, 0);
-INSERT INTO users (dni, name, surname, date_of_brith, date_of_admission, username, password, teacher, admin) VALUES (33598456, 'Diego', 'Mendieta', '1989-07-16', '2022-03-01', 'mendez', '12345', 0, 0);
-INSERT INTO users (dni, name, surname, date_of_brith, date_of_admission, username, password, teacher, admin) VALUES (29623122, 'Carlos', 'Suarez', '1993-02-11', '2022-03-01', 'suarez', '12345', 0, 0);
-INSERT INTO users (dni, name, surname, date_of_brith, date_of_admission, username, password, teacher, admin) VALUES (27468845, 'Matias', 'Escobar', '1992-08-15', '2022-03-01', 'escobar', '12345', 0, 0);
-INSERT INTO users (dni, name, surname, date_of_brith, date_of_admission, username, password, teacher, admin) VALUES (28995648, 'Esteban', 'Quito', '1988-02-04', '2022-07-01', 'quito', '12345', 0, 0);
-INSERT INTO users (dni, name, surname, date_of_brith, date_of_admission, username, password, teacher, admin) VALUES (29889548, 'Susana', 'Oria', '1990-12-25', '2022-07-01', 'oria', '12345', 0, 0);
-INSERT INTO users (dni, name, surname, date_of_brith, date_of_admission, username, password, teacher, admin) VALUES (34988562, 'Armando', 'Predes', '1991-09-15', '2022-07-01', 'paredes', '12345', 0, 0);
-INSERT INTO users (dni, name, surname, date_of_brith, date_of_admission, username, password, teacher, admin) VALUES (35899875, 'Elvis', 'Nieto', '1994-06-19', '2022-07-01', 'nieto', '12345', 0, 0);
-INSERT INTO users (dni, name, surname, date_of_brith, date_of_admission, username, password, teacher, admin) VALUES ( 29656789, 'Jose', 'Svagdiz', '1981-12-10', '2022-07-01', 'svagdiz', '11223344', 1, 0);
-INSERT INTO users (dni, name, surname, date_of_brith, date_of_admission, username, password, teacher, admin) VALUES ( 22995987, 'Cristian', 'Astorga', '1982-09-14', '2022-07-01', 'astorga', '11223344', 1, 0);
-INSERT INTO users (dni, name, surname, date_of_brith, date_of_admission, username, password, teacher, admin) VALUES ( 22254879, 'Carlos', 'Gutierrez', '1986-04-30', '2022-07-01', 'docente', 'docente1234', 1, 0);
+INSERT INTO users (dni, name, surname, date_of_brith, date_of_admission, career, password, teacher, admin) VALUES (34135573, 'Lucas Omar', 'Vidal', '1988-06-04', '2022-03-01', 101, '12345', 0, 1);
+INSERT INTO users (dni, name, surname, date_of_brith, date_of_admission, career, password, teacher, admin) VALUES (31223556, 'Daniel', 'Guerrero', '1990-10-19', '2022-03-01', 101, 'alumno1234', 0, 0);
+INSERT INTO users (dni, name, surname, date_of_brith, date_of_admission, career, password, teacher, admin) VALUES (32546221, 'Rodrigo', 'Mendez', '1987-08-01', '2022-03-01', 102, '12345', 0, 0);
+INSERT INTO users (dni, name, surname, date_of_brith, date_of_admission, career, password, teacher, admin) VALUES (33598456, 'Diego', 'Mendieta', '1989-07-16', '2022-03-01', 102, '12345', 0, 0);
+INSERT INTO users (dni, name, surname, date_of_brith, date_of_admission, career, password, teacher, admin) VALUES (29623122, 'Carlos', 'Suarez', '1993-02-11', '2022-03-01', 103, '12345', 0, 0);
+INSERT INTO users (dni, name, surname, date_of_brith, date_of_admission, career, password, teacher, admin) VALUES (27468845, 'Matias', 'Escobar', '1992-08-15', '2022-03-01', 103, '12345', 0, 0);
+INSERT INTO users (dni, name, surname, date_of_brith, date_of_admission, career, password, teacher, admin) VALUES (28995648, 'Esteban', 'Quito', '1988-02-04', '2022-07-01', 101, '12345', 0, 0);
+INSERT INTO users (dni, name, surname, date_of_brith, date_of_admission, career, password, teacher, admin) VALUES (29889548, 'Susana', 'Oria', '1990-12-25', '2022-07-01', 101, '12345', 0, 0);
+INSERT INTO users (dni, name, surname, date_of_brith, date_of_admission, career, password, teacher, admin) VALUES (34988562, 'Armando', 'Predes', '1991-09-15', '2022-07-01', 101, '12345', 0, 0);
+INSERT INTO users (dni, name, surname, date_of_brith, date_of_admission, career, password, teacher, admin) VALUES (35899875, 'Elvis', 'Nieto', '1994-06-19', '2022-07-01', 102, '12345', 0, 0);
+INSERT INTO users (dni, name, surname, date_of_brith, date_of_admission, career, password, teacher, admin) VALUES ( 29656789, 'Jose', 'Svagdiz', '1981-12-10', '2022-07-01', 102, '11223344', 1, 0);
+INSERT INTO users (dni, name, surname, date_of_brith, date_of_admission, career, password, teacher, admin) VALUES ( 22995987, 'Cristian', 'Astorga', '1982-09-14', '2022-07-01', 103, '11223344', 1, 0);
+INSERT INTO users (dni, name, surname, date_of_brith, date_of_admission, career, password, teacher, admin) VALUES ( 22254879, 'Carlos', 'Gutierrez', '1986-04-30', '2022-07-01', 103, 'docente1234', 1, 0);
 
 
 

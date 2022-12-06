@@ -83,7 +83,7 @@ function logout() {
     window.location.href = "/index.html";
 }
 
-//MENUS
+////////////MENUS////////////
 var menu_act_home = '<li><a href="javascript:void(0)" class="mm-active"><i class="metismenu-icon pe-7s-home"></i>Home</a></li>';
 var menu_act_materias = '<li><a href="javascript:void(0)" class="mm-active"><i class="metismenu-icon pe-7s-albums"></i>Materias</a></li>';
 var menu_act_carreras = '<li><a href="javascript:void(0)" onclick="carrerasAct()" class="mm-active"><i class="metismenu-icon pe-7s-way"></i>Carreras</a></li>';
@@ -238,7 +238,8 @@ function menuActividadPractica() {
             break;
     }
 }
-//TITULOS
+
+////////////TITULOS////////////
 function tituloHome(){
     var icon = "home"
     var title = "Home"
@@ -313,7 +314,7 @@ function tituloCarreras(){
 }
 function tituloCarrerasActiva(){
     var icon = "way"
-    var title = nameCareerActual
+    var title = codeCareerActual + " - " + nameCareerActual
     var description = ""
     tit_str1 = '<div class="page-title-wrapper"><div class="page-title-heading"><div class="page-title-icon"><i class="pe-7s-' 
     tit_str2 = icon + ' icon-gradient bg-mean-fruit"></i></div><div>' 
@@ -383,74 +384,171 @@ function tituloNotificaciones(){
     const titleTag = document.querySelector("#title");   
     titleTag.innerHTML =  tit_str1 + tit_str2 + tit_str3 + tit_str4;
 }
+function inputHTML(){
+    str1 = '<div"></div>'
+    const tag = document.querySelector("#body1");
+    tag.innerHTML =  str1;
+}
 
 
-//FUNCIONALIDADES
+////////////FUNCIONALIDADES////////////
 function homeAct(){
     localStorage.menuActivo = "home";
     menuHome();
     tituloHome();
-}
+    switch (localStorage.perfilActivo) {
+        case "alumno":
 
+            break;
+        case "docente":
+
+            break;
+        case "administrador":
+
+            break;
+    }
+}
 function administradoresAct(){ 
     localStorage.menuActivo = "administradores"
     menuAdministradores();
     tituloAdministradores();
-    inputsUsuariosAdminHTML(1,0);
-    tablaUsuariosHTML();
-    cargarDatosAdministradores();
-}
+    switch (localStorage.perfilActivo) {
+        case "alumno":
 
+            break;
+        case "docente":
+
+            break;
+        case "administrador":
+            // inputsUsuariosAdminHTML(1,0);
+            inputHTML()
+            tablaUsuariosHTML();
+            cargarDatosAdministradores();
+            break;
+    }
+}
 function alumnosAct(){ 
     localStorage.menuActivo = "alumnos"
     menuAlumnos();
     tituloAlumnos();
-    inputsUsuariosAdminHTML(0,0);
-    tablaUsuariosHTML();
-    cargarDatosAlumnos();
-}
+    switch (localStorage.perfilActivo) {
+        case "alumno":
 
+            break;
+        case "docente":
+
+            break;
+        case "administrador":
+            // inputsUsuariosAdminHTML(0,0);
+            inputHTML()
+            tablaUsuariosHTML();
+            cargarDatosAlumnos();
+            break;
+    }
+}
 function docentesAct(){
     localStorage.menuActivo = "docentes"
     menuDocentes();
     tituloDocentes();
-    inputsUsuariosAdminHTML(0,1);
-    tablaUsuariosHTML();
-    cargarDatosDocentes();
-}
+    switch (localStorage.perfilActivo) {
+        case "alumno":
 
+            break;
+        case "docente":
+
+            break;
+        case "administrador":
+            // inputsUsuariosAdminHTML(0,1);
+            inputHTML()
+            tablaUsuariosHTML();
+            cargarDatosDocentes();
+            break;
+    }
+}
 function materiasAct(){
     localStorage.menuActivo = "materias"
     menuMaterias();
     tituloMaterias();
-    tablaMateriasAdminHTML()
+    switch (localStorage.perfilActivo) {
+        case "alumno":
+
+            break;
+        case "docente":
+
+            break;
+        case "administrador":
+            tablaMateriasAdminHTML()
+            break;
+    }
 }
 function carrerasAct(){
     localStorage.menuActivo = "carreras"
     menuCarreras();
     tituloCarreras();
-    inputsCarrerasAdminHTML()
+    switch (localStorage.perfilActivo) {
+        case "alumno":
 
-    tablaCarrerasHTML()
-    cargarDatosCarreras();
+            break;
+        case "docente":
 
+            break;
+        case "administrador":
+            // inputsCarrerasHTML()
+            inputHTML()
+            tablaCarrerasHTML()
+            cargarDatosCarreras();
+            break;
+    }
 }
 function examenesAct(){
     localStorage.menuActivo = "examenes"
     menuExamenes();
     tituloExamenes();
+    switch (localStorage.perfilActivo) {
+        case "alumno":
+
+            break;
+        case "docente":
+
+            break;
+        case "administrador":
+
+            break;
+    }
 }
 
 function actividadPracticaAct(){
     localStorage.menuActivo = "actividades_practicas"
     menuActividadPractica();
     tituloActividadesPracticas();
+    switch (localStorage.perfilActivo) {
+        case "alumno":
+
+            break;
+        case "docente":
+
+            break;
+        case "administrador":
+
+            break;
+    }
 }
 
 function calificacionesAct(){
     localStorage.menuActivo = "calificaciones"
     menuCalificaciones();
     tituloCalificaciones();
+    switch (localStorage.perfilActivo) {
+        case "alumno":
+
+            break;
+        case "docente":
+
+            break;
+        case "administrador":
+
+            break;
+    }
 }
 
 function calendarioAct(){
@@ -463,6 +561,18 @@ function notificacionesAct(){
     localStorage.menuActivo = "notificaciones"
     menuNotificaciones();
     tituloNotificaciones();
+    switch (localStorage.perfilActivo) {
+        case "alumno":
+
+            break;
+        case "docente":
+
+            break;
+        case "administrador":
+
+            break;
+    }
+
 }
 
 
@@ -487,7 +597,6 @@ function cargarDatosAlumnos(){
     }
     cargarDatosAlumnos();
 }
-
 function cargarDatosDocentes(){
     const cargarDatosDocentes = async () => {
         try {
@@ -503,7 +612,6 @@ function cargarDatosDocentes(){
     }
     cargarDatosDocentes();
 }
-
 function cargarDatosAdministradores(){
     const cargarDatosAdministradores = async () => {
         try {
@@ -519,99 +627,6 @@ function cargarDatosAdministradores(){
     }
     cargarDatosAdministradores();
 }
-
-
-function inputsUsuariosAdminHTML(admin, teacher){
-    var str01 = '<div class="row"><div class="col-md-12 align-middle"><div class="needs-validation" novalidate><div class="form-row">'
-    var str02 = '<div class="col-md-3 mb-3"><input type="number" class="form-control" id="dni" placeholder="DNI" value="" required></div>'
-    var str03 = '<div class="col-md-3 mb-3"><input type="text" class="form-control" id="surname" placeholder="Apellidos" required></div>'
-    var str04 = '<div class="col-md-3 mb-3"><input type="text" class="form-control" id="name" placeholder="Nombres" required></div>'
-    var str05 = '<div class="col-md-3 mb-3"><input type="text" class="form-control" id="password" placeholder="Password" required></div>'
-    var str06 = '</div></div></div></div><div class="row">'
-    var str07 = '<div class="col-md-12 align-middle"><div class="needs-validation" novalidate><div class="form-row">'
-    var str08 = '<div class="col-md-1 mb-3"><p class="text-right">Fecha Nacimiento</p></div>'
-    var str09 = '<div class="col-md-1 mb-3"><input type="number" class="form-control" id="dia1" placeholder="Dia" value="" required></div>'
-    var str10 = '<div class="col-md-1 mb-3"><input type="number" class="form-control" id="mes1" placeholder="Mes" required></div>'
-    var str11 = '<div class="col-md-1 mb-3"><input type="number" class="form-control" id="ano1" placeholder="Año" required></div>'
-    var str12 = '<div class="col-md-1 mb-3"><p class="text-right">Fecha de Ingreso</p></div>'
-    var str13 = '<div class="col-md-1 mb-3"><input type="number" class="form-control" id="dia2" placeholder="Dia" value="" required></div>'
-    var str14 = '<div class="col-md-1 mb-3"><input type="number" class="form-control" id="mes2" placeholder="Mes" required></div>'
-    var str15 = '<div class="col-md-1 mb-3"><input type="number" class="form-control" id="ano2" placeholder="Año" required></div>'
-    var str16 = '<div class="col-md-4 mb-3"><div class="row">'
-    var str17 = '<div class="col-md-4"><button onclick="agregarUsuario(' + teacher + ',' + admin + ')" class="btn btn-success" type="submit"style="width: 100%; font-size: 100%;">Agregar</button></div>'
-    var str18 = '<div class="col-md-4" id="botonModificar"><button onclick="actualizarUsuario()" class="btn btn-primary"style="width: 100%; font-size: 100%;">Modificar</button></div>'
-    var str19 = '<div class="col-md-4"><button onclick=limpiarInputs10("dni","name","surname","password","dia1","mes1","ano1","dia2","mes2","ano2") class="btn btn-danger"type="submit" style="width: 100%; font-size: 100%;">Limpiar</button></div>'
-    var str20 = '</div></div></div></div></div></div>'
-
-    const titleTag = document.querySelector("#body1");   
-    return titleTag.innerHTML =  str01 + str02 + str03 + str04 + str05 + str06 + str07 + str08 + str09 + str10 + str11 + str12 + str13 + str14 + str15 + str16 + str17 + str18 + str19 + str20;
-}
-
-function tablaUsuariosHTML(){
-    var str01 = '<div class="col-md-12"><div class="main-card mb-3 card"><div class="table-responsive">'
-    var str02 = '<table class="align-middle mb-0 table table-borderless table-striped table-hover"><thead><tr>'
-    var str03 = '<th class="text-center bg-secondary text-white">DNI</th>'
-    var str04 = '<th class="text-center bg-secondary text-white">Apellidos</th>'
-    var str05 = '<th class="text-center bg-secondary text-white">Nombres</th>'
-    var str06 = '<th class="text-center bg-secondary text-white">Fecha de Nacimiento</th>'
-    var str07 = '<th class="text-center bg-secondary text-white">Fecha de Ingreso</th>'
-    var str08 = '<th class="text-center bg-secondary text-white">Password</th>'
-    var str09 = '<th class="text-center bg-secondary text-white">Modificar</th>'
-    var str10 = '<th class="text-center bg-secondary text-white">Eliminar</th>'
-    var str11 = '</tr></thead><tbody id="tabla1">'
-    var str12 = '</tbody></table></div></div></div>'
-    
-    const titleTag = document.querySelector("#body2");   
-    return titleTag.innerHTML =  str01 + str02 + str03 + str04 + str05 + str06 + str07 + str08 + str09 + str10 + str11 + str12 ;
-}
-
-function tablaDatosUsuariosHTML(data){
-    var str01 = '<tr><td class="text-center">' + data.dni + '</td>'
-    var str02 = '<td class="text-center">' + data.surname + '</td>'
-    var str03 = '<td class="text-center">' + data.name + '</td>'
-    var str04 = '<td class="text-center">' + convertirStringData(data.date_of_brith) + '</td>'
-    var str05 = '<td class="text-center">' + convertirStringData(data.date_of_admission) + '</td>'
-    var str06 = '<td class="text-center">' + data.password + '</td>'
-    var str07 = '<td class="text-center"><button onclick="cargarDatosUsuariosEnInputs(' + data.dni + ')" class="btn-icon btn-icon-only btn btn-outline-success">'
-    var str08 = '<i class="pe-7s-note btn-icon-wrapper"> </i></button></td>'
-    var str09 = '<td class="text-center"><button onclick="eliminarUsuario(' + data.dni + ')" class="btn-icon btn-icon-only btn btn-outline-danger">'
-    var str10 = '<i class="pe-7s-trash btn-icon-wrapper"></i></button></td>'
-    var str11 = '</tr></tbody></table></div></div></div>'
-    
-    const titleTag = document.querySelector("#tabla1");   
-    return titleTag.insertAdjacentHTML("afterbegin",  str01 + str02 + str03 + str04 + str05 + str06 + str07 + str08 + str09 + str10 + str11);   
-}
-
-function cargarDatosUsuariosEnInputs(dni){
-    const cargarDatosUsuariosEnInputs = async () => {
-        try {
-            const respuesta = await fetch(API + '/users/dni/' + dni, {
-                    method: 'GET',
-                    headers: new Headers({ 'Content-type': 'application/json'}),
-                    mode: 'cors'
-                });
-            const userdata = await respuesta.json();
-            var datatime_admission = convertirDataTimeInObjct(userdata[0].date_of_admission)
-            var datatime_brith = convertirDataTimeInObjct(userdata[0].date_of_brith)
-
-            document.getElementById("dni").value = userdata[0].dni
-            document.getElementById("name").value = userdata[0].name
-            document.getElementById("surname").value = userdata[0].surname
-            document.getElementById("password").value = userdata[0].password
-            document.getElementById("ano1").value = datatime_brith[2]
-            document.getElementById("mes1").value = datatime_brith[1]
-            document.getElementById("dia1").value = datatime_brith[0]
-            document.getElementById("ano2").value = datatime_admission[2]
-            document.getElementById("mes2").value = datatime_admission[1]
-            document.getElementById("dia2").value = datatime_admission[0]
-            document.getElementById("botonModificar").innerHTML = '<button onclick="actualizarUsuario(' + dni + ')" class="btn btn-primary"style="width: 100%; font-size: 100%;">Modificar</button>';
-        } catch (error) {
-            console.log(error)
-        }
-    }
-    cargarDatosUsuariosEnInputs();
-}
-
 function agregarUsuario(teacher, admin){
     var dni = document.getElementById("dni").value
     var name = document.getElementById("name").value
@@ -667,7 +682,6 @@ function agregarUsuario(teacher, admin){
         agregarUsuario();
     }
 }
-
 function actualizarUsuario(dni){
     var name = document.getElementById("name").value
     var surname = document.getElementById("surname").value
@@ -718,7 +732,6 @@ function actualizarUsuario(dni){
     actualizarUsuario();
     }
 }
-
 function eliminarUsuario(dni) {
     var option = confirm("Desea eliminar este usuario?");
     if (option == true) {
@@ -752,6 +765,93 @@ function eliminarUsuario(dni) {
 }
 
 
+function inputsUsuariosAdminHTML(admin, teacher){
+    var str01 = '<div class="row"><div class="col-md-12 align-middle"><div class="needs-validation" novalidate><div class="form-row">'
+    var str02 = '<div class="col-md-3 mb-3"><input type="number" class="form-control" id="dni" placeholder="DNI" value="" required></div>'
+    var str03 = '<div class="col-md-3 mb-3"><input type="text" class="form-control" id="surname" placeholder="Apellidos" required></div>'
+    var str04 = '<div class="col-md-3 mb-3"><input type="text" class="form-control" id="name" placeholder="Nombres" required></div>'
+    var str05 = '<div class="col-md-3 mb-3"><input type="text" class="form-control" id="password" placeholder="Password" required></div>'
+    var str06 = '</div></div></div></div><div class="row">'
+    var str07 = '<div class="col-md-12 align-middle"><div class="needs-validation" novalidate><div class="form-row">'
+    var str08 = '<div class="col-md-1 mb-3"><p class="text-right">Fecha Nacimiento</p></div>'
+    var str09 = '<div class="col-md-1 mb-3"><input type="number" class="form-control" id="dia1" placeholder="Dia" value="" required></div>'
+    var str10 = '<div class="col-md-1 mb-3"><input type="number" class="form-control" id="mes1" placeholder="Mes" required></div>'
+    var str11 = '<div class="col-md-1 mb-3"><input type="number" class="form-control" id="ano1" placeholder="Año" required></div>'
+    var str12 = '<div class="col-md-1 mb-3"><p class="text-right">Fecha de Ingreso</p></div>'
+    var str13 = '<div class="col-md-1 mb-3"><input type="number" class="form-control" id="dia2" placeholder="Dia" value="" required></div>'
+    var str14 = '<div class="col-md-1 mb-3"><input type="number" class="form-control" id="mes2" placeholder="Mes" required></div>'
+    var str15 = '<div class="col-md-1 mb-3"><input type="number" class="form-control" id="ano2" placeholder="Año" required></div>'
+    var str16 = '<div class="col-md-4 mb-3"><div class="row">'
+    var str17 = '<div class="col-md-4"><button onclick="agregarUsuario(' + teacher + ',' + admin + ')" class="btn btn-success" type="submit"style="width: 100%; font-size: 100%;">Agregar</button></div>'
+    var str18 = '<div class="col-md-4" id="botonModificar"><button onclick="actualizarUsuario()" class="btn btn-primary"style="width: 100%; font-size: 100%;">Modificar</button></div>'
+    var str19 = '<div class="col-md-4"><button onclick=limpiarInputs10("dni","name","surname","password","dia1","mes1","ano1","dia2","mes2","ano2"),inputHTML() class="btn btn-danger"type="submit" style="width: 100%; font-size: 100%;">Cerrar</button></div>'
+    var str20 = '</div></div></div></div></div></div>'
+
+    const titleTag = document.querySelector("#body1");   
+    return titleTag.innerHTML =  str01 + str02 + str03 + str04 + str05 + str06 + str07 + str08 + str09 + str10 + str11 + str12 + str13 + str14 + str15 + str16 + str17 + str18 + str19 + str20;
+}
+function tablaUsuariosHTML(){
+    var str01 = '<div class="col-md-12"><div class="main-card mb-3 card"><div class="table-responsive">'
+    var str02 = '<table class="align-middle mb-0 table table-borderless table-striped table-hover"><thead><tr>'
+    var str03 = '<th class="text-center bg-secondary text-white">DNI</th>'
+    var str04 = '<th class="text-center bg-secondary text-white">Apellidos</th>'
+    var str05 = '<th class="text-center bg-secondary text-white">Nombres</th>'
+    var str06 = '<th class="text-center bg-secondary text-white">Fecha de Nacimiento</th>'
+    var str07 = '<th class="text-center bg-secondary text-white">Fecha de Ingreso</th>'
+    var str08 = '<th class="text-center bg-secondary text-white">Password</th>'
+    var str09 = '<th class="text-center bg-secondary text-white">Modificar</th>'
+    var str10 = '<th class="text-center bg-secondary text-white">Eliminar</th>'
+    var str11 = '</tr></thead><tbody id="tabla1">'
+    var str12 = '</tbody></table></div></div></div>'
+    
+    const titleTag = document.querySelector("#body2");   
+    return titleTag.innerHTML =  str01 + str02 + str03 + str04 + str05 + str06 + str07 + str08 + str09 + str10 + str11 + str12 ;
+}
+function tablaDatosUsuariosHTML(data){
+    var str01 = '<tr><td class="text-center">' + data.dni + '</td>'
+    var str02 = '<td class="text-center">' + data.surname + '</td>'
+    var str03 = '<td class="text-center">' + data.name + '</td>'
+    var str04 = '<td class="text-center">' + convertirStringData(data.date_of_brith) + '</td>'
+    var str05 = '<td class="text-center">' + convertirStringData(data.date_of_admission) + '</td>'
+    var str06 = '<td class="text-center">' + data.password + '</td>'
+    var str07 = '<td class="text-center"><button onclick="inputsUsuariosAdminHTML(1,0), cargarDatosUsuariosEnInputs(' + data.dni + ')" class="btn-icon btn-icon-only btn btn-outline-success">'
+    var str08 = '<i class="pe-7s-note btn-icon-wrapper"> </i></button></td>'
+    var str09 = '<td class="text-center"><button onclick="eliminarUsuario(' + data.dni + ')" class="btn-icon btn-icon-only btn btn-outline-danger">'
+    var str10 = '<i class="pe-7s-trash btn-icon-wrapper"></i></button></td>'
+    var str11 = '</tr></tbody></table></div></div></div>'
+    
+    const titleTag = document.querySelector("#tabla1");   
+    return titleTag.insertAdjacentHTML("afterbegin",  str01 + str02 + str03 + str04 + str05 + str06 + str07 + str08 + str09 + str10 + str11);   
+}
+function cargarDatosUsuariosEnInputs(dni){
+    const cargarDatosUsuariosEnInputs = async () => {
+        try {
+            const respuesta = await fetch(API + '/users/dni/' + dni, {
+                    method: 'GET',
+                    headers: new Headers({ 'Content-type': 'application/json'}),
+                    mode: 'cors'
+                });
+            const userdata = await respuesta.json();
+            var datatime_admission = convertirDataTimeInObjct(userdata[0].date_of_admission)
+            var datatime_brith = convertirDataTimeInObjct(userdata[0].date_of_brith)
+
+            document.getElementById("dni").value = userdata[0].dni
+            document.getElementById("name").value = userdata[0].name
+            document.getElementById("surname").value = userdata[0].surname
+            document.getElementById("password").value = userdata[0].password
+            document.getElementById("ano1").value = datatime_brith[2]
+            document.getElementById("mes1").value = datatime_brith[1]
+            document.getElementById("dia1").value = datatime_brith[0]
+            document.getElementById("ano2").value = datatime_admission[2]
+            document.getElementById("mes2").value = datatime_admission[1]
+            document.getElementById("dia2").value = datatime_admission[0]
+            document.getElementById("botonModificar").innerHTML = '<button onclick="actualizarUsuario(' + dni + ')" class="btn btn-primary"style="width: 100%; font-size: 100%;">Modificar</button>';
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    cargarDatosUsuariosEnInputs();
+}
 
 
 ///////////////CARRERAS//////////////////
@@ -770,71 +870,6 @@ function cargarDatosCarreras(){
     }
     cargarDatosCarreras();
 }
-
-function inputsCarrerasAdminHTML(){
-    var str01 = '<div class="row"><div class="col-md-12 align-middle"><div class="needs-validation" novalidate><div class="form-row">'
-    var str02 = '<div class="col-md-2 mb-3"><input type="number" class="form-control" id="code" placeholder="Codigo" value="" required></div>'
-    var str03 = '<div class="col-md-7 mb-3"><input type="text" class="form-control" id="name" placeholder="Nombre" required></div>'
-    var str17 = '<div class="col-md-1"><button onclick="agregarCarrera()" class="btn btn-success" type="submit"style="width: 100%; font-size: 100%;">Agregar</button></div>'
-    var str18 = '<div class="col-md-1" id="botonModificar"><button onclick="actualizarCarrera()" class="btn btn-primary"style="width: 100%; font-size: 100%;">Modificar</button></div>'
-    var str19 = '<div class="col-md-1"><button onclick=limpiarInputs2("code","name") class="btn btn-danger"type="submit" style="width: 100%; font-size: 100%;">Limpiar</button></div>'
-    var str20 = '</div></div></div></div>'
-    
-
-    const titleTag = document.querySelector("#body1");   
-    return titleTag.innerHTML =  str01 + str02 + str03 + str17 + str18 + str19 + str20;
-}
-function tablaCarrerasHTML(){
-    var str01 = '<div class="col-md-12"><div class="main-card mb-3 card"><div class="table-responsive">'
-    var str02 = '<table class="align-middle mb-0 table table-borderless table-striped table-hover"><thead><tr>'
-    var str03 = '<th class="text-center bg-secondary text-white">Codigo</th>'
-    var str04 = '<th class="text-left bg-secondary text-white">Carrera</th>'
-    var str05 = '<th class="text-center bg-secondary text-white">Materias</th>'
-    var str06 = '<th class="text-center bg-secondary text-white">Modificar Nombre</th>'
-    var str07 = '<th class="text-center bg-secondary text-white">Eliminar</th>'
-    var str08 = '</tr></thead><tbody id="tabla1">'
-    var str09 = '</tbody></table></div></div></div>'
-    
-    const titleTag = document.querySelector("#body2");   
-    return titleTag.innerHTML =  str01 + str02 + str03 + str04 + str05 + str06 + str07 + str08 + str09;
-}
-
-function tablaDatosCarrerasHTML(data){
-    var str01 = '<tr><td class="text-center">' + data.code + '</td>'
-    var str02 = '<td class="text-left">' + data.name + '</td>'
-    var str05 = '<td class="text-center"><button onclick="cargarMateriasCarreras(' + data.code + ')" class="btn-icon btn-icon-only btn btn-outline-info">'
-    var str06 = '<i class=" btn-icon-wrapper">Ver Materias</i></button></td>'
-    var str07 = '<td class="text-center"><button onclick="cargarDatosCarrerasEnInputs(' + data.code + ')" class="btn-icon btn-icon-only btn btn-outline-success">'
-    var str08 = '<i class="pe-7s-note btn-icon-wrapper"> </i></button></td>'
-    var str09 = '<td class="text-center"><button onclick="eliminarCarrera(' + data.code + ')" class="btn-icon btn-icon-only btn btn-outline-danger">'
-    var str10 = '<i class="pe-7s-trash btn-icon-wrapper"></i></button></td>'
-    var str11 = '</tr></tbody></table></div></div></div>'
-    
-    const titleTag = document.querySelector("#tabla1");   
-    return titleTag.insertAdjacentHTML("afterbegin",  str01 + str02 + str05 + str06 + str07 + str08 + str09 + str10 + str11);   
-}
-function cargarDatosCarrerasEnInputs(code){
-    const cargarDatosCarreraEnInputs = async () => {
-        try {
-            const respuesta = await fetch(API + '/careers/' + code, {
-                    method: 'GET',
-                    headers: new Headers({ 'Content-type': 'application/json'}),
-                    mode: 'cors'
-                });
-            const careers = await respuesta.json();
-
-
-            document.getElementById("code").value = careers[0].code
-            document.getElementById("name").value = careers[0].name
-
-            document.getElementById("botonModificar").innerHTML = '<button onclick="actualizarCarrera(' + code + ')" class="btn btn-primary"style="width: 100%; font-size: 100%;">Modificar</button>';
-        } catch (error) {
-            console.log(error)
-        }
-    }
-    cargarDatosCarreraEnInputs();
-}
-
 function agregarCarrera(){
     var code = document.getElementById("code").value
     var name = document.getElementById("name").value
@@ -912,8 +947,187 @@ function eliminarCarrera(code) {
 }
 
 
+function inputsCarrerasHTML(){
+    var str01 = '<div class="row"><div class="col-md-12 align-middle"><div class="needs-validation" novalidate><div class="form-row">'
+    var str02 = '<div class="col-md-2 mb-3"><input type="number" class="form-control" id="code" placeholder="Codigo" value="" required></div>'
+    var str03 = '<div class="col-md-7 mb-3"><input type="text" class="form-control" id="name" placeholder="Nombre" required></div>'
+    var str17 = '<div class="col-md-1"><button onclick="agregarCarrera()" class="btn btn-success" type="submit"style="width: 100%; font-size: 100%;">Agregar</button></div>'
+    var str18 = '<div class="col-md-1" id="botonModificar"><button onclick="actualizarCarrera()" class="btn btn-primary"style="width: 100%; font-size: 100%;">Modificar</button></div>'
+    var str19 = '<div class="col-md-1"><button onclick=limpiarInputs2("code","name"),inputHTML() class="btn btn-danger"type="submit" style="width: 100%; font-size: 100%;">Cerrar</button></div>'
+    var str20 = '</div></div></div></div>'
+    
+    const titleTag = document.querySelector("#body1");   
+    return titleTag.innerHTML =  str01 + str02 + str03 + str17 + str18 + str19 + str20;
+}
+function tablaCarrerasHTML(){
+    var str01 = '<div class="col-md-12"><div class="main-card mb-3 card"><div class="table-responsive">'
+    var str02 = '<table class="align-middle mb-0 table table-borderless table-striped table-hover"><thead><tr>'
+    var str03 = '<th class="text-center bg-secondary text-white">Codigo</th>'
+    var str04 = '<th class="text-left bg-secondary text-white">Carrera</th>'
+    var str05 = '<th class="text-center bg-secondary text-white">Materias</th>'
+    var str06 = '<th class="text-center bg-secondary text-white">Modificar Nombre</th>'
+    var str07 = '<th class="text-center bg-secondary text-white">Eliminar</th>'
+    var str08 = '</tr></thead><tbody id="tabla1">'
+    var str09 = '</tbody></table></div></div></div>'
+    
+    const titleTag = document.querySelector("#body2");   
+    return titleTag.innerHTML =  str01 + str02 + str03 + str04 + str05 + str06 + str07 + str08 + str09;
+}
+function tablaDatosCarrerasHTML(data){
+    var str01 = '<tr><td class="text-center">' + data.code + '</td>'
+    var str02 = '<td class="text-left">' + data.name + '</td>'
+    var str05 = '<td class="text-center"><button onclick="cargarMateriasCarreras(' + data.code + ')" class="btn-icon btn-icon-only btn btn-outline-info">'
+    var str06 = '<i class=" btn-icon-wrapper"><b>Ver Materias</b></i></button></td>'
+    var str07 = '<td class="text-center"><button onclick="inputsCarrerasHTML(), cargarDatosCarrerasEnInputs(' + data.code + ')" class="btn-icon btn-icon-only btn btn-outline-success">'
+    var str08 = '<i class="pe-7s-note btn-icon-wrapper"> </i></button></td>'
+    var str09 = '<td class="text-center"><button onclick="eliminarCarrera(' + data.code + ')" class="btn-icon btn-icon-only btn btn-outline-danger">'
+    var str10 = '<i class="pe-7s-trash btn-icon-wrapper"></i></button></td>'
+    var str11 = '</tr></tbody></table></div></div></div>'
+    
+    const titleTag = document.querySelector("#tabla1");   
+    return titleTag.insertAdjacentHTML("afterbegin",  str01 + str02 + str05 + str06 + str07 + str08 + str09 + str10 + str11);   
+}
+function cargarDatosCarrerasEnInputs(code){
+    const cargarDatosCarreraEnInputs = async () => {
+        try {
+            const respuesta = await fetch(API + '/careers/' + code, {
+                    method: 'GET',
+                    headers: new Headers({ 'Content-type': 'application/json'}),
+                    mode: 'cors'
+                });
+            const careers = await respuesta.json();
+
+
+            document.getElementById("code").value = careers[0].code
+            document.getElementById("name").value = careers[0].name
+
+            document.getElementById("botonModificar").innerHTML = '<button onclick="actualizarCarrera(' + code + ')" class="btn btn-primary"style="width: 100%; font-size: 100%;">Modificar</button>';
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    cargarDatosCarreraEnInputs();
+}
+
 
 ///////////////MATERIAS//////////////////
+function agregarMateria(){
+    var code = document.getElementById("code").value
+    var name = document.getElementById("name").value
+    var season = document.getElementById("season").value
+    var teacher = document.getElementById("teacher").value
+
+    var option = confirm("Desea agregar una materia?");
+    if (option == true) {
+        const agregarMateria = async () => {
+            try {
+                const respuesta = await fetch(API + '/courses', {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify(
+
+                        {
+                            "code": code,
+                            "name": name,
+                            "career": codeCareerActual,
+                            "season": season,
+                            "teacher": teacher,
+                            "date_test1": "1900-01-01T00:00:00.000Z",
+                            "date_test2": "1900-01-01T00:00:00.000Z",
+                            "date_test3": "1900-01-01T00:00:00.000Z",
+                            "date_test4": "1900-01-01T00:00:00.000Z",
+                            "date_ap1": "1900-01-01T00:00:00.000Z",
+                            "date_ap2": "1900-01-01T00:00:00.000Z",
+                            "date_ap3": "1900-01-01T00:00:00.000Z",
+                            "date_ap4": "1900-01-01T00:00:00.000Z"
+
+                        })
+                    }); 
+                    limpiarInputs4("code","name","season","teacher")
+                    tablaMateriasHTML();
+                    cargarDatosMaterias(codeCareerActual)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        agregarMateria();
+    }
+}
+function actualizarMateria(code){
+    var name = document.getElementById("name").value
+    var season = document.getElementById("season").value
+    var teacher = document.getElementById("teacher").value
+
+    var option = confirm("Desea modificar esta materia?");
+    if (option == true) {
+    const actualizarMateria = async () => {
+        try {
+            const respuesta = await fetch(API + '/courses/' + code, {
+                    method: 'PUT',
+                    headers: new Headers({ 'Content-type': 'application/json'}),
+                    mode: 'cors',
+                    body: JSON.stringify(
+
+                    {
+                        "name": name,
+                        "career": codeCareerActual,
+                        "season": season,
+                        "teacher": teacher,
+                        "date_test1": "1900-01-01T00:00:00.000Z",
+                        "date_test2": "1900-01-01T00:00:00.000Z",
+                        "date_test3": "1900-01-01T00:00:00.000Z",
+                        "date_test4": "1900-01-01T00:00:00.000Z",
+                        "date_ap1": "1900-01-01T00:00:00.000Z",
+                        "date_ap2": "1900-01-01T00:00:00.000Z",
+                        "date_ap3": "1900-01-01T00:00:00.000Z",
+                        "date_ap4": "1900-01-01T00:00:00.000Z"
+                   })
+                });
+                limpiarInputs4("code","name","season","teacher")
+                tablaMateriasHTML();
+                cargarDatosMaterias(codeCareerActual);
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    actualizarMateria();
+    }
+}
+function eliminarMateria(code) {
+    var option = confirm("Desea eliminar esta carrera?");
+    if (option == true) {
+        const eliminarMateria = async () => {
+            try {
+                const respuesta = await fetch(API + '/courses/' + code, {
+                    method: 'DELETE',
+                    headers: { 'Content-type': 'application/json' }
+                })
+                tablaMateriasHTML();
+                cargarDatosMaterias(codeCareerActual)
+            } catch (error) {
+                console.log(error)
+            };
+        }
+        eliminarMateria();
+    }
+}
+function tablaMateriasAdminHTML(){
+    var str01 = '<div class="col-md-12"><div class="main-card mb-3 card"><div class="table-responsive">'
+    var str02 = '<table class="align-middle mb-0 table table-borderless table-striped table-hover"><thead><tr>'
+    var str03 = '<th class="text-center bg-secondary text-white">Materia</th>'
+    var str04 = '<th class="text-center bg-secondary text-white">Nombre</th>'
+    var str05 = '<th class="text-center bg-secondary text-white">Año</th>'
+    var str06 = '<th class="text-center bg-secondary text-white">Carrera</th>'
+    var str07 = '<th class="text-center bg-secondary text-white">Fecha de Ingreso</th>'
+    var str08 = '<th class="text-center bg-secondary text-white">Password</th>'
+    var str09 = '<th class="text-center bg-secondary text-white">Modificar</th>'
+    var str10 = '<th class="text-center bg-secondary text-white">Eliminar</th>'
+    var str11 = '</tr></thead><tbody id="tabla1">'
+    var str12 = '</tbody></table></div></div></div>'
+    
+    const titleTag = document.querySelector("#body2");   
+    return titleTag.innerHTML =  str01 + str02 + str03 + str04 + str05 + str06 + str07 + str08 + str09 + str10 + str11 + str12 ;
+}
 
 
 function cargarCarreraActual(code){
@@ -932,14 +1146,12 @@ console.log(career)
     }
     cargarCarreraActual();
 }
-
 function cargarMateriasCarreras(code){
     cargarCarreraActual(code)
     inputsMateriasAdminHTML()
     tablaMateriasHTML()
     cargarDatosMaterias(code)
 }
-
 function cargarDatosMaterias(code){
     const cargarDatosMaterias = async () => {
         try {
@@ -964,7 +1176,6 @@ function cargarDatosMaterias(code){
     }
     cargarDatosMaterias();
 }
-
 function tablaMateriasHTML(){
     var str01 = '<div class="col-md-12"><div class="main-card mb-3 card"><div class="table-responsive">'
     var str02 = '<table class="align-middle mb-0 table table-borderless table-striped table-hover"><thead><tr>'
@@ -1033,7 +1244,6 @@ function tablaDatosMateriasHTML(data, año){
             break;
     }
 }
-
 function inputsMateriasAdminHTML(){
     var str01 = '<div class="row"><div class="col-md-12 align-middle"><div class="needs-validation" novalidate><div class="form-row">'
     var str02 = '<div class="col-md-3 mb-3"><input type="number" class="form-control" id="code" placeholder="Codigo" value="" required></div>'
@@ -1044,7 +1254,7 @@ function inputsMateriasAdminHTML(){
 
     var str17 = '<div class="col-md-2"><button onclick="agregarMateria()" class="btn btn-success" type="submit"style="width: 100%; font-size: 100%;">Agregar</button></div>'
     var str18 = '<div class="col-md-2" id="botonModificar"><button onclick="actualizarMateria()" class="btn btn-primary"style="width: 100%; font-size: 100%;">Modificar</button></div>'
-    var str19 = '<div class="col-md-2"><button onclick=limpiarInputs5("code","name","career","season","teacher") class="btn btn-danger"type="submit" style="width: 100%; font-size: 100%;">Limpiar</button></div>'
+    var str19 = '<div class="col-md-2"><button onclick=limpiarInputs5("code","name","career","season","teacher") class="btn btn-danger"type="submit" style="width: 100%; font-size: 100%;">Cerrar</button></div>'
     var str20 = '</div></div></div></div>'
     
 
@@ -1078,106 +1288,83 @@ function cargarDatosMateriasEnInputs(code){
 
 
 
-function agregarMateria(){
-    var code = document.getElementById("code").value
-    var name = document.getElementById("name").value
-    var season = document.getElementById("season").value
-    var teacher = document.getElementById("teacher").value
 
-    var option = confirm("Desea agregar una materia?");
-    if (option == true) {
-        const agregarMateria = async () => {
-            try {
-                const respuesta = await fetch(API + '/courses', {
-                        method: 'POST',
-                        headers: {'Content-Type': 'application/json'},
-                        body: JSON.stringify(
 
-                        {
-                            "code": code,
-                            "name": name,
-                            "career": codeCareerActual,
-                            "season": season,
-                            "teacher": teacher,
-                            "date_test1": "1900-01-01T00:00:00.000Z",
-                            "date_test2": "1900-01-01T00:00:00.000Z",
-                            "date_test3": "1900-01-01T00:00:00.000Z",
-                            "date_test4": "1900-01-01T00:00:00.000Z",
-                            "date_ap1": "1900-01-01T00:00:00.000Z",
-                            "date_ap2": "1900-01-01T00:00:00.000Z",
-                            "date_ap3": "1900-01-01T00:00:00.000Z",
-                            "date_ap4": "1900-01-01T00:00:00.000Z"
 
-                        })
-                    }); 
-                    limpiarInputs4("code","name","season","teacher")
-                    tablaMateriasHTML();
-                    cargarDatosMaterias(codeCareerActual)
-            } catch (error) {
-                console.log(error)
-            }
-        }
-        agregarMateria();
-    }
-}
-function actualizarMateria(code){
-    var name = document.getElementById("name").value
-    var season = document.getElementById("season").value
-    var teacher = document.getElementById("teacher").value
 
-    var option = confirm("Desea modificar esta materia?");
-    if (option == true) {
-    const actualizarMateria = async () => {
-        try {
-            const respuesta = await fetch(API + '/courses/code/' + code, {
-                    method: 'PUT',
-                    headers: new Headers({ 'Content-type': 'application/json'}),
-                    mode: 'cors',
-                    body: JSON.stringify(
 
-                    {
-                        "name": name,
-                        "career": codeCareerActual,
-                        "season": season,
-                        "teacher": teacher,
-                        "date_test1": "1900-01-01T00:00:00.000Z",
-                        "date_test2": "1900-01-01T00:00:00.000Z",
-                        "date_test3": "1900-01-01T00:00:00.000Z",
-                        "date_test4": "1900-01-01T00:00:00.000Z",
-                        "date_ap1": "1900-01-01T00:00:00.000Z",
-                        "date_ap2": "1900-01-01T00:00:00.000Z",
-                        "date_ap3": "1900-01-01T00:00:00.000Z",
-                        "date_ap4": "1900-01-01T00:00:00.000Z"
-                   })
-                });
-                limpiarInputs4("code","name","season","teacher")
-                tablaMateriasHTML();
-                cargarDatosMaterias(codeCareerActual);
-        } catch (error) {
-            console.log(error)
-        }
-    }
-    actualizarMateria();
-    }
-}
-function eliminarMateria(code) {
-    var option = confirm("Desea eliminar esta carrera?");
-    if (option == true) {
-        const eliminarMateria = async () => {
-            try {
-                const respuesta = await fetch(API + '/courses/' + code, {
-                    method: 'DELETE',
-                    headers: { 'Content-type': 'application/json' }
-                })
-                tablaMateriasHTML();
-                cargarDatosMaterias(codeCareerActual)
-            } catch (error) {
-                console.log(error)
-            };
-        }
-        eliminarMateria();
-    }
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1320,22 +1507,3 @@ function ordenarPorCodigo(data){
   });
 }
 
-
-
-function tablaMateriasAdminHTML(){
-    var str01 = '<div class="col-md-12"><div class="main-card mb-3 card"><div class="table-responsive">'
-    var str02 = '<table class="align-middle mb-0 table table-borderless table-striped table-hover"><thead><tr>'
-    var str03 = '<th class="text-center bg-secondary text-white">Materia</th>'
-    var str04 = '<th class="text-center bg-secondary text-white">Nombre</th>'
-    var str05 = '<th class="text-center bg-secondary text-white">Año</th>'
-    var str06 = '<th class="text-center bg-secondary text-white">Carrera</th>'
-    var str07 = '<th class="text-center bg-secondary text-white">Fecha de Ingreso</th>'
-    var str08 = '<th class="text-center bg-secondary text-white">Password</th>'
-    var str09 = '<th class="text-center bg-secondary text-white">Modificar</th>'
-    var str10 = '<th class="text-center bg-secondary text-white">Eliminar</th>'
-    var str11 = '</tr></thead><tbody id="tabla1">'
-    var str12 = '</tbody></table></div></div></div>'
-    
-    const titleTag = document.querySelector("#body2");   
-    return titleTag.innerHTML =  str01 + str02 + str03 + str04 + str05 + str06 + str07 + str08 + str09 + str10 + str11 + str12 ;
-}

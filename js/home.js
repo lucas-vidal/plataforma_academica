@@ -512,7 +512,8 @@ function examenesAct(){
 
             break;
         case "administrador":
-
+            tablaExamenesAdminHTML()
+            cargarDatosExamenAdmin()
             break;
     }
 }
@@ -1011,6 +1012,46 @@ function cargarDatosCarrerasEnInputs(code){
 
 
 ///////////////MATERIAS//////////////////
+function cargarDatosMaterias(code){
+    const cargarDatosMaterias = async () => {
+        try {
+            const respuesta = await fetch(API + '/courses/career/' + code, );
+            const courses = await respuesta.json();
+            console.log(courses)
+            const courses1 = courses.filter(course => course.season == 1 );
+            const courses2 = courses.filter(course => course.season == 2 );
+            const courses3 = courses.filter(course => course.season == 3 );
+
+            ordenarPorNombre(courses1)
+            ordenarPorNombre(courses2)
+            ordenarPorNombre(courses3)
+
+            courses1.map((course) => tablaDatosMateriasHTML(course, course.season));
+            courses2.map((course) => tablaDatosMateriasHTML(course, course.season));
+            courses3.map((course) => tablaDatosMateriasHTML(course, course.season));
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
+    cargarDatosMaterias();
+}
+function cargarCarreraActual(code){
+    const cargarCarreraActual = async () => {
+        try {
+            const respuesta = await fetch(API + '/careers/' + code, );
+            const career = await respuesta.json();
+console.log(career)
+            codeCareerActual =  career[0].code
+            nameCareerActual =  career[0].name
+            tituloCarrerasActiva();
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
+    cargarCarreraActual();
+}
 function agregarMateria(){
     var code = document.getElementById("code").value
     var name = document.getElementById("name").value
@@ -1130,51 +1171,12 @@ function tablaMateriasAdminHTML(){
 }
 
 
-function cargarCarreraActual(code){
-    const cargarCarreraActual = async () => {
-        try {
-            const respuesta = await fetch(API + '/careers/' + code, );
-            const career = await respuesta.json();
-console.log(career)
-            codeCareerActual =  career[0].code
-            nameCareerActual =  career[0].name
-            tituloCarrerasActiva();
-        }
-        catch (error) {
-            console.log(error)
-        }
-    }
-    cargarCarreraActual();
-}
+
 function cargarMateriasCarreras(code){
     cargarCarreraActual(code)
     inputsMateriasAdminHTML()
     tablaMateriasHTML()
     cargarDatosMaterias(code)
-}
-function cargarDatosMaterias(code){
-    const cargarDatosMaterias = async () => {
-        try {
-            const respuesta = await fetch(API + '/courses/career/' + code, );
-            const courses = await respuesta.json();
-            console.log(courses)
-            const courses1 = courses.filter(course => course.season == 1 );
-            const courses2 = courses.filter(course => course.season == 2 );
-            const courses3 = courses.filter(course => course.season == 3 );
-
-            ordenarPorNombre(courses1)
-            ordenarPorNombre(courses2)
-            ordenarPorNombre(courses3)
-
-            courses1.map((course) => tablaDatosMateriasHTML(course, course.season));
-            courses2.map((course) => tablaDatosMateriasHTML(course, course.season));
-            courses3.map((course) => tablaDatosMateriasHTML(course, course.season));
-        }
-        catch (error) {
-            console.log(error)
-        }
-    }
-    cargarDatosMaterias();
 }
 function tablaMateriasHTML(){
     var str01 = '<div class="col-md-12"><div class="main-card mb-3 card"><div class="table-responsive">'
@@ -1289,13 +1291,52 @@ function cargarDatosMateriasEnInputs(code){
 
 
 
+//EXAMENES//
 
 
+function cargarDatosExamenAdmin(){
+    const cargarDatosExamenAdmin = async () => {
+        try {
+            const respuesta = await fetch(API + '/courses', );
+            const courses = await respuesta.json();
+            console.log(courses)
+            // const alumnosdata = usersdata[0].filter(usersdata => usersdata.admin == false && usersdata.teacher == false);
+            // ordenarPorNombre(courses)
+            courses[0].map((course) => tablaDatosExamenesAdminHTML(course));
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
+    cargarDatosExamenAdmin();
+}
 
-
-
-
-
+function tablaExamenesAdminHTML(){
+    var str01 = '<div class="col-md-12"><div class="main-card mb-3 card"><div class="table-responsive">'
+    var str02 = '<table class="align-middle mb-0 table table-borderless table-striped table-hover"><thead><tr>'
+    var str03 = '<th class="text-center bg-secondary text-white">Codigo</th>'
+    var str04 = '<th class="text-left bg-secondary text-white">Materia</th>'
+    var str05 = '<th class="text-center bg-secondary text-white">Examen 1</th>'
+    var str06 = '<th class="text-center bg-secondary text-white">Examen 2</th>'
+    var str07 = '<th class="text-center bg-secondary text-white">Modificar</th>'
+    var str08 = '</tr></thead><tbody id="tabla1">'
+    var str09 = '</tbody></table></div></div></div>'
+    
+    const titleTag = document.querySelector("#body2");   
+    return titleTag.innerHTML =  str01 + str02 + str03 + str04 + str05 + str06 + str07 + str08 + str09;
+}
+function tablaDatosExamenesAdminHTML(data){
+    var str01 = '<tr><td class="text-center">' + data.code + '</td>'
+    var str02 = '<td class="text-left">' + data.name + '</td>'
+    var str03 = '<td class="text-center">' + convertirStringData(data.date_test1) + '</td>'
+    var str04 = '<td class="text-center">' + convertirStringData(data.date_test2) + '</td>'
+    var str05 = '<td class="text-center"><button onclick="inputsUsuariosAdminHTML(1,0), cargarDatosUsuariosEnInputs(' + data.code + ')" class="btn-icon btn-icon-only btn btn-outline-success">'
+    var str06 = '<i class="pe-7s-note btn-icon-wrapper"> </i></button></td>'
+    var str07 = '</tr></tbody></table></div></div></div>'
+    
+    const titleTag = document.querySelector("#tabla1");   
+    return titleTag.insertAdjacentHTML("afterbegin",  str01 + str02 + str03 + str04 + str05 + str06 + str07);   
+}
 
 
 
